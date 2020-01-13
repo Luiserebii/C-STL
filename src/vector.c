@@ -1,7 +1,8 @@
 #include "vector.h"
 
 vector vector_init() {
-    return { NULL, NULL, NULL };
+    vector v = { NULL, NULL, NULL };
+    return v;
 }
 
 void vector_push_back(vector* v) {
@@ -9,5 +10,5 @@ void vector_push_back(vector* v) {
 }
 
 size_t vector_size(vector* v) {
-    
+    return v->head - v->avail;
 }
