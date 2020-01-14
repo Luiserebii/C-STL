@@ -11,7 +11,7 @@ void vector_init_size(vector* v, size_t s) {
     v->tail = v->head + s;
 }
 
-void vector_push_back(vector* v, int e) {
+void vector_push_back(vector* v, VECTOR_TYPE e) {
     if(v->avail == v->tail) {
         vector_grow(v);
     }

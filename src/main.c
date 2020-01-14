@@ -2,6 +2,7 @@
 
 //#define VECTOR_TYPE int
 #include "vector.h"
+#include "algorithm.h"
 
 void vector_print(vector* v);
 
@@ -24,6 +25,14 @@ int main() {
     vector_push_back(&v2, 10);
     vector_push_back(&v2, 10);
     vector_print(&v2);
+
+    //Testing algorithm.h
+    int testArr[] = { 1, 2, 3 };
+    int meme[sizeof testArr/sizeof(int)];
+    array_print(testArr, 3);
+    array_print(meme, 3);
+    copy(int, testArr, testArr + 3, meme)
+
 }
 
 void vector_print(vector* v) {
@@ -33,4 +42,11 @@ void vector_print(vector* v) {
         printf(" %d", *i);
     }
     putchar('\n');
+}
+
+void array_print(int* arr, int n) {
+    printf("Array:");
+    while(n--) {
+        printf(" %d", *arr++);
+    }
 }
