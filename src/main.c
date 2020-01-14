@@ -4,7 +4,8 @@ void vector_print(vector* v);
 
 int main() {
 
-    vector v = vector_init();
+    vector v;
+    vector_init(&v);
     vector_push_back(&v, 5);
 
     vector v2;
