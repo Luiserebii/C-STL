@@ -4,6 +4,7 @@
 #include "../src/algorithm.h"
 
 void test_algorithm_h();
+int arrIsEqual(int* a, int* b, int n);
 
 void setUp() { }
 void tearDown() { }
@@ -13,7 +14,7 @@ int main() {
     UNITY_BEGIN();
     RUN_TEST(test_algorithm_h);
     return UNITY_END();
-    
+
 }
 
 void test_algorithm_h() {
@@ -24,9 +25,16 @@ void test_algorithm_h() {
     int meme[sz];
 
     //Attempt copying of testArr into meme
-    TEST_ASSERT_FALSE_INT_ARRAY(testArr, meme, sz);
+    TEST_ASSERT_FALSE(arrIsEqual(testArr, meme, sz));
     algorithm_copy(int*, testArr, testArr + sz, meme);
 
     //Assert copied value
     TEST_ASSERT_EQUAL_INT_ARRAY(testArr, meme, sz);
+}
+
+int arrIsEqual(int* a, int* b, int n) {
+    while(n--) {
+        if(*a != *b) return 0;
+    }
+    return 1;
 }
