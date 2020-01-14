@@ -32,6 +32,7 @@ int main() {
     array_print(testArr, 3);
     array_print(meme, 3);
     copy(int, testArr, testArr + 3, meme)
+    array_print(meme, 3);
 
 }
 
@@ -49,4 +50,5 @@ void array_print(int* arr, int n) {
     while(n--) {
         printf(" %d", *arr++);
     }
+    putchar('\n');
 }
