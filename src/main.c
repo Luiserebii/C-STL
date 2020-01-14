@@ -30,6 +30,9 @@ int main() {
     vector_print(&v2);
     printf("Element at pos 5: %d\n", vector_at_int(&v2, 5));
 
+    vector_free_int(&v);
+    vector_free_int(&v2);
+
     //Testing algorithm.h
     int testArr[] = { 1, 2, 3 };
     int meme[sizeof testArr/sizeof(int)];
