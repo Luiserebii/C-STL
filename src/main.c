@@ -5,20 +5,22 @@ void vector_print(vector* v);
 int main() {
 
     vector v;
-    vector_init(&v);
-    vector_push_back(&v, 5);
+    vector_init(&v, sizeof(int));
+
+    int n = 10;
+    vector_push_back(&v, &n);
 
     vector v2;
-    vector_init_size(&v2, 2);
+    vector_init_size(&v2, sizeof(int), 2);
 
-    vector_push_back(&v2, 10);
-    vector_push_back(&v2, 10);
-    vector_push_back(&v2, 10);
+    vector_push_back(&v2, &n);
+    vector_push_back(&v2, &n);
+    vector_push_back(&v2, &n);
     
     vector_print(&v2);
-    vector_push_back(&v2, 10);
-    vector_push_back(&v2, 10);
-    vector_push_back(&v2, 10);
+    vector_push_back(&v2, &n);
+    vector_push_back(&v2, &n);
+    vector_push_back(&v2, &n);
     vector_print(&v2);
 }
 
