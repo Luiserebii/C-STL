@@ -41,6 +41,16 @@ void vector_init_size_##vector_type(vector_##vector_type* v, size_t s); \
 void vector_push_back_##vector_type(vector_##vector_type* v, vector_type e); \
 \
 /** \
+ * Returns the first pointer in the vector's sequence. \
+ */ \
+vector_type* vector_begin_##vector_type(vector_##vector_type* v); \
+\
+/** \
+ * Returns the last pointer in the vector's sequence. \
+ */ \
+vector_type* vector_end_##vector_type(vector_##vector_type* v); \
+\
+/** \
  * Returns the current size of the vector. \
  */ \
 size_t vector_size_##vector_type(vector_##vector_type* v); \
@@ -91,6 +101,14 @@ void vector_push_back_##vector_type(vector_##vector_type* v, vector_type e) { \
         vector_grow_##vector_type(v); \
     } \
     *(v->avail++) = e; \
+} \
+\
+vector_type* vector_begin_##vector_type(vector_##vector_type* v) { \
+    return v->head; \
+} \
+\
+vector_type* vector_end_##vector_type(vector_##vector_type* v) { \
+    return v->avail; \
 } \
 \
 void vector_grow_##vector_type(vector_##vector_type* v) { \
