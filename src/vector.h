@@ -4,10 +4,9 @@
 #include <stdlib.h>
 
 typedef struct {
-    void* head;
-    void* avail;
-    void* tail;
-    size_t type_size;
+    VECTOR_TYPE* head;
+    VECTOR_TYPE* avail;
+    VECTOR_TYPE* tail;
 } vector;
 
 /**
@@ -15,25 +14,20 @@ typedef struct {
  *
  * Note that this data structure is completely empty, and has
  * nothing allocated; not necessary to call vector_free on this
- *
- * Second parameter refers to type size (e.g. typeof(int))
  */
-void vector_init(vector* v, size_t t_sz);
+void vector_init(vector* v);
 
 /**
  * Initializes an empty vector with the size passed.
  * Memory will be allocated under the size given, so vector_free
- * is required.
- *
- * The second param (t_sz) is the type size, and the third
- * refers to the number of elements to initialize the vector with.
+ * is required
  */
-void vector_init_size(vector* v, size_t t_sz, size_t n);
+void vector_init_size(vector* v, size_t s);
 
 /**
  * Pushes a new element onto the vector.
  */
-void vector_push_back(vector* v, const void* e);
+void vector_push_back(vector* v, VECTOR_TYPE e);
 
 /**
  * Returns the current size of the vector.

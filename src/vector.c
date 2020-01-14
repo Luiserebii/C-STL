@@ -2,22 +2,21 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void vector_init(vector* v, size_t t_sz) {
-    *v = (vector) { NULL, NULL, NULL, t_sz };
+void vector_init(vector* v) {
+    *v = (vector) { NULL, NULL, NULL };
 }
 
-void vector_init_size(vector* v, size_t t_sz, size_t n) {
-    v->head = v->avail = malloc(t_sz * n);
-    v->tail = v->head + n;
-    v->type_size = t_sz;
+void vector_init_size(vector* v, size_t s) {
+    v->head = v->avail = (VECTOR_TYPE*) malloc(sizeof(VECTOR_TYPE) * s);
+    v->tail = v->head + s;
 }
 
-void vector_push_back(vector* v, const void* e) {
+void vector_push_back(vector* v, int e) {
     if(v->avail == v->tail) {
         vector_grow(v);
     }
     //Append
-    *(v->avail++) = *e;
+    *(v->avail++) = e;
 }
 
 void vector_grow(vector* v) {
@@ -26,10 +25,10 @@ void vector_grow(vector* v) {
     size_t n_size = v->head ? old_size * 2 : 1;
 
     //Allocate new
-    void* n_head = malloc(v->type_size * n_size);
+    VECTOR_TYPE* n_head = (VECTOR_TYPE*) malloc(sizeof(VECTOR_TYPE) * n_size);
 
     //Copy
-    for(void* i = v->head, * n = n_head; i != v->avail;) {
+    for(VECTOR_TYPE* i = v->head, * n = n_head; i != v->avail;) {
         *n++ = *i++;
     }
 
