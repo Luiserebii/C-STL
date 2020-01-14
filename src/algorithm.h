@@ -16,7 +16,5 @@
             ;   \
     } \
 
-//#define algorithm_copy(type, begin, end, dest) type alg_copy_it = begin, for(type alg_copy_dest = dest; alg_copy_it != end; *alg_copy_dest++ = *alg_copy_it++), dest
-
 
 #endif

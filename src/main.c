@@ -2,7 +2,6 @@
 
 #include "vector.h"
 #include "algorithm.h"
-#include "vector.c"
 
 declare_vector(int)
 define_vector(int)
