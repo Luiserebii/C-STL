@@ -52,6 +52,11 @@ size_t vector_size_##vector_type(vector_##vector_type* v); \
 size_t vector_capacity_##vector_type(vector_##vector_type* v); \
 \
 /** \
+ * Returns the element found at the specified location passed. \
+ */ \
+vector_type vector_at_##vector_type(vector_##vector_type* v, size_t n); \
+\
+/** \
  * Frees the resources allocated to the vector. \
  * The vector is also cleared. \
  */ \
@@ -108,6 +113,10 @@ size_t vector_size_##vector_type(vector_##vector_type* v) { \
 \
 size_t vector_capacity_##vector_type(vector_##vector_type* v) { \
     return v->tail - v->head; \
+} \
+\
+vector_type vector_at_##vector_type(vector_##vector_type* v, size_t n) { \
+    return *(v->head + n); \
 } \
 \
 void vector_free_##vector_type(vector_##vector_type* v) { \
