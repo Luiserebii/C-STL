@@ -24,4 +24,9 @@ int main() {
 
 void vector_print(vector* v) {
     printf("Vector | size: %lu | capacity: %lu\n", vector_size(v), vector_capacity(v));
+    printf("Elements:");
+    for(int* i = v->head; i != v->avail; ++i) {
+        printf(" %d", *i);
+    }
+    putchar('\n');
 }

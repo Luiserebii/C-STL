@@ -15,8 +15,8 @@ void vector_push_back(vector* v, int e) {
     if(v->avail == v->tail) {
         vector_grow(v);
     }
-    *(v->avail) = e;
-    ++v->avail;
+    //Append
+    *(v->avail++) = e;
 }
 
 void vector_grow(vector* v) {
