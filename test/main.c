@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-#include "vector.h"
-#include "algorithm.h"
+#include "../src/vector.h"
+#include "../src/algorithm.h"
 
 declare_vector(int)
 define_vector(int)
