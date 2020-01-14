@@ -2,8 +2,12 @@
 
 #include "vector.h"
 #include "algorithm.h"
+#include "vector.c"
 
-void vector_print(vector* v);
+declare_vector(int)
+define_vector(int)
+
+void vector_print(vector_int* v);
 void array_print(int* arr, int n);
 
 int main() {
@@ -36,8 +40,8 @@ int main() {
 
 }
 
-void vector_print(vector* v) {
-    printf("Vector | size: %lu | capacity: %lu\n", vector_size(v), vector_capacity(v));
+void vector_print(vector_int* v) {
+    printf("Vector | size: %lu | capacity: %lu\n", vector_size_int(v), vector_capacity_int(v));
     printf("Elements:");
     for(int* i = v->head; i != v->avail; ++i) {
         printf(" %d", *i);
