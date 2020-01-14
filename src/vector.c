@@ -1,6 +1,8 @@
-#include "vector.h"
 #include <stdlib.h>
 #include <stdio.h>
+
+#include "vector.h"
+#include "algorithm.h"
 
 void vector_init(vector* v) {
     *v = (vector) { NULL, NULL, NULL };
@@ -28,9 +30,7 @@ void vector_grow(vector* v) {
     VECTOR_TYPE* n_head = (VECTOR_TYPE*) malloc(sizeof(VECTOR_TYPE) * n_size);
 
     //Copy
-    for(VECTOR_TYPE* i = v->head, * n = n_head; i != v->avail;) {
-        *n++ = *i++;
-    }
+    algorithm_copy(VECTOR_TYPE*, v->head, v->avail, n_head);
 
     //Destroy
     free(v->head);

@@ -5,6 +5,7 @@
 #include "algorithm.h"
 
 void vector_print(vector* v);
+void array_print(int* arr, int n);
 
 int main() {
 
@@ -31,7 +32,7 @@ int main() {
     int meme[sizeof testArr/sizeof(int)];
     array_print(testArr, 3);
     array_print(meme, 3);
-    copy(int, testArr, testArr + 3, meme)
+    algorithm_copy(int*, testArr, testArr + 3, meme)
     array_print(meme, 3);
 
 }
