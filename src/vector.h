@@ -2,6 +2,7 @@
 #define VECTOR_H
 
 #include <stdlib.h>
+#define VECTOR_TYPE int
 
 typedef struct {
     VECTOR_TYPE* head;

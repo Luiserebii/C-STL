@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define VECTOR_TYPE int
+//#define VECTOR_TYPE int
 #include "vector.h"
 
 void vector_print(vector* v);
