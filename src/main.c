@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-//#define VECTOR_TYPE int
 #include "vector.h"
 #include "algorithm.h"
 
@@ -9,22 +8,22 @@ void array_print(int* arr, int n);
 
 int main() {
 
-    vector v;
-    vector_init(&v);
+    vector_int v;
+    vector_init_int(&v);
 
-    vector_push_back(&v, 5);
+    vector_push_back_int(&v, 5);
 
-    vector v2;
-    vector_init_size(&v2, 2);
+    vector_int v2;
+    vector_init_size_int(&v2, 2);
 
-    vector_push_back(&v2, 10);
-    vector_push_back(&v2, 10);
-    vector_push_back(&v2, 10);
+    vector_push_back_int(&v2, 10);
+    vector_push_back_int(&v2, 10);
+    vector_push_back_int(&v2, 10);
     
     vector_print(&v2);
-    vector_push_back(&v2, 10);
-    vector_push_back(&v2, 10);
-    vector_push_back(&v2, 10);
+    vector_push_back_int(&v2, 10);
+    vector_push_back_int(&v2, 10);
+    vector_push_back_int(&v2, 10);
     vector_print(&v2);
 
     //Testing algorithm.h
