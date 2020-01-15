@@ -1,4 +1,4 @@
-#include "../include/test-vector.h"
+#include "../include/test-vector-int.h"
 #include "../lib/unity.h"
 #include "../include/vector-int.h"
 
@@ -7,15 +7,15 @@ void tearDown() { }
 
 int main() {
     UNITY_BEGIN();
-    RUN_TEST(test_vector_init);
-    RUN_TEST(test_vector_init_size);
-    RUN_TEST(test_vector_init_capacity);
-    RUN_TEST(test_vector_push_back);
-    RUN_TEST(test_vector_accessors);
+    RUN_TEST(test_vector_init_int);
+    RUN_TEST(test_vector_init_size_int);
+    RUN_TEST(test_vector_init_capacity_int);
+    RUN_TEST(test_vector_push_back_int);
+    RUN_TEST(test_vector_accessors_int);
     return UNITY_END();
 }
 
-void test_vector_init() {
+void test_vector_init_int() {
     //Create and initialize test vector
     vector_int v;
     vector_init_int(&v);
@@ -27,7 +27,7 @@ void test_vector_init() {
     vector_free_int(&v);
 }
 
-void test_vector_init_size() {
+void test_vector_init_size_int() {
     //Create and initialize test vector
     vector_int v;
     const size_t sz = 4;
@@ -44,7 +44,7 @@ void test_vector_init_size() {
     vector_free_int(&v);
 }
 
-void test_vector_init_capacity() {
+void test_vector_init_capacity_int() {
     //Create and initialize test vector
     vector_int v;
     const size_t sz = 4;
@@ -61,7 +61,7 @@ void test_vector_init_capacity() {
     vector_free_int(&v);
 }
 
-void test_vector_push_back() {
+void test_vector_push_back_int() {
     //Create and initialize test vector
     vector_int v;
     vector_init_int(&v);
@@ -82,7 +82,7 @@ void test_vector_push_back() {
     vector_free_int(&v);
 }
 
-void test_vector_accessors() {
+void test_vector_accessors_int() {
     //Create an intiialize test vector
     vector_int v;
     vector_init_int(&v);
