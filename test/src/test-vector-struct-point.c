@@ -7,27 +7,27 @@ void tearDown() { }
 
 int main() {
     UNITY_BEGIN();
-    RUN_TEST(test_vector_init_int);
-    RUN_TEST(test_vector_init_size_int);
-    RUN_TEST(test_vector_init_capacity_int);
-    RUN_TEST(test_vector_push_back_int);
-    RUN_TEST(test_vector_accessors_int);
+    RUN_TEST(test_vector_init_point);
+/*    RUN_TEST(test_vector_init_size_point);
+    RUN_TEST(test_vector_init_capacity_point);
+    RUN_TEST(test_vector_push_back_point);
+    RUN_TEST(test_vector_accessors_point);*/
     return UNITY_END();
 }
 
-void test_vector_init_int() {
+void test_vector_init_point() {
     //Create and initialize test vector
-    vector_int v;
-    vector_init_int(&v);
+    vector_point v;
+    vector_init_point(&v);
    
     //Assert state of fresh vector
     TEST_ASSERT(v.head == NULL && v.avail == NULL && v.tail == NULL);
 
     //Free
-    vector_free_int(&v);
+    vector_free_point(&v);
 }
-
-void test_vector_init_size_int() {
+/*
+void test_vector_init_size_point() {
     //Create and initialize test vector
     vector_int v;
     const size_t sz = 4;
@@ -44,7 +44,7 @@ void test_vector_init_size_int() {
     vector_free_int(&v);
 }
 
-void test_vector_init_capacity_int() {
+void test_vector_init_capacity_point() {
     //Create and initialize test vector
     vector_int v;
     const size_t sz = 4;
@@ -61,7 +61,7 @@ void test_vector_init_capacity_int() {
     vector_free_int(&v);
 }
 
-void test_vector_push_back_int() {
+void test_vector_push_back_point() {
     //Create and initialize test vector
     vector_int v;
     vector_init_int(&v);
@@ -82,7 +82,7 @@ void test_vector_push_back_int() {
     vector_free_int(&v);
 }
 
-void test_vector_accessors_int() {
+void test_vector_accessors_point() {
     //Create an intiialize test vector
     vector_int v;
     vector_init_int(&v);
@@ -108,4 +108,4 @@ void test_vector_accessors_int() {
 
     //Free
     vector_free_int(&v);
-}
+}*/
