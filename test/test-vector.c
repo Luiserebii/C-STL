@@ -22,7 +22,7 @@ int main() {
     RUN_TEST(test_vector_init);
     RUN_TEST(test_vector_init_size);
     RUN_TEST(test_vector_init_capacity);
-    RUN_TEST(test_vector_init_push_back);
+    RUN_TEST(test_vector_push_back);
     return UNITY_END();
 /*
     vector_int v;
@@ -97,11 +97,11 @@ void test_vector_init_capacity() {
 void test_vector_push_back() {
     //Create and initialize test vector
     vector_int v;
-    vector_init(&v);
+    vector_init_int(&v);
 
     //Try to push an element back
     const int e = 10;
-    vector_init_push_back_int(&v, e);
+    vector_push_back_int(&v, e);
 
     //Assert state of vector post-element push
     TEST_ASSERT_EQUAL_UINT(1, vector_size_int(&v));
