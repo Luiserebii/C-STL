@@ -1,17 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "./lib/unity.h"
-#include "../src/algorithm.h"
-
-struct point {
-    int x;
-    int y;
-};
-
-void test_algorithm_copy_int();
-void test_algorithm_copy_char();
-void test_algorithm_copy_struct();
+#include "../include/test-algorithm.h"
+#include "../lib/unity.h"
+#include "../../include/algorithm.h"
 
 void setUp() { }
 void tearDown() { }
