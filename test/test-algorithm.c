@@ -6,8 +6,6 @@
 
 void test_algorithm_copy_int();
 void test_algorithm_copy_char();
-int arrIntIsEqual(int* a, int* b, int n);
-int arrCharIsEqual(char* a, char* b, int n);
 
 void setUp() { }
 void tearDown() { }
@@ -29,10 +27,13 @@ void test_algorithm_copy_int() {
 
     //Attempt copying of a1 into a2
     TEST_ASSERT(memcmp(a1, a2, sizeof a1) != 0);
+    printf("MEMCMP: %d", memcmp(a1, a2, sizeof a1));
     algorithm_copy(int*, a1, a1 + sz, a2);
 
     //Assert copied values
     TEST_ASSERT_EQUAL_INT_ARRAY(a1, a2, sz);
+    TEST_ASSERT(memcmp(a1, a2, sizeof a1) == 0);
+    printf("MEMCMP: %d", memcmp(a1, a2, sizeof a1));
 }
 
 void test_algorithm_copy_char() {
@@ -43,22 +44,11 @@ void test_algorithm_copy_char() {
 
     //Attempt copying of a1 into a2
     TEST_ASSERT(memcmp(a1, a2, sizeof a1) != 0);
+    printf("MEMCMP: %d", memcmp(a1, a2, sizeof a1));
     algorithm_copy(char*, a1, a1 + sz, a2);
 
     //Assert copied values
     TEST_ASSERT_EQUAL_CHAR_ARRAY(a1, a2, sz);
-}
-
-int arrIntIsEqual(int* a, int* b, int n) {
-    while(n--) {
-        if(*a++ != *b++) return 0;
-    }
-    return 1;
-}
-
-int arrCharIsEqual(char* a, char* b, int n) {
-    while(n--) {
-        if(*a++ != *b++) return 0;
-    }
-    return 1;
+    TEST_ASSERT(memcmp(a1, a2, sizeof a1) == 0);
+    printf("MEMCMP: %d", memcmp(a1, a2, sizeof a1));
 }
