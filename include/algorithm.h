@@ -67,4 +67,19 @@
         }                                                                            \
     }
 
+/**
+ * algorithm_max(a, b)
+ *
+ * Returns the greater of the two values by resolving into a boolean expression.
+ */
+#define algorithm_max(a, b) (a > b) ? a : b
+
+/**
+ * algorithm_min(a, b)
+ *
+ * Returns the lesser of the two values by resolving into a boolean expression.
+ */
+#define algorithm_min(a, b) (a < b) ? a : b
+
+
 #endif

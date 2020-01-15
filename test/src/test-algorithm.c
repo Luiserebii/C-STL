@@ -9,8 +9,8 @@ void setUp() {}
 void tearDown() {}
 void test_algorithm_find_int();
 void test_algorithm_find_char();
-void test_algorithm_find_struct();
 void test_algorithm_equal_int();
+void test_algorithm_equal_char();
 
 int main() {
 
@@ -22,6 +22,7 @@ int main() {
     RUN_TEST(test_algorithm_find_char);
     //RUN_TEST(test_algorithm_find_struct);
     RUN_TEST(test_algorithm_equal_int);
+    RUN_TEST(test_algorithm_equal_char);
     return UNITY_END();
 }
 
@@ -96,21 +97,6 @@ void test_algorithm_find_char() {
     algorithm_find(a, a + sz, 'z', found);
     TEST_ASSERT_EQUAL_PTR(a + sz, found);
 }
-/*
-void test_algorithm_find_struct() {
-    //Setting up basic array of structs
-    struct point a[] = {{1, 2}, {4, 5}, {10, 10}};
-    const int sz = sizeof a / sizeof(struct point);
-    struct point* found;
-    
-    //Look for second element
-    algorithm_find(a, a + sz, a[1], found);
-    TEST_ASSERT_EQUAL_MEMORY(a + 1, found, sizeof(struct point));
-
-    //Look for non-existing element
-    //algorithm_find(a, a + sz, (struct point){2, 3}, found);
-    //TEST_ASSERT_EQUAL_PTR(a + sz, found);
-}*/
 
 void test_algorithm_equal_int() {
     //Setting basic arrays
@@ -127,5 +113,23 @@ void test_algorithm_equal_int() {
     //Compare [a, a + sz) for both arrays
     int* e2 = a + sz;
     algorithm_equal(int*, a, e2, b, res);
+    TEST_ASSERT_FALSE(res);
+}
+
+void test_algorithm_equal_char() {
+    //Setting basic arrays
+    char a[] = {'a', 'b', 'c', 'd', 'e', 'f'};
+    int sz = sizeof a / sizeof(char);
+    char b[] = {'a', 'b', 'c', 'd', 'q'};
+    int res;
+
+    //Compare [a, a + sz - 2) for both arrays
+    char* e1 = a + sz - 2;
+    algorithm_equal(char*, a, e1, b, res);
+    TEST_ASSERT_TRUE(res);
+
+    //Compare [a, a + sz - 1) for both arrays
+    char* e2 = a + sz - 1;
+    algorithm_equal(char*, a, e2, b, res);
     TEST_ASSERT_FALSE(res);
 }
