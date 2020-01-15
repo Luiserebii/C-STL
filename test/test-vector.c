@@ -11,6 +11,7 @@ define_vector(int)
 void test_vector_init();
 void test_vector_init_size();
 void test_vector_init_capacity();
+void test_vector_push_back();
 
 void setUp() { }
 void tearDown() { }
@@ -21,6 +22,7 @@ int main() {
     RUN_TEST(test_vector_init);
     RUN_TEST(test_vector_init_size);
     RUN_TEST(test_vector_init_capacity);
+    RUN_TEST(test_vector_init_push_back);
     return UNITY_END();
 /*
     vector_int v;
@@ -90,4 +92,26 @@ void test_vector_init_capacity() {
 
     //Free
     vector_free_int(&v);
+}
+
+void test_vector_push_back() {
+    //Create and initialize test vector
+    vector_int v;
+    vector_init(&v);
+
+    //Try to push an element back
+    const int e = 10;
+    vector_init_push_back_int(&v, e);
+
+    //Assert state of vector post-element push
+    TEST_ASSERT_EQUAL_UINT(1, vector_size_int(&v));
+    TEST_ASSERT_EQUAL_UINT(1, vector_capacity_int(&v));
+
+    //Small tests for vector_at and vector_begin
+    TEST_ASSERT_EQUAL_UINT(e, vector_at_int(&v, 0));
+    TEST_ASSERT_EQUAL_UINT(e, *vector_begin_int(&v));
+
+    //Free
+    vector_free_int(&v);
+
 }
