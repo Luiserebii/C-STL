@@ -7,6 +7,6 @@ vector-int:
 vector-struct-point:
 	cc ./src/test-vector-struct-point.c ./src/vector-struct-point.c lib/*.c && ./a.out
 valgrind:
-	cc ./src/test-vector-int.c ./src/vector-int.c lib/*.c && valgrind ./a.out 
+	cc ./src/test-vector-int.c ./src/vector-int.c lib/*.c && valgrind ./a.out && cc ./src/test-vector-struct-point.c ./src/vector-struct-point.c lib/*.c && valgrind ./a.out
 clean:
 	rm a.out
