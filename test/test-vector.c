@@ -12,6 +12,7 @@ void test_vector_init();
 void test_vector_init_size();
 void test_vector_init_capacity();
 void test_vector_push_back();
+void test_vector_accessors(); /* Intention is to test expected usage of basic vector accessors */
 
 void setUp() { }
 void tearDown() { }
@@ -23,6 +24,7 @@ int main() {
     RUN_TEST(test_vector_init_size);
     RUN_TEST(test_vector_init_capacity);
     RUN_TEST(test_vector_push_back);
+    RUN_TEST(test_vector_accessors);
     return UNITY_END();
 /*
     vector_int v;
@@ -113,5 +115,32 @@ void test_vector_push_back() {
 
     //Free
     vector_free_int(&v);
+}
 
+void test_vector_accessors() {
+    //Create an intiialize test vector
+    vector_int v;
+    vector_init_int(&v);
+
+    //Push a few elements back
+    const int el[] = { 10, 20, 30 };
+    vector_push_back_int(&v, el[0]);
+    vector_push_back_int(&v, el[1]);
+    vector_push_back_int(&v, el[2]);
+
+    //Assert usage of vector_at
+    TEST_ASSERT_EQUAL_UINT(el[0], vector_at_int(&v, 0));
+    TEST_ASSERT_EQUAL_UINT(el[1], vector_at_int(&v, 1));
+    TEST_ASSERT_EQUAL_UINT(el[2], vector_at_int(&v, 2));
+    
+    //Assert usage of vector_begin and vector_end
+    TEST_ASSERT_EQUAL_UINT(el[0], *vector_begin_int(&v));
+    //Assert read of [vector_begin, vector_end)
+    const int* e = el;
+    for(int* b = vector_begin_int(&v); b != vector_end_int(&v); ++b, ++e) {
+        TEST_ASSERT_EQUAL_UINT(*b, *e);
+    }
+
+    //Free
+    vector_free_int(&v);
 }
