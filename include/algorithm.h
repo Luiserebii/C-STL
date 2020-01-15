@@ -44,7 +44,7 @@
 #define algorithm_find(begin, end, val, res)   \
     {                                          \
         res = begin;                           \
-        while(begin != end && *begin != val) { \
+        while(res != end && *res != val) { \
             ++res;                             \
         }                                      \
     }

@@ -7,6 +7,7 @@
 
 void setUp() {}
 void tearDown() {}
+void test_algorithm_find_int();
 
 int main() {
 
@@ -14,6 +15,7 @@ int main() {
     RUN_TEST(test_algorithm_copy_int);
     RUN_TEST(test_algorithm_copy_char);
     RUN_TEST(test_algorithm_copy_struct);
+    RUN_TEST(test_algorithm_find_int);
     return UNITY_END();
 }
 
@@ -57,4 +59,19 @@ void test_algorithm_copy_struct() {
 
     //Assert copied values
     TEST_ASSERT(memcmp(a1, a2, sizeof a1) == 0);
+}
+
+void test_algorithm_find_int() {
+    //Setting up basic array to look for a value
+    int a[] = {10, 20, 30};
+    const int sz = sizeof a / sizeof(int);
+    int* found;
+     
+    //Look for second element
+    algorithm_find(a, a + sz, a[1], found);
+    TEST_ASSERT_EQUAL_INT(a[1], *found);
+
+    //Look for non-existing element
+    algorithm_find(a, a + sz, 1000, found);
+    TEST_ASSERT_EQUAL_PTR(a + sz, found);
 }
