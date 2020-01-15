@@ -81,5 +81,4 @@
  */
 #define algorithm_min(a, b) (a < b) ? a : b
 
-
 #endif

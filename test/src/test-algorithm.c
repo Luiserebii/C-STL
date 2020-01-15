@@ -12,6 +12,7 @@ void test_algorithm_find_char();
 void test_algorithm_equal_int();
 void test_algorithm_equal_char();
 void test_algorithm_max();
+void test_algorithm_min();
 
 int main() {
 
@@ -21,10 +22,10 @@ int main() {
     RUN_TEST(test_algorithm_copy_struct);
     RUN_TEST(test_algorithm_find_int);
     RUN_TEST(test_algorithm_find_char);
-    //RUN_TEST(test_algorithm_find_struct);
     RUN_TEST(test_algorithm_equal_int);
     RUN_TEST(test_algorithm_equal_char);
     RUN_TEST(test_algorithm_max);
+    RUN_TEST(test_algorithm_min);
     return UNITY_END();
 }
 
@@ -141,7 +142,7 @@ void test_algorithm_max() {
     int a = algorithm_max(1, 2);
     int b = algorithm_max(15, 0);
     int c = algorithm_max(100, 100);
-    
+
     //Asserting max on int
     TEST_ASSERT_EQUAL_INT(2, a);
     TEST_ASSERT_EQUAL_INT(15, b);
@@ -156,5 +157,26 @@ void test_algorithm_max() {
     TEST_ASSERT_EQUAL_CHAR('b', d);
     TEST_ASSERT_EQUAL_CHAR('e', e);
     TEST_ASSERT_EQUAL_CHAR('z', f);
+}
 
+void test_algorithm_min() {
+    //Testing max on int
+    int a = algorithm_min(1, 2);
+    int b = algorithm_min(15, 0);
+    int c = algorithm_min(100, 100);
+
+    //Asserting max on int
+    TEST_ASSERT_EQUAL_INT(1, a);
+    TEST_ASSERT_EQUAL_INT(0, b);
+    TEST_ASSERT_EQUAL_INT(100, c);
+
+    //Testin max on char
+    char d = algorithm_min('a', 'b');
+    char e = algorithm_min('e', 'c');
+    char f = algorithm_min('z', 'z');
+
+    //Asserting max on char
+    TEST_ASSERT_EQUAL_CHAR('a', d);
+    TEST_ASSERT_EQUAL_CHAR('c', e);
+    TEST_ASSERT_EQUAL_CHAR('z', f);
 }
