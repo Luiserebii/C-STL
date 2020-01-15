@@ -58,7 +58,8 @@
 #define algorithm_equal(type, begin, end, begin2, res)                \
     {                                                                 \
         res = 1;                                                      \
-        for(type b = begin, b2 = begin2; *begin != *end; ++b, ++b2) { \
+        type b = begin;                                               \
+        for(type b2 = begin2; *begin != *end; ++b, ++b2) {            \
             if(*b != *b2) {                                           \
                 res = 0;                                              \
                 break;                                                \

@@ -19,7 +19,7 @@ int main() {
     RUN_TEST(test_algorithm_copy_struct);
     RUN_TEST(test_algorithm_find_int);
     RUN_TEST(test_algorithm_find_char);
-    RUN_TEST(test_algorithm_find_struct);
+    //RUN_TEST(test_algorithm_find_struct);
     return UNITY_END();
 }
 
@@ -94,7 +94,7 @@ void test_algorithm_find_char() {
     algorithm_find(a, a + sz, 'z', found);
     TEST_ASSERT_EQUAL_PTR(a + sz, found);
 }
-
+/*
 void test_algorithm_find_struct() {
     //Setting up basic array of structs
     struct point a[] = {{1, 2}, {4, 5}, {10, 10}};
@@ -108,4 +108,20 @@ void test_algorithm_find_struct() {
     //Look for non-existing element
     //algorithm_find(a, a + sz, (struct point){2, 3}, found);
     //TEST_ASSERT_EQUAL_PTR(a + sz, found);
+}*/
+
+void test_algorithm_equal_int() {
+    //Setting basic arrays
+    int a[] = {10, 20, 30};
+    int sz = sizeof a / sizeof(int);
+    int b[] = {10, 20, 50};
+    int res;
+
+    //Compare [a, a + sz -1) for both arrays
+    algorithm_equal(int*, a, a + sz - 1, b, res);
+    TEST_ASSERT_TRUE(res);
+
+    //Compare [a, a + sz) for both arrays
+    algorithm_equal(int*, a, a + sz, b, res);
+    TEST_ASSERT_FALSE(res);
 }
