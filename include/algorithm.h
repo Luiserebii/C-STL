@@ -35,6 +35,12 @@
             ;                                                                                 \
     }
 
+/**
+ * algorithm_find(begin, end, val, res)
+ *
+ * Searches through [begin, end) for val. Returns a pointer to the found value through
+ * res, or end if nothing found. 
+ */
 #define algorithm_find(begin, end, val, res)   \
     {                                          \
         res = begin;                           \
@@ -43,6 +49,12 @@
         }                                      \
     }
 
+/**
+ * algorithm_equal(type, begin, end, begin2, res)
+ *
+ * Searches and compares [begin, end) to [begin2, x), where x is end - begin. 
+ * Returns a boolean value into res representing the equivalence of the range.
+ */
 #define algorithm_equal(type, begin, end, begin2, res)                \
     {                                                                 \
         res = 1;                                                      \
