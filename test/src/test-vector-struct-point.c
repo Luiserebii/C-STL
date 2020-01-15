@@ -12,7 +12,7 @@ int main() {
     RUN_TEST(test_vector_init_size_point);
     RUN_TEST(test_vector_init_capacity_point);
     RUN_TEST(test_vector_push_back_point);
-//    RUN_TEST(test_vector_accessors_point);
+    RUN_TEST(test_vector_accessors_point);
     return UNITY_END();
 }
 
@@ -89,22 +89,22 @@ void test_vector_accessors_point() {
     vector_init_point(&v);
 
     //Push a few elements back
-    const point el[] = { { "", 10, 50 }, {}, {} };
+    const point el[] = { { "Istanbul", 10, 50 }, { "Tokyo", 80, 80 }, { "Moscow", 100, 100 } };
     vector_push_back_point(&v, el[0]);
     vector_push_back_point(&v, el[1]);
     vector_push_back_point(&v, el[2]);
 
     //Assert usage of vector_at
-    TEST_ASSERT_EQUAL_UINT(el[0], vector_at_point(&v, 0));
-    TEST_ASSERT_EQUAL_UINT(el[1], vector_at_point(&v, 1));
-    TEST_ASSERT_EQUAL_UINT(el[2], vector_at_point(&v, 2));
+    TEST_ASSERT(is_equal_point(el[0], vector_at_point(&v, 0)));
+    TEST_ASSERT(is_equal_point(el[1], vector_at_point(&v, 1)));
+    TEST_ASSERT(is_equal_point(el[2], vector_at_point(&v, 2)));
     
     //Assert usage of vector_begin and vector_end
-    TEST_ASSERT_EQUAL_UINT(el[0], *vector_begin_point(&v));
+    TEST_ASSERT(is_equal_point(el[0], *vector_begin_point(&v)));
     //Assert read of [vector_begin, vector_end)
-    const int* e = el;
-    for(int* b = vector_begin_point(&v); b != vector_end_point(&v); ++b, ++e) {
-        TEST_ASSERT_EQUAL_UINT(*b, *e);
+    const point* e = el;
+    for(point* b = vector_begin_point(&v); b != vector_end_point(&v); ++b, ++e) {
+        TEST_ASSERT(is_equal_point(*b, *e));
     }
 
     //Free
