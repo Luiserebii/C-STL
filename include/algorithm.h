@@ -58,10 +58,9 @@
 #define algorithm_equal(type, begin, end, begin2, res)                \
     {                                                                 \
         res = 1;                                                      \
-        type b = begin;                                               \
-        for(type b2 = begin2; *b != *end; ++b, ++b2) {                \
-            printf("OwO: %d | %d\n", *b, *b2);  \
-            if(*b != *b2) {                                           \
+        type _alg_b = begin;                                               \
+        for(type _alg_b2 = begin2; _alg_b != end; ++_alg_b, ++_alg_b2) {                \
+            if(*_alg_b != *_alg_b2) {                                           \
                 res = 0;                                              \
                 break;                                                \
             }                                                         \
