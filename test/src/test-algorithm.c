@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "../../include/algorithm.h"
 #include "../include/test-algorithm.h"
 #include "../lib/unity.h"
-#include "../../include/algorithm.h"
 
-void setUp() { }
-void tearDown() { }
+void setUp() {}
+void tearDown() {}
 
 int main() {
 
@@ -15,12 +15,11 @@ int main() {
     RUN_TEST(test_algorithm_copy_char);
     RUN_TEST(test_algorithm_copy_struct);
     return UNITY_END();
-
 }
 
 void test_algorithm_copy_int() {
     //Setting up basic array to copy over
-    int a1[] = { 1, 2, 3 };
+    int a1[] = {1, 2, 3};
     const int sz = sizeof a1 / sizeof(int);
     int a2[sz];
 
@@ -34,7 +33,7 @@ void test_algorithm_copy_int() {
 
 void test_algorithm_copy_char() {
     //Setting up basic array to copy over
-    char a1[] = { 'a', 'b', 'c', 'd', 'e', 'f' };
+    char a1[] = {'a', 'b', 'c', 'd', 'e', 'f'};
     const int sz = sizeof a1 / sizeof(char);
     char a2[sz];
 

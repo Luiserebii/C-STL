@@ -1,9 +1,9 @@
 #include "../include/test-vector-int.h"
-#include "../lib/unity.h"
 #include "../include/vector-int.h"
+#include "../lib/unity.h"
 
-void setUp() { }
-void tearDown() { }
+void setUp() {}
+void tearDown() {}
 
 int main() {
     UNITY_BEGIN();
@@ -19,7 +19,7 @@ void test_vector_init_int() {
     //Create and initialize test vector
     vector_int v;
     vector_init_int(&v);
-   
+
     //Assert state of fresh vector
     TEST_ASSERT(v.head == NULL && v.avail == NULL && v.tail == NULL);
 
@@ -32,7 +32,7 @@ void test_vector_init_size_int() {
     vector_int v;
     const size_t sz = 4;
     vector_init_size_int(&v, sz);
-    
+
     //Assert state of newly created vector
     TEST_ASSERT(v.head != NULL && v.avail != NULL && v.tail != NULL);
 
@@ -49,7 +49,7 @@ void test_vector_init_capacity_int() {
     vector_int v;
     const size_t sz = 4;
     vector_init_capacity_int(&v, sz);
-    
+
     //Assert state of newly created vector
     TEST_ASSERT(v.head != NULL && v.avail != NULL && v.tail != NULL);
 
@@ -88,7 +88,7 @@ void test_vector_accessors_int() {
     vector_init_int(&v);
 
     //Push a few elements back
-    const int el[] = { 10, 20, 30 };
+    const int el[] = {10, 20, 30};
     vector_push_back_int(&v, el[0]);
     vector_push_back_int(&v, el[1]);
     vector_push_back_int(&v, el[2]);
@@ -97,12 +97,12 @@ void test_vector_accessors_int() {
     TEST_ASSERT_EQUAL_UINT(el[0], vector_at_int(&v, 0));
     TEST_ASSERT_EQUAL_UINT(el[1], vector_at_int(&v, 1));
     TEST_ASSERT_EQUAL_UINT(el[2], vector_at_int(&v, 2));
-    
+
     //Assert usage of vector_begin and vector_end
     TEST_ASSERT_EQUAL_UINT(el[0], *vector_begin_int(&v));
     //Assert read of [vector_begin, vector_end)
     const int* e = el;
-    for(int* b = vector_begin_int(&v); b != vector_end_int(&v); ++b, ++e) {
+    for(int *b = vector_begin_int(&v); b != vector_end_int(&v); ++b, ++e) {
         TEST_ASSERT_EQUAL_UINT(*b, *e);
     }
 
