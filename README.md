@@ -3,9 +3,15 @@
 [![CircleCI](https://circleci.com/gh/Luiserebii/C-STL.svg?style=svg)](https://circleci.com/gh/Luiserebii/C-STL)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d864f79a239d487a97c5ed0144b9a51b)](https://www.codacy.com/manual/Luiserebii/C-STL?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Luiserebii/C-STL&amp;utm_campaign=Badge_Grade)
 
-Implementations of the C++ Standard Library in C. Can creatures without wings engage in flight?
+Implementation of the C++ Standard Library in C. Can creatures armed without wings engage in flight?
 
 ## Implementations
+
+### \<algorithm\>
+
+Functions from the `<algorithm>` header are currently being implemented as macros, often requiring an explicit passing of the type being used. For more, check out [algorithm.h](https://github.com/Luiserebii/C-STL/blob/master/include/algorithm.h)
+
+### \<vector\>
 
 Emulating the C++ `<vector>` in C is difficult, but macros allow us some room to play. Two macros, `declare_vector` and `define_vector`, allow us to explicitly provide a type (much like a template) and construct the rest according to our needs.
 
