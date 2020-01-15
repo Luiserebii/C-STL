@@ -10,6 +10,7 @@ void tearDown() {}
 void test_algorithm_find_int();
 void test_algorithm_find_char();
 void test_algorithm_find_struct();
+void test_algorithm_equal_int();
 
 int main() {
 
@@ -20,6 +21,7 @@ int main() {
     RUN_TEST(test_algorithm_find_int);
     RUN_TEST(test_algorithm_find_char);
     //RUN_TEST(test_algorithm_find_struct);
+    RUN_TEST(test_algorithm_equal_int);
     return UNITY_END();
 }
 
@@ -120,7 +122,7 @@ void test_algorithm_equal_int() {
     //Compare [a, a + sz -1) for both arrays
     algorithm_equal(int*, a, a + sz - 1, b, res);
     TEST_ASSERT_TRUE(res);
-
+    
     //Compare [a, a + sz) for both arrays
     algorithm_equal(int*, a, a + sz, b, res);
     TEST_ASSERT_FALSE(res);
