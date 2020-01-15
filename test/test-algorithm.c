@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #include "./lib/unity.h"
 #include "../src/algorithm.h"
@@ -27,7 +28,7 @@ void test_algorithm_copy_int() {
     int a2[sz];
 
     //Attempt copying of a1 into a2
-    TEST_ASSERT_FALSE(arrIntIsEqual(a1, a2, sz));
+    TEST_ASSERT(memcmp(a1, a2, sizeof a1) != 0);
     algorithm_copy(int*, a1, a1 + sz, a2);
 
     //Assert copied values
@@ -41,7 +42,7 @@ void test_algorithm_copy_char() {
     char a2[sz];
 
     //Attempt copying of a1 into a2
-    TEST_ASSERT_FALSE(arrCharIsEqual(a1, a2, sz));
+    TEST_ASSERT(memcmp(a1, a2, sizeof a1) != 0);
     algorithm_copy(char*, a1, a1 + sz, a2);
 
     //Assert copied values
@@ -50,14 +51,14 @@ void test_algorithm_copy_char() {
 
 int arrIntIsEqual(int* a, int* b, int n) {
     while(n--) {
-        if(*a != *b) return 0;
+        if(*a++ != *b++) return 0;
     }
     return 1;
 }
 
 int arrCharIsEqual(char* a, char* b, int n) {
     while(n--) {
-        if(*a != *b) return 0;
+        if(*a++ != *b++) return 0;
     }
     return 1;
 }
