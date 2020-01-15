@@ -8,6 +8,8 @@
 void setUp() {}
 void tearDown() {}
 void test_algorithm_find_int();
+void test_algorithm_find_char();
+void test_algorithm_find_struct();
 
 int main() {
 
@@ -16,6 +18,8 @@ int main() {
     RUN_TEST(test_algorithm_copy_char);
     RUN_TEST(test_algorithm_copy_struct);
     RUN_TEST(test_algorithm_find_int);
+    RUN_TEST(test_algorithm_find_char);
+    RUN_TEST(test_algorithm_find_struct);
     return UNITY_END();
 }
 
@@ -74,4 +78,34 @@ void test_algorithm_find_int() {
     //Look for non-existing element
     algorithm_find(a, a + sz, 1000, found);
     TEST_ASSERT_EQUAL_PTR(a + sz, found);
+}
+
+void test_algorithm_find_char() {
+    //Setting up basic char array
+    char a[] = {'a', 'b', 'c', 'd', 'e', 'f'};
+    const int sz = sizeof a / sizeof(char);
+    char* found;
+
+    //Look for fourth element
+    algorithm_find(a, a + sz, a[3], found);
+    TEST_ASSERT_EQUAL_CHAR(a[3], *found);
+
+    //Look for non-existing element
+    algorithm_find(a, a + sz, 'z', found);
+    TEST_ASSERT_EQUAL_PTR(a + sz, found);
+}
+
+void test_algorithm_find_struct() {
+    //Setting up basic array of structs
+    struct point a[] = {{1, 2}, {4, 5}, {10, 10}};
+    const int sz = sizeof a / sizeof(struct point);
+    struct point* found;
+    
+    //Look for second element
+    algorithm_find(a, a + sz, a[1], found);
+    TEST_ASSERT_EQUAL_MEMORY(a + 1, found, sizeof(struct point));
+
+    //Look for non-existing element
+    //algorithm_find(a, a + sz, (struct point){2, 3}, found);
+    //TEST_ASSERT_EQUAL_PTR(a + sz, found);
 }
