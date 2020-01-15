@@ -35,4 +35,23 @@
             ;                                                                                 \
     }
 
+#define algorithm_find(begin, end, val, res)   \
+    {                                          \
+        res = begin;                           \
+        while(begin != end && *begin != val) { \
+            ++res;                             \
+        }                                      \
+    }
+
+#define algorithm_equal(type, begin, end, begin2, res)                \
+    {                                                                 \
+        res = 1;                                                      \
+        for(type b = begin, b2 = begin2; *begin != *end; ++b, ++b2) { \
+            if(*b != *b2) {                                           \
+                res = 0;                                              \
+                break;                                                \
+            }                                                         \
+        }                                                             \
+    }
+
 #endif
