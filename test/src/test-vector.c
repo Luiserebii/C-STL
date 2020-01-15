@@ -1,18 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-#include "./lib/unity.h"
-#include "../src/vector.h"
-
-//Macros to setup vector of int
-declare_vector(int)
-define_vector(int)
-
-void test_vector_init();
-void test_vector_init_size();
-void test_vector_init_capacity();
-void test_vector_push_back();
-void test_vector_accessors(); /* Intention is to test expected usage of basic vector accessors */
+#include "../include/test-vector.h"
+#include "../lib/unity.h"
+#include "../include/vector-int.h"
 
 void setUp() { }
 void tearDown() { }
