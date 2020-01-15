@@ -28,11 +28,11 @@
  *
  * Ex: algorithm_copy(int*, months, months + 12, words)
  */
-#define algorithm_copy(type, begin, end, dest)                                                \
-    {                                                                                         \
-        type alg_copy_it = begin;                                                             \
-        for(type alg_copy_dest = dest; alg_copy_it != end; *alg_copy_dest++ = *alg_copy_it++) \
-            ;                                                                                 \
+#define algorithm_copy(type, begin, end, dest)                                                    \
+    {                                                                                             \
+        type _alg_copy_it = begin;                                                                \
+        for(type _alg_copy_dest = dest; _alg_copy_it != end; *_alg_copy_dest++ = *_alg_copy_it++) \
+            ;                                                                                     \
     }
 
 /**
@@ -41,12 +41,12 @@
  * Searches through [begin, end) for val. Returns a pointer to the found value through
  * res, or end if nothing found. 
  */
-#define algorithm_find(begin, end, val, res)   \
-    {                                          \
-        res = begin;                           \
-        while(res != end && *res != val) { \
-            ++res;                             \
-        }                                      \
+#define algorithm_find(begin, end, val, res) \
+    {                                        \
+        res = begin;                         \
+        while(res != end && *res != val) {   \
+            ++res;                           \
+        }                                    \
     }
 
 /**
@@ -55,16 +55,16 @@
  * Searches and compares [begin, end) to [begin2, x), where x is end - begin. 
  * Returns a boolean value into res representing the equivalence of the range.
  */
-#define algorithm_equal(type, begin, end, begin2, res)                \
-    {                                                                 \
-        res = 1;                                                      \
-        type _alg_b = begin;                                               \
-        for(type _alg_b2 = begin2; _alg_b != end; ++_alg_b, ++_alg_b2) {                \
-            if(*_alg_b != *_alg_b2) {                                           \
-                res = 0;                                              \
-                break;                                                \
-            }                                                         \
-        }                                                             \
+#define algorithm_equal(type, begin, end, begin2, res)                               \
+    {                                                                                \
+        res = 1;                                                                     \
+        type _alg_eq_b = begin;                                                      \
+        for(type _alg_eq_b2 = begin2; _alg_eq_b != end; ++_alg_eq_b, ++_alg_eq_b2) { \
+            if(*_alg_eq_b != *_alg_eq_b2) {                                          \
+                res = 0;                                                             \
+                break;                                                               \
+            }                                                                        \
+        }                                                                            \
     }
 
 #endif

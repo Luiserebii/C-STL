@@ -72,7 +72,7 @@ void test_algorithm_find_int() {
     int a[] = {10, 20, 30};
     const int sz = sizeof a / sizeof(int);
     int* found;
-     
+
     //Look for second element
     algorithm_find(a, a + sz, a[1], found);
     TEST_ASSERT_EQUAL_INT(a[1], *found);
@@ -123,7 +123,7 @@ void test_algorithm_equal_int() {
     int* e1 = a + sz - 1;
     algorithm_equal(int*, a, e1, b, res);
     TEST_ASSERT_TRUE(res);
-    
+
     //Compare [a, a + sz) for both arrays
     int* e2 = a + sz;
     algorithm_equal(int*, a, e2, b, res);
