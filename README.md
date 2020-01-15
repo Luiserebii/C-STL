@@ -1,5 +1,5 @@
 # C-STL
-![GitHub](https://img.shields.io/github/license/Luiserebii/C-STL?color=red)
+![GitHub](https://img.shields.io/github/license/Luiserebii/C-STL?color=222)
 [![CircleCI](https://circleci.com/gh/Luiserebii/C-STL.svg?style=svg)](https://circleci.com/gh/Luiserebii/C-STL)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d864f79a239d487a97c5ed0144b9a51b)](https://www.codacy.com/manual/Luiserebii/C-STL?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Luiserebii/C-STL&amp;utm_campaign=Badge_Grade)
 
@@ -18,7 +18,7 @@ Emulating the C++ `<vector>` in C is difficult, but macros allow us some room to
 Since the declaration of the vector `struct` data type and associated functions should ideally belong in a header file, it is advised to use the `declare_vector` within one, and use `define_vector` in a matching `.c` file. For example, to create an `int` vector, one might write:
 
 ```c
-/* vector_int.h */
+/** vector_int.h **/
 #ifndef VECTOR_INT_H
 #define VECTOR_INT_H
 
@@ -29,7 +29,7 @@ declare_vector(int)
 #endif
 ```
 ```c
-/* vector_int.c */
+/** vector_int.c **/
 #include "vector_int.h"
 #include "vector.h"
 
