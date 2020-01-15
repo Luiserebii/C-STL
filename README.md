@@ -9,7 +9,7 @@ Implementation of the C++ Standard Library in C. Can creatures armed without win
 
 ### \<algorithm\>
 
-Functions from the `<algorithm>` header are currently being implemented as macros, often requiring an explicit passing of the type being used. For more, check out [algorithm.h](https://github.com/Luiserebii/C-STL/blob/master/include/algorithm.h)
+Functions from the `<algorithm>` header are currently being implemented as macros, often requiring an explicit passing of the type being used. For more, check out [algorithm.h](https://github.com/Luiserebii/C-STL/blob/master/include/algorithm.h).
 
 ### \<vector\>
 
@@ -36,12 +36,14 @@ declare_vector(int)
 define_vector(int)
 ```
 
-This will then expand into the appropriate vector struct with matching functions. All functions are appended with the type, with the general format `vector_FUNCTION_TYPE`. Therefore, to `push_back` on an `int` vector, one would call `vector_push_back_int`.
+This will then expand into the appropriate vector `struct` (e.g. `vector_int`) with matching functions. All functions are appended with the type, with the general format `vector_FUNCTION_TYPE`. Therefore, to `push_back` on an `int` vector, one would call `vector_push_back_int`.
+
+As `vector` relies on dynamically-allocated memory via `malloc`, a convenience function `vector_free_TYPE` has been provided to release a vector after it has finished being used.
 
 Further documentation on the currently implemented functions can be found in [vector.h](https://github.com/Luiserebii/C-STL/blob/master/include/vector.h).
 
 ## Testing
-The [`test/`](test) directory contains tests which intend to exercise typical usage. To run all tests, simply use the command `make test`. The simple test framework [Unity](https://github.com/ThrowTheSwitch/Unity) is currently being used to write them.
+The [`test/`](test) directory contains tests which intend to exercise typical usage. To run all tests, simply use the command `make test`, which also includes diagnostic information from valgrind to ensure resources are being freed properly. The simple test framework [Unity](https://github.com/ThrowTheSwitch/Unity) is currently being used to write them.
 
 ## License
 This code has been licensed under the GNU General Public License v3.0.
