@@ -31,9 +31,15 @@ void vector_init_##vector_type(vector_##vector_type* v); \
 /** \
  * Initializes an empty vector with the size passed. \
  * Memory will be allocated under the size given, so vector_free \
- * is required \
+ * is required. \
  */ \
 void vector_init_size_##vector_type(vector_##vector_type* v, size_t s); \
+\
+/** \
+ * Intiailizes an empty vector with the size passed. \
+ * Unlike vector_init_size, this function will fill the capacity. \
+ */ \
+void vector_init_capacity_##vector_type(vector_##vector_type* v, size_t s); \
 \
 /** \
  * Pushes a new element onto the vector. \
@@ -92,6 +98,11 @@ void vector_init_##vector_type(vector_##vector_type* v) { \
 } \
 \
 void vector_init_size_##vector_type(vector_##vector_type* v, size_t s) { \
+    v->head = (vector_type*) malloc(sizeof(vector_type) * s); \
+    v->tail = v->avail = v->head + s; \
+} \
+\
+void vector_init_capacity_##vector_type(vector_##vector_type* v, size_t s) { \
     v->head = v->avail = (vector_type*) malloc(sizeof(vector_type) * s); \
     v->tail = v->head + s; \
 } \

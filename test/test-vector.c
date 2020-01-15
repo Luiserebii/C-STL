@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "./lib/unity.h"
 #include "../src/vector.h"
@@ -8,6 +9,8 @@ declare_vector(int)
 define_vector(int)
 
 void test_vector_init();
+void test_vector_init_size();
+void test_vector_init_capacity();
 
 void setUp() { }
 void tearDown() { }
@@ -16,6 +19,8 @@ int main() {
 
     UNITY_BEGIN();
     RUN_TEST(test_vector_init);
+    RUN_TEST(test_vector_init_size);
+    RUN_TEST(test_vector_init_capacity);
     return UNITY_END();
 /*
     vector_int v;
@@ -48,6 +53,40 @@ void test_vector_init() {
    
     //Assert state of fresh vector
     TEST_ASSERT(v.head == NULL && v.avail == NULL && v.tail == NULL);
+
+    //Free
+    vector_free_int(&v);
+}
+
+void test_vector_init_size() {
+    //Create and initialize test vector
+    vector_int v;
+    const size_t sz = 4;
+    vector_init_size_int(&v, sz);
+    
+    //Assert state of newly created vector
+    TEST_ASSERT(v.head != NULL && v.avail != NULL && v.tail != NULL);
+
+    //Small test for vector_size
+    TEST_ASSERT_EQUAL_UINT(sz, vector_size_int(&v));
+    TEST_ASSERT_EQUAL_UINT(sz, vector_capacity_int(&v));
+
+    //Free
+    vector_free_int(&v);
+}
+
+void test_vector_init_capacity() {
+    //Create and initialize test vector
+    vector_int v;
+    const size_t sz = 4;
+    vector_init_capacity_int(&v, sz);
+    
+    //Assert state of newly created vector
+    TEST_ASSERT(v.head != NULL && v.avail != NULL && v.tail != NULL);
+
+    //Small test for vector_size
+    TEST_ASSERT_EQUAL_UINT(0, vector_size_int(&v));
+    TEST_ASSERT_EQUAL_UINT(sz, vector_capacity_int(&v));
 
     //Free
     vector_free_int(&v);
