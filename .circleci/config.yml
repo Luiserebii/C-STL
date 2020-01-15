@@ -16,15 +16,15 @@ jobs:
       - checkout
       - run: 
           name: Linter
-          command: ./script/lint.sh && if [[ `git status --porcelain` ]]; then exit 1; else exit 0; fi
+          command: ./scripts/lint.sh && if [[ `git status --porcelain` ]]; then exit 1; else exit 0; fi
 
   # Building and running examples
   test:
     <<: *defaults
     steps:
       - run: 
-          name: Install gcc
-          command: apt-get update && apt-get install -y gcc
+          name: Install gcc and make
+          command: apt-get update && apt-get install -y gcc make
       - checkout
       - run:
           name: <vector>
