@@ -23,8 +23,8 @@ jobs:
     <<: *defaults
     steps:
       - run: 
-          name: Install gcc and make
-          command: apt-get update && apt-get install -y gcc make
+          name: Install gcc, make, and valgrind
+          command: apt-get update && apt-get install -y gcc make valgrind
       - checkout
       - run:
           name: <vector>
