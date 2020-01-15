@@ -120,8 +120,8 @@ void test_algorithm_equal_int() {
     int res;
 
     //Compare [a, a + sz -1) for both arrays
-    algorithm_equal(int*, a, a + sz - 1, b, res);
-    TEST_ASSERT_TRUE(res);
+    //algorithm_equal(int*, a, a + sz - 1, b, res);
+    //TEST_ASSERT_TRUE(res);
     
     //Compare [a, a + sz) for both arrays
     algorithm_equal(int*, a, a + sz, b, res);

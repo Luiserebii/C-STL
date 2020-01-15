@@ -59,7 +59,8 @@
     {                                                                 \
         res = 1;                                                      \
         type b = begin;                                               \
-        for(type b2 = begin2; *b != *end; ++b, ++b2) {            \
+        for(type b2 = begin2; *b != *end; ++b, ++b2) {                \
+            printf("OwO: %d | %d\n", *b, *b2);  \
             if(*b != *b2) {                                           \
                 res = 0;                                              \
                 break;                                                \
