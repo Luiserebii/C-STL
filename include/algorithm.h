@@ -108,6 +108,23 @@
         while(_alg_tr_it != end) { \
             *dest++ = f(*begin++); \
         } \
-    } 
+    }
+
+/**
+ * algorithm_accumulate(type, begin, end, res)
+ *
+ * Add all values found in the range [begin, end) and return in res.
+ * 
+ * The res variable can be prepopulated with an initial value like
+ * std::accumulate, the result of the computation will be stored
+ * there regardless.
+ */
+#define algorithm_accumulate(type, begin, end, res) \
+    { \
+        const type _alg_acc_it = begin; \
+        while(_alg_acc_it != end) { \
+            res += *_alg_acc_it++; \
+        } \
+    }
 
 #endif
