@@ -30,7 +30,7 @@
  */
 #define algorithm_copy(type, begin, end, dest)                                                    \
     {                                                                                             \
-        type _alg_copy_it = begin;                                                                \
+        const type _alg_copy_it = begin;                                                          \
         for(type _alg_copy_dest = dest; _alg_copy_it != end; *_alg_copy_dest++ = *_alg_copy_it++) \
             ;                                                                                     \
     }
@@ -55,16 +55,16 @@
  * Searches and compares [begin, end) to [begin2, x), where x is end - begin. 
  * Returns a boolean value into res representing the equivalence of the range.
  */
-#define algorithm_equal(type, begin, end, begin2, res)                               \
-    {                                                                                \
-        res = 1;                                                                     \
-        type _alg_eq_b = begin;                                                      \
-        for(type _alg_eq_b2 = begin2; _alg_eq_b != end; ++_alg_eq_b, ++_alg_eq_b2) { \
-            if(*_alg_eq_b != *_alg_eq_b2) {                                          \
-                res = 0;                                                             \
-                break;                                                               \
-            }                                                                        \
-        }                                                                            \
+#define algorithm_equal(type, begin, end, begin2, res)                                     \
+    {                                                                                      \
+        res = 1;                                                                           \
+        const type _alg_eq_b = begin;                                                      \
+        for(const type _alg_eq_b2 = begin2; _alg_eq_b != end; ++_alg_eq_b, ++_alg_eq_b2) { \
+            if(*_alg_eq_b != *_alg_eq_b2) {                                                \
+                res = 0;                                                                   \
+                break;                                                                     \
+            }                                                                              \
+        }                                                                                  \
     }
 
 /**
@@ -86,14 +86,14 @@
  *
  * Returns the number of times val appears in [begin, end) into res.
  */
-#define algorithm_count(type, begin, end, val, res)                              \
-    {                                                                            \
-        res = 0;                                                                 \
-        for(type _alg_count_it = begin; _alg_count_it != end; ++_alg_count_it) { \
-            if(*_alg_count_it == val) {                                          \
-                ++res;                                                           \
-            }                                                                    \
-        }                                                                        \
+#define algorithm_count(type, begin, end, val, res)                                    \
+    {                                                                                  \
+        res = 0;                                                                       \
+        for(const type _alg_count_it = begin; _alg_count_it != end; ++_alg_count_it) { \
+            if(*_alg_count_it == val) {                                                \
+                ++res;                                                                 \
+            }                                                                          \
+        }                                                                              \
     }
 
 #endif
