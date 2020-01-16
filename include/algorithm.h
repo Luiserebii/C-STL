@@ -149,6 +149,11 @@
         } \
     }
 
+/**
+ * algorithm_search(type, begin, end, begin2, end2, res) 
+ *
+ *
+ */
 #define algorithm_search(type, begin, end, begin2, end2, res) \
     { \
         for(const type _alg_search_b1 = begin; _alg_search_b1 != end; ++_alg_search_b1) { \
@@ -168,6 +173,21 @@
         } \
         res = end; \
         _algorithm_search_end: \
+    }
+
+/**
+ * algorithm_find_if(begin, end, f, res)
+ *
+ * Searches through [begin, end) for the first element in which the
+ * predicate f returns true. Returns a pointer to the found value through
+ * res, or end if nothing found.
+ */
+#define algorithm_find_if(begin, end, f, res) \
+    { \
+        res = begin; \
+        while(res != end && !f(*res)) {   \
+            ++res;                           \
+        }                                    \
     }
 
 #endif
