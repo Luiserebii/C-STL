@@ -127,4 +127,16 @@
         }                                           \
     }
 
+#define algorithm_remove_copy_if(type, begin, end, dest, f) \
+    { \
+        const type _alg_cpif_it = begin; \
+        type _alg_cpif_dest = dest; \
+        while(_alg_cpif_it != end) { \
+            if(!f(*_alg_cpif_it)) { \
+                *_alg_cpif_dest++ = *_alg_cpif_it; \
+            } \
+            ++_alg_cpif_it; \
+        } \
+    }
+
 #endif
