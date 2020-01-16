@@ -126,7 +126,17 @@
             res += *_alg_acc_it++;                  \
         }                                           \
     }
-
+/**
+ * algorithm_remove_copy_if(type, begin, end, dest, f)
+ *
+ * Copies all values in the range [begin, end) to dest which
+ * do not match the predicate f passed. 
+ *
+ * Alternatively, this function removes any elements which match
+ * the predicate and places this new range in dest.
+ *
+ * Ex: algorithm_remove_copy_if(char*, a, a + sz, b, islower)
+ */
 #define algorithm_remove_copy_if(type, begin, end, dest, f) \
     { \
         const type _alg_cpif_it = begin; \
@@ -137,6 +147,27 @@
             } \
             ++_alg_cpif_it; \
         } \
+    }
+
+#define algorithm_search(type, begin, end, begin2, end2, res) \
+    { \
+        for(const type _alg_search_b1 = begin; _alg_search_b1 != end; ++_alg_search_b1) { \
+            type _alg_search_it1 = begin; \
+            type _alg_search_it2 = begin2; \
+            while(*_alg_search_it1 == *_alg_search_it2) { \
+                if(_alg_search_it2 == end2) { \
+                    res = _alg_search_b1; \
+                    goto _algorithm_search_end; \
+                } \
+                if(_alg_search_it1 == end) { \
+                    res = end; \
+                    goto _algorithm_search_end; \
+                } \
+                ++_alg_search_it1, ++_alg_search_it2; \
+            } \
+        } \
+        res = end; \
+        _algorithm_search_end: \
     }
 
 #endif
