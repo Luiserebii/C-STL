@@ -96,4 +96,18 @@
         }                                                                              \
     }
 
+/**
+ * algorithm_transform(type, begin, end, dest, f)
+ *
+ * Apply the unary function f to the range [begin, end), storing the result
+ * in a range [dest, end - begin).
+ */
+#define algorithm_transform(type, begin, end, dest, f) \
+    { \
+        const type _alg_tr_it = begin; \
+        while(_alg_tr_it != end) { \
+            *dest++ = f(*begin++); \
+        } \
+    } 
+
 #endif
