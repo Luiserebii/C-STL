@@ -11,6 +11,7 @@ int main() {
     RUN_TEST(test_vector_init_size_int);
     RUN_TEST(test_vector_init_capacity_int);
     RUN_TEST(test_vector_copy_int);
+    RUN_TEST(test_vector_set_int);
     RUN_TEST(test_vector_push_back_int);
     RUN_TEST(test_vector_accessors_int);
     return UNITY_END();
@@ -63,10 +64,10 @@ void test_vector_init_capacity_int() {
 }
 
 void test_vector_copy_int() {
-    //Create an initialize test vector
+    //Create and initialize test vector
     vector_int v, copy;
     vector_init_int(&v);
-
+    
     //Push a few elements back
     const int el[] = {10, 20, 30};
     vector_push_back_int(&v, el[0]);
@@ -82,6 +83,31 @@ void test_vector_copy_int() {
     TEST_ASSERT(res);
 
     //Ensure pointers are truly seperate
+
+}
+
+void test_vector_set_int() {
+    //Create and intiailize test vector
+    vector_int v, copy;
+    vector_init_int(&v);
+
+    //Push a few elements back
+    const int el[] = {10, 20, 30};
+    const int newEl[] = {10, 40, 30};
+    vector_push_back_int(&v, el[0]);
+    vector_push_back_int(&v, el[1]);
+    vector_push_back_int(&v, el[2]);
+    
+    //Try setting the second element
+    vector_set_int(&v, newEl[1]);
+
+    //Assert the element has been set
+    TEST_ASSERT_EQUAL_INT(newEl[1], vector_at_int(&v, 1));
+
+    //Furthermore, assert that the full set of stuff has been unmodified
+    int res;
+    algorithm_equal(int*, vector_begin_int(&v), vector_end_int(&v), newEl, res);
+    TEST_ASSERT(res);
 }
 
 void test_vector_push_back_int() {
