@@ -83,6 +83,11 @@ void test_vector_copy_int() {
     TEST_ASSERT(res);
 
     //Ensure pointers are truly seperate
+    vector_set_int(&copy, 1, 40);
+    TEST_ASSERT(vector_at_int(&v, 1) != vector_at_int(&copy, 1));
+    const int expEl[] = {10, 40, 30};
+    algorithm_equal(int*, vector_begin_int(&copy), vector_end_int(&copy), expEl, res);
+    TEST_ASSERT(res);
 }
 
 void test_vector_set_int() {
