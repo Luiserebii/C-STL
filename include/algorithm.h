@@ -81,4 +81,19 @@
  */
 #define algorithm_min(a, b) (a < b) ? a : b
 
+/**
+ * algorithm_count(type, begin, end, val, res)
+ *
+ * Returns the number of times val appears in [begin, end) into res.
+ */
+#define algorithm_count(type, begin, end, val, res) \
+    { \
+        res = 0; \
+        for(type _alg_count_it = begin; _alg_count_it != end; ++_alg_count_it) { \
+            if(*_alg_count_it == val) { \
+                ++res; \
+            } \
+        } \
+    } 
+
 #endif
