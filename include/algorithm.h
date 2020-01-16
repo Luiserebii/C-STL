@@ -172,9 +172,10 @@
 #define algorithm_search(type, begin, end, begin2, end2, res)                             \
     {                                                                                     \
         for(const type _alg_search_b1 = begin; _alg_search_b1 != end; ++_alg_search_b1) { \
-            const type _alg_search_it1 = begin;                                           \
+            const type _alg_search_it1 = _alg_search_b1;                                  \
             const type _alg_search_it2 = begin2;                                          \
             while(*_alg_search_it1 == *_alg_search_it2) {                                 \
+                printf("SNAGGED: %d \n", *_alg_search_it1); \
                 if(_alg_search_it2 == end2) {                                             \
                     res = _alg_search_b1;                                                 \
                     goto _algorithm_search_end;                                           \
@@ -188,6 +189,7 @@
         }                                                                                 \
         res = end;                                                                        \
     _algorithm_search_end:                                                                \
+        printf("OWO: Are we ewual to end?: %d\n", res == end); \
         ;                                                                                 \
     }
 
