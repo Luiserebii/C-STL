@@ -10,6 +10,7 @@ int main() {
     RUN_TEST(test_vector_init_int);
     RUN_TEST(test_vector_init_size_int);
     RUN_TEST(test_vector_init_capacity_int);
+    RUN_TEST(test_vector_copy_int);
     RUN_TEST(test_vector_push_back_int);
     RUN_TEST(test_vector_accessors_int);
     return UNITY_END();
