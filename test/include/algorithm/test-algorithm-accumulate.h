@@ -1,13 +1,7 @@
-#ifndef TEST_ALGORITHM_COPY_H
-#define TEST_ALGORITHM_COPY_H
+#ifndef TEST_ALGORITHM_ACCUMULATE_H
+#define TEST_ALGORITHM_ACCUMULATE_H
 
-struct point {
-    int x;
-    int y;
-};
-
-void test_algorithm_copy_int();
-void test_algorithm_copy_char();
-void test_algorithm_copy_struct();
+void test_algorithm_accumulate_int();
+void test_algorithm_accumulate_double();
 
 #endif

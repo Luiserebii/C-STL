@@ -1,7 +1,7 @@
 CC=cc
 test: algorithm vector valgrind
 algorithm:
-	$(CC) ./src/test-algorithm.c lib/*.c && ./a.out
+	$(CC) ./src/algorithm/test-algorithm.c lib/*.c && ./a.out
 vector: vector-int vector-struct-point
 vector-int:
 	$(CC) ./src/test-vector-int.c ./src/vector-int.c lib/*.c && ./a.out
