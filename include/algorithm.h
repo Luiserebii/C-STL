@@ -40,6 +40,8 @@
  *
  * Searches through [begin, end) for val. Returns a pointer to the found value through
  * res, or end if nothing found. 
+ *
+ * Ex: algorithm_find(int*, nums, nums + sz, 100);
  */
 #define algorithm_find(begin, end, val, res) \
     {                                        \
@@ -54,6 +56,8 @@
  *
  * Searches and compares [begin, end) to [begin2, x), where x is end - begin. 
  * Returns a boolean value into res representing the equivalence of the range.
+ *
+ * Ex: algorithm_equal(char*, charList, charList + sz, word, res);
  */
 #define algorithm_equal(type, begin, end, begin2, res)                                     \
     {                                                                                      \
@@ -85,6 +89,8 @@
  * algorithm_count(type, begin, end, val, res)
  *
  * Returns the number of times val appears in [begin, end) into res.
+ *
+ * Ex: algorithm_count(int*, nums, nums + sz, 10, res);
  */
 #define algorithm_count(type, begin, end, val, res)                                    \
     {                                                                                  \
@@ -101,6 +107,9 @@
  *
  * Apply the unary function f to the range [begin, end), storing the result
  * in a range [dest, end - begin).
+ *
+ * Ex: algorithm_transform(int*, nums, nums + sz, doubled, doubleNum);
+ * where doubleNum is a function (int doubleNum(int x) { returns x * 2; })
  */
 #define algorithm_transform(type, begin, end, dest, f) \
     {                                                  \
