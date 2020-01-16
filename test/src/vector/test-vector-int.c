@@ -1,6 +1,6 @@
-#include "../include/test-vector-int.h"
-#include "../include/vector-int.h"
-#include "../lib/unity.h"
+#include "../../include/vector/test-vector-int.h"
+#include "../../include/vector/vector-int.h"
+#include "../../lib/unity.h"
 
 void setUp() {}
 void tearDown() {}

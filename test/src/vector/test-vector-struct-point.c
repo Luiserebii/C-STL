@@ -1,6 +1,6 @@
-#include "../include/test-vector-struct-point.h"
-#include "../include/vector-struct-point.h"
-#include "../lib/unity.h"
+#include "../../include/vector/test-vector-struct-point.h"
+#include "../../include/vector/vector-struct-point.h"
+#include "../../lib/unity.h"
 
 void setUp() {}
 void tearDown() {}

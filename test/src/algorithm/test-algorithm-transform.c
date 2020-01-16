@@ -1,7 +1,7 @@
 #include <ctype.h>
 
-#include "../../include/algorithm/test-algorithm-transform.h"
 #include "../../../include/algorithm.h"
+#include "../../include/algorithm/test-algorithm-transform.h"
 #include "../../lib/unity.h"
 
 int doubleInt(int x);
