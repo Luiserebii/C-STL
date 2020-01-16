@@ -214,3 +214,29 @@ void test_algorithm_count_char() {
     algorithm_count(char*, a, a + sz, 'z', count);
     TEST_ASSERT_EQUAL_INT(0, count);
 }
+
+void test_algorithm_transform_int() {
+    //Setting up basic array to copy over
+    int a1[] = {1, 2, 3};
+    const int sz = sizeof a1 / sizeof(int);
+    int a2[sz];
+
+    //Attempt transformation with doubling unary
+    algorithm_transform(int*, a1, a1 + sz, a2, doubleInt);
+
+    //Assert transformation
+    const int expres[] = {2, 4, 6};
+    int res;
+    algorithm_equal(int*, a1, a1 + sz, expres, res);
+}
+
+void test_algorithm_accumulate_int() {
+    //Setting up basic array to copy over
+    int a1[] = {1, 2, 3};
+    const int sz = sizeof a1 / sizeof(int);
+    
+    //Attempt accumulate and assert
+    int sum = 0;
+    algorithm_accumulate(int*, a1, a1 + sz, sum);
+    TEST_ASSERT_EQUAL_INT(a1[0] + a2[1] + a1[2], sum);
+}

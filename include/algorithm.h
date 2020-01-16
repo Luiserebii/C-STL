@@ -115,9 +115,8 @@
  *
  * Add all values found in the range [begin, end) and return in res.
  * 
- * The res variable can be prepopulated with an initial value like
- * std::accumulate, the result of the computation will be stored
- * there regardless.
+ * Aside from storing the result of the computation, the initial value of res
+ * will be used within the sum. Typically, res should therefore be 0.
  */
 #define algorithm_accumulate(type, begin, end, res) \
     { \
