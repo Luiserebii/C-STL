@@ -57,7 +57,7 @@
  * Searches and compares [begin, end) to [begin2, x), where x is end - begin. 
  * Returns a boolean value into res representing the equivalence of the range.
  *
- * Ex: algorithm_equal(char*, charList, charList + sz, word, res);
+ * Ex: algorithm_equal(char*, word, word + sz, word2, res);
  */
 #define algorithm_equal(type, begin, end, begin2, res)                                     \
     {                                                                                      \
@@ -127,6 +127,8 @@
  * 
  * Aside from storing the result of the computation, the initial value of res
  * will be used within the sum. Typically, res should therefore be 0.
+ *
+ * Ex: algorithm_accumulate(int*, nums, nums + sz, sum);
  */
 #define algorithm_accumulate(type, begin, end, res) \
     {                                               \
@@ -164,6 +166,8 @@
  * Searches through the range [begin, end) for [begin2, end2).
  * Returns a pointer to the first element found that matches this sequence
  * through res, or end if nothing is found.
+ *
+ * Ex: algorithm_search(char*, charList, charList + cLsz, word, word + wsz, res);
  */
 #define algorithm_search(type, begin, end, begin2, end2, res)                             \
     {                                                                                     \
@@ -192,6 +196,8 @@
  * Searches through [begin, end) for the first element in which the
  * predicate f returns true. Returns a pointer to the found value through
  * res, or end if nothing found.
+ *
+ * Ex: algorithm_find(nums, nums + sz, isEven, res);
  */
 #define algorithm_find_if(begin, end, f, res) \
     {                                         \
