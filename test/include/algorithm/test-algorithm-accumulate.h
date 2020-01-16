@@ -1,5 +1,5 @@
-#ifndef TEST_ALGORITHM_H
-#define TEST_ALGORITHM_H
+#ifndef TEST_ALGORITHM_COPY_H
+#define TEST_ALGORITHM_COPY_H
 
 struct point {
     int x;
