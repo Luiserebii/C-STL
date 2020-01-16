@@ -15,6 +15,8 @@ void test_algorithm_max();
 void test_algorithm_min();
 void test_algorithm_count_int();
 void test_algorithm_count_char();
+void test_algorithm_transform_int();
+void test_algorithm_accumulate_int();
 
 int main() {
 
@@ -30,6 +32,8 @@ int main() {
     RUN_TEST(test_algorithm_min);
     RUN_TEST(test_algorithm_count_int);
     RUN_TEST(test_algorithm_count_char);
+    RUN_TEST(test_algorithm_transform_int);
+    RUN_TEST(test_algorithm_accumulate_int);
     return UNITY_END();
 }
 
@@ -214,6 +218,7 @@ void test_algorithm_count_char() {
     algorithm_count(char*, a, a + sz, 'z', count);
     TEST_ASSERT_EQUAL_INT(0, count);
 }
+int doubleInt(int x);
 
 void test_algorithm_transform_int() {
     //Setting up basic array to copy over
@@ -227,7 +232,8 @@ void test_algorithm_transform_int() {
     //Assert transformation
     const int expres[] = {2, 4, 6};
     int res;
-    algorithm_equal(int*, a1, a1 + sz, expres, res);
+    algorithm_equal(int*, a2, a2 + sz, expres, res);
+    TEST_ASSERT(res);
 }
 
 void test_algorithm_accumulate_int() {
@@ -238,5 +244,9 @@ void test_algorithm_accumulate_int() {
     //Attempt accumulate and assert
     int sum = 0;
     algorithm_accumulate(int*, a1, a1 + sz, sum);
-    TEST_ASSERT_EQUAL_INT(a1[0] + a2[1] + a1[2], sum);
+    TEST_ASSERT_EQUAL_INT(a1[0] + a1[1] + a1[2], sum);
+}
+
+int doubleInt(int x) {
+    return x * 2;
 }

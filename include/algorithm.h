@@ -105,8 +105,9 @@
 #define algorithm_transform(type, begin, end, dest, f) \
     { \
         const type _alg_tr_it = begin; \
+        type _alg_tr_dest = dest; \
         while(_alg_tr_it != end) { \
-            *dest++ = f(*begin++); \
+            *_alg_tr_dest++ = f(*_alg_tr_it++); \
         } \
     }
 
