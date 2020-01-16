@@ -6,8 +6,8 @@
 #include "../../include/algorithm/test-algorithm-find.h"
 #include "../../include/algorithm/test-algorithm-max.h"
 #include "../../include/algorithm/test-algorithm-min.h"
-#include "../../include/algorithm/test-algorithm-transform.h"
 #include "../../include/algorithm/test-algorithm-remove-copy-if.h"
+#include "../../include/algorithm/test-algorithm-transform.h"
 #include "../../lib/unity.h"
 
 void setUp() {}
@@ -28,7 +28,7 @@ int main() {
 
     /* algorithm_equal */
     RUN_TEST(test_algorithm_equal_int);
-    RUN_TEST(test_algorithm_equal_char); 
+    RUN_TEST(test_algorithm_equal_char);
 
     /* algorithm_max/min */
     RUN_TEST(test_algorithm_max);
