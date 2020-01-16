@@ -2,5 +2,6 @@
 #define TEST_ALGORITHM_TRANSFORM_H
 
 void test_algorithm_transform_int();
+void test_algorithm_transform_char();
 
 #endif

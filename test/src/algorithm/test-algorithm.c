@@ -27,6 +27,7 @@ int main() {
     RUN_TEST(test_algorithm_count_int);
     RUN_TEST(test_algorithm_count_char);
     RUN_TEST(test_algorithm_transform_int);
+    RUN_TEST(test_algorithm_transform_char);
     RUN_TEST(test_algorithm_accumulate_int);
     return UNITY_END();
 }
