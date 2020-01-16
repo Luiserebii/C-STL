@@ -103,12 +103,12 @@
  * in a range [dest, end - begin).
  */
 #define algorithm_transform(type, begin, end, dest, f) \
-    { \
-        const type _alg_tr_it = begin; \
-        type _alg_tr_dest = dest; \
-        while(_alg_tr_it != end) { \
-            *_alg_tr_dest++ = f(*_alg_tr_it++); \
-        } \
+    {                                                  \
+        const type _alg_tr_it = begin;                 \
+        type _alg_tr_dest = dest;                      \
+        while(_alg_tr_it != end) {                     \
+            *_alg_tr_dest++ = f(*_alg_tr_it++);        \
+        }                                              \
     }
 
 /**
@@ -120,11 +120,11 @@
  * will be used within the sum. Typically, res should therefore be 0.
  */
 #define algorithm_accumulate(type, begin, end, res) \
-    { \
-        const type _alg_acc_it = begin; \
-        while(_alg_acc_it != end) { \
-            res += *_alg_acc_it++; \
-        } \
+    {                                               \
+        const type _alg_acc_it = begin;             \
+        while(_alg_acc_it != end) {                 \
+            res += *_alg_acc_it++;                  \
+        }                                           \
     }
 
 #endif
