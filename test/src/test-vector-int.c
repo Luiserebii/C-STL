@@ -61,6 +61,26 @@ void test_vector_init_capacity_int() {
     vector_free_int(&v);
 }
 
+void test_vector_copy_int() {
+    //Create an initialize test vector
+    vector_int v, copy;
+    vector_init_int(&v);
+    
+    //Push a few elements back
+    const int el[] = {10, 20, 30};
+    vector_push_back_int(&v, el[0]);
+    vector_push_back_int(&v, el[1]);
+    vector_push_back_int(&v, el[2]);
+
+    //Copy vector over
+    vector_copy_int(&copy, &v);
+
+    //Assert equality
+    int res;
+    algorithm_equal(int*, vector_begin_int(&v), vector_end_int(&v), vector_begin_int(&copy), res);
+    TEST_ASSERT(res);
+}
+
 void test_vector_push_back_int() {
     //Create and initialize test vector
     vector_int v;
