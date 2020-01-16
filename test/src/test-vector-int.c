@@ -66,7 +66,7 @@ void test_vector_copy_int() {
     //Create an initialize test vector
     vector_int v, copy;
     vector_init_int(&v);
-    
+
     //Push a few elements back
     const int el[] = {10, 20, 30};
     vector_push_back_int(&v, el[0]);
@@ -80,6 +80,8 @@ void test_vector_copy_int() {
     int res;
     algorithm_equal(int*, vector_begin_int(&v), vector_end_int(&v), vector_begin_int(&copy), res);
     TEST_ASSERT(res);
+
+    //Ensure pointers are truly seperate
 }
 
 void test_vector_push_back_int() {
