@@ -86,14 +86,14 @@
  *
  * Returns the number of times val appears in [begin, end) into res.
  */
-#define algorithm_count(type, begin, end, val, res) \
-    { \
-        res = 0; \
+#define algorithm_count(type, begin, end, val, res)                              \
+    {                                                                            \
+        res = 0;                                                                 \
         for(type _alg_count_it = begin; _alg_count_it != end; ++_alg_count_it) { \
-            if(*_alg_count_it == val) { \
-                ++res; \
-            } \
-        } \
-    } 
+            if(*_alg_count_it == val) {                                          \
+                ++res;                                                           \
+            }                                                                    \
+        }                                                                        \
+    }
 
 #endif

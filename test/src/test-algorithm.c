@@ -205,12 +205,12 @@ void test_algorithm_count_char() {
     char a[] = {'a', 'b', 'c', 'd', 'a', 'd', 'c'};
     int sz = sizeof a / sizeof(char);
     int count;
-    
+
     //Attempt count of c
-    algorithm_count(int*, a, a + sz, 'c', count);
+    algorithm_count(char*, a, a + sz, 'c', count);
     TEST_ASSERT_EQUAL_INT(2, count);
-    
+
     //Attempt count of non-existing
-    algorithm_count(int*, a, a + sz, 'z', count);
+    algorithm_count(char*, a, a + sz, 'z', count);
     TEST_ASSERT_EQUAL_INT(0, count);
 }
