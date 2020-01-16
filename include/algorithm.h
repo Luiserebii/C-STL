@@ -178,10 +178,12 @@
                 printf("SNAGGED: %d \n", *_alg_search_it1); \
                 if(_alg_search_it2 == end2) {                                             \
                     res = _alg_search_b1;                                                 \
+                    printf("FLAG1");  \
                     goto _algorithm_search_end;                                           \
                 }                                                                         \
                 if(_alg_search_it1 == end) {                                              \
                     res = end;                                                            \
+                    printf("FLAG2"); \
                     goto _algorithm_search_end;                                           \
                 }                                                                         \
                 ++_alg_search_it1, ++_alg_search_it2;                                     \
