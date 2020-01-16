@@ -172,8 +172,8 @@
 #define algorithm_search(type, begin, end, begin2, end2, res)                             \
     {                                                                                     \
         for(const type _alg_search_b1 = begin; _alg_search_b1 != end; ++_alg_search_b1) { \
-            type _alg_search_it1 = begin;                                                 \
-            type _alg_search_it2 = begin2;                                                \
+            const type _alg_search_it1 = begin;                                           \
+            const type _alg_search_it2 = begin2;                                          \
             while(*_alg_search_it1 == *_alg_search_it2) {                                 \
                 if(_alg_search_it2 == end2) {                                             \
                     res = _alg_search_b1;                                                 \
@@ -188,6 +188,7 @@
         }                                                                                 \
         res = end;                                                                        \
     _algorithm_search_end:                                                                \
+        ;                                                                                 \
     }
 
 /**
