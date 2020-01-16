@@ -1,20 +1,6 @@
-#include <stdio.h>
-#include <string.h>
-
-#include "../../include/algorithm.h"
-#include "../include/algorithm/test-algorithm-equal.h"
-#include "../lib/unity.h"
-
-void setUp() {}
-void tearDown() {}
-
-int main() {
-
-    UNITY_BEGIN();
-    RUN_TEST(test_algorithm_equal_int);
-    RUN_TEST(test_algorithm_equal_char);
-    return UNITY_END();
-}
+#include "../../include/algorithm/test-algorithm-equal.h"
+#include "../../../include/algorithm.h"
+#include "../../lib/unity.h"
 
 void test_algorithm_equal_int() {
     //Setting basic arrays

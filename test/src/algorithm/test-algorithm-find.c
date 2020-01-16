@@ -1,20 +1,6 @@
-#include <stdio.h>
-#include <string.h>
-
-#include "../../include/algorithm.h"
-#include "../include/algorithm/test-algorithm-find.h"
-#include "../lib/unity.h"
-
-void setUp() {}
-void tearDown() {}
-
-int main() {
-
-    UNITY_BEGIN();
-    RUN_TEST(test_algorithm_find_int);
-    RUN_TEST(test_algorithm_find_char);
-    return UNITY_END();
-}
+#include "../../include/algorithm/test-algorithm-find.h"
+#include "../../../include/algorithm.h"
+#include "../../lib/unity.h"
 
 void test_algorithm_find_int() {
     //Setting up basic array to look for a value

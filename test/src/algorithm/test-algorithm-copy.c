@@ -1,21 +1,8 @@
-#include <stdio.h>
 #include <string.h>
 
-#include "../../include/algorithm.h"
-#include "../include/algorithm/test-algorithm-copy.h"
-#include "../lib/unity.h"
-
-void setUp() {}
-void tearDown() {}
-
-int main() {
-
-    UNITY_BEGIN();
-    RUN_TEST(test_algorithm_copy_int);
-    RUN_TEST(test_algorithm_copy_char);
-    RUN_TEST(test_algorithm_copy_struct);
-    return UNITY_END();
-}
+#include "../../../include/algorithm.h"
+#include "../../include/algorithm/test-algorithm-copy.h"
+#include "../../lib/unity.h"
 
 void test_algorithm_copy_int() {
     //Setting up basic array to copy over

@@ -1,19 +1,6 @@
-#include <stdio.h>
-#include <string.h>
-
-#include "../../include/algorithm.h"
-#include "../include/algorithm/test-algorithm-min.h"
-#include "../lib/unity.h"
-
-void setUp() {}
-void tearDown() {}
-
-int main() {
-
-    UNITY_BEGIN();
-    RUN_TEST(test_algorithm_min);
-    return UNITY_END();
-}
+#include "../../include/algorithm/test-algorithm-min.h"
+#include "../../../include/algorithm.h"
+#include "../../lib/unity.h"
 
 void test_algorithm_min() {
     //Testing max on int

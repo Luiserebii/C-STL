@@ -1,20 +1,6 @@
-#include <stdio.h>
-#include <string.h>
-
-#include "../../include/algorithm.h"
-#include "../include/algorithm/test-algorithm-count.h"
-#include "../lib/unity.h"
-
-void setUp() {}
-void tearDown() {}
-
-int main() {
-
-    UNITY_BEGIN();
-    RUN_TEST(test_algorithm_count_int);
-    RUN_TEST(test_algorithm_count_char);
-    return UNITY_END();
-}
+#include "../../include/algorithm/test-algorithm-count.h"
+#include "../../../include/algorithm.h"
+#include "../../lib/unity.h"
 
 void test_algorithm_count_int() {
     //Basic setup

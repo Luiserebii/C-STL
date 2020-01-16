@@ -1,20 +1,6 @@
-#include <stdio.h>
-#include <string.h>
-
-#include "../../include/algorithm.h"
-#include "../include/algorithm/test-algorithm-accumulate.h"
-#include "../lib/unity.h"
-
-void setUp() {}
-void tearDown() {}
-
-int main() {
-
-    UNITY_BEGIN();
-    RUN_TEST(test_algorithm_accumulate_int);
-    RUN_TEST(test_algorithm_accumulate_double);
-    return UNITY_END();
-}
+#include "../../include/algorithm/test-algorithm-accumulate.h"
+#include "../../../include/algorithm.h"
+#include "../../lib/unity.h"
 
 void test_algorithm_accumulate_int() {
     //Setting up basic array to copy over
