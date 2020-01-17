@@ -149,7 +149,7 @@ void test_vector_erase_int() {
 
     //Attempt erasure of second element
     int* newEnd = vector_erase_int(&v, v.head + 1);
-    
+
     //Assert newEnd is valid
     TEST_ASSERT_EQUAL_PTR(newEnd, v.head + 2);
 
