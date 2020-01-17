@@ -16,6 +16,7 @@ int main() {
     RUN_TEST(test_vector_erase_int);
     RUN_TEST(test_vector_erase_range_int);
     RUN_TEST(test_vector_accessors_int);
+    RUN_TEST(test_vector_idioms_int);
     return UNITY_END();
 }
 
@@ -150,7 +151,7 @@ void test_vector_erase_int() {
 
     //Attempt erasure of second element
     int* newEnd = vector_erase_int(&v, vector_begin_int(&v) + 1);
-    
+
     //Assert newEnd is valid
     TEST_ASSERT_EQUAL_PTR(newEnd, vector_begin_int(&v) + 2);
 
@@ -179,7 +180,7 @@ void test_vector_erase_range_int() {
 
     //Attempt erasure of [2, 4)
     int* newEnd = vector_erase_range_int(&v, vector_begin_int(&v) + 2, vector_begin_int(&v) + 4);
-    
+
     //Assert newEnd is valid
     TEST_ASSERT_EQUAL_PTR(newEnd, vector_begin_int(&v) + 3);
 
@@ -233,13 +234,13 @@ void test_vector_idioms_int() {
     vector_push_back_int(&v, el[2]);
     vector_push_back_int(&v, el[3]);
     vector_push_back_int(&v, el[4]);
-    
+
     //Attempt to remove all even nums from vector
     int isEven(int x);
     int* lastIt;
     algorithm_remove_if(int*, vector_begin_int(&v), vector_end_int(&v), isEven, lastIt);
     vector_erase_range_int(&v, lastIt, vector_end_int(&v));
-    
+
     //Now, assert the new vector:
     const int expEl[] = {15, 45, 75};
     int isEqual;
@@ -248,7 +249,6 @@ void test_vector_idioms_int() {
 
     //Free
     vector_free_int(&v);
-    
 }
 
 int isEven(int x) {
