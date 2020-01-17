@@ -13,6 +13,7 @@ int main() {
     RUN_TEST(test_vector_copy_int);
     RUN_TEST(test_vector_set_int);
     RUN_TEST(test_vector_push_back_int);
+    RUN_TEST(test_vector_erase_int);
     RUN_TEST(test_vector_accessors_int);
     return UNITY_END();
 }
@@ -130,6 +131,33 @@ void test_vector_push_back_int() {
     //Small tests for vector_at and vector_begin
     TEST_ASSERT_EQUAL_UINT(e, vector_at_int(&v, 0));
     TEST_ASSERT_EQUAL_UINT(e, *vector_begin_int(&v));
+
+    //Free
+    vector_free_int(&v);
+}
+
+void test_vector_erase_int() {
+    //Create and initialize test vector
+    vector_int v;
+    vector_init_int(&v);
+
+    //Push a few elements back
+    const int el[] = {10, 20, 30};
+    vector_push_back_int(&v, el[0]);
+    vector_push_back_int(&v, el[1]);
+    vector_push_back_int(&v, el[2]);
+
+    //Attempt erasure of second element
+    int newEnd* = vector_erase_int(&v, &v + 1);
+    
+    //Assert newEnd is valid
+    TEST_ASSERT_EQUAL_PTR(newEnd, &v + 2);
+
+    //Assert elements have changed (this also tests size implicitly)
+    const int newEl[] = {10, 30};
+    int isEqual;
+    algorithm_equal(int*, v.begin, v.avail, newEl, isEqual);
+    TEST_ASSERT(isEqual);
 
     //Free
     vector_free_int(&v);
