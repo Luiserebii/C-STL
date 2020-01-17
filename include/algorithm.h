@@ -226,15 +226,14 @@
  *
  * Ex: algorithm_remove(int*, nums, nums + sz, 10, res);
  */
-#define algorithm_remove(type, begin, end, val, res) \
-    { \
-        res = begin; \
+#define algorithm_remove(type, begin, end, val, res)                                \
+    {                                                                               \
+        res = begin;                                                                \
         for(type _alg_remove_it = begin; _alg_remove_it != end; ++_alg_remove_it) { \
-            if(*_alg_remove_it != val) { \
-                *res++ = *_alg_remove_it; \
-            } \
-        } \
+            if(*_alg_remove_it != val) {                                            \
+                *res++ = *_alg_remove_it;                                           \
+            }                                                                       \
+        }                                                                           \
     }
-
 
 #endif

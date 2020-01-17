@@ -21,8 +21,15 @@ void test_algorithm_remove_int() {
 
 void test_algorithm_remove_char() {
     //Setting up initial array
-    char a1[] = {'a', 'b', 'c', 'd', 'E'};
+    char a1[] = {'a', 'b', 'c', 'a', 'b'};
     const int sz1 = sizeof a1 / sizeof(char);
 
-}
+    //Attempt to remove all bs with algorithm_remove
+    char* res;
+    algorithm_remove(char*, a1, a1 + sz1, 'b', res);
 
+    //Assert iterator and new range
+    TEST_ASSERT_EQUAL_PTR(a1 + 3, res);
+    char expran[] = {'a', 'c', 'a'};
+    TEST_ASSERT_EQUAL_CHAR_ARRAY(a1, expran, sizeof expran / sizeof(char));
+}
