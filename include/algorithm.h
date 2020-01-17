@@ -171,6 +171,9 @@
  */
 #define algorithm_search(type, begin, end, begin2, end2, res)                               \
     {                                                                                       \
+        /* Declaring local label */                                                         \
+        __label__ _algorithm_search_end;                                                    \
+                                                                                            \
         for(const type _alg_search_b1 = begin; _alg_search_b1 != end; ++_alg_search_b1) {   \
             /* Idea behind continue; only add names below if we snag an equal initial val*/ \
             if(*_alg_search_b1 != *begin2) {                                                \
@@ -191,8 +194,7 @@
             }                                                                               \
         }                                                                                   \
         res = end;                                                                          \
-    _algorithm_search_end:                                                                  \
-        ;                                                                                   \
+    _algorithm_search_end:;                                                                 \
     }
 
 /**

@@ -14,8 +14,13 @@ void test_algorithm_search_int() {
     //Attempt algorithm_search, looking for a2 in a1
     const int* res;
     algorithm_search(int*, a1, a1 + sz1, a2, a2 + sz2, res);
-    //    TEST_ASSERT_EQUAL_PTR(a1 + 2, res);
+    TEST_ASSERT_EQUAL_PTR(a1 + 2, res);
     TEST_ASSERT_EQUAL_INT(a1[2], *res);
+
+    //Attempt algorithm_search once more, looking for a1 in a2
+    //This should "break" within and return the last
+    algorithm_search(int*, a2, a2 + sz2, a1, a1 + sz1, res);
+    TEST_ASSERT_EQUAL_PTR(a2 + sz2, res);
 }
 
 void test_algorithm_search_char() {}
