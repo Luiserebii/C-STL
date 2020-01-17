@@ -7,6 +7,7 @@
 #include "../../include/algorithm/test-algorithm-find.h"
 #include "../../include/algorithm/test-algorithm-max.h"
 #include "../../include/algorithm/test-algorithm-min.h"
+#include "../../include/algorithm/test-algorithm-partition.h"
 #include "../../include/algorithm/test-algorithm-remove-copy-if.h"
 #include "../../include/algorithm/test-algorithm-remove-copy.h"
 #include "../../include/algorithm/test-algorithm-remove.h"
@@ -69,5 +70,9 @@ int main() {
     /* algorithm_remove_copy */
     RUN_TEST(test_algorithm_remove_copy_int);
     RUN_TEST(test_algorithm_remove_copy_char);
+
+    /* algorithm_partition */
+    RUN_TEST(test_algorithm_partition_int);
+
     return UNITY_END();
 }

@@ -254,15 +254,24 @@
             }                                                                       \
         }                                                                           \
     }
-
-#define algorithm_partition(type, begin, end, f, res)                        \
-    res = begin;                                                             \
-    for(const type _alg_prt_it = begin; _alg_prt_it != end; ++_alg_prt_it) { \
-        if(!f(*_alg_prt_it)) {                                               \
-            type _alg_prt_val = *res;                                        \
-            *res++ = *_alg_prt_it;                                           \
-            *alg_prt_it = _alg_prt_val;                                      \
-        }                                                                    \
+/**
+ * algorithm_partition(type, begin, end, ftype, f, res)
+ *
+ * Sorts the range [begin, end) where all elements for which the predicate f returns
+ * true are moved to the front of the range. The end of this parititioned range is 
+ * returned via res. ftype represents the type of the argument taken by the unary
+ * predicate f.
+ *
+ * Ex: algorithm_partition(int*, nums, nums + sz, int, isEven, ptend);
+ */
+#define algorithm_partition(type, begin, end, predtype, f, res)        \
+    res = begin;                                                       \
+    for(type _alg_prt_it = begin; _alg_prt_it != end; ++_alg_prt_it) { \
+        if(!f(*_alg_prt_it)) {                                         \
+            predtype _alg_prt_val = *res;                              \
+            *res++ = *_alg_prt_it;                                     \
+            *_alg_prt_it = _alg_prt_val;                               \
+        }                                                              \
     }
 
 #endif
