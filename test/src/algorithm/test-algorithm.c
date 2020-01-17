@@ -73,6 +73,7 @@ int main() {
 
     /* algorithm_partition */
     RUN_TEST(test_algorithm_partition_int);
+    RUN_TEST(test_algorithm_partition_char);
 
     return UNITY_END();
 }
