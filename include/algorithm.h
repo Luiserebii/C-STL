@@ -214,4 +214,27 @@
         }                                     \
     }
 
+/**
+ * algorithm_remove(type, begin, end, val, res)
+ *
+ * Iterates through [begin, end), removing any elements equal to val.
+ * Elements are not truly removed; the function simply does not set elements
+ * equal to val in the range [begin, res), where res is a pointer to the 
+ * new end of the range.
+ *
+ * This function is convenient when paired with vector's erase, forming an idiom.
+ *
+ * Ex: algorithm_remove(int*, nums, nums + sz, 10, res);
+ *
+#define algorithm_remove(type, begin, end, val, res) \
+    { \
+        res = begin; \
+        for(type _alg_remove_it = begin; _alg_remove_it != end; ++_alg_remove_it) { \
+            if(*_alg_remove_it != val) { \
+                *res++ = *_alg_remove_it; \
+            } \
+        } \
+    }
+
+
 #endif
