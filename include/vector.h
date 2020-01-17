@@ -32,85 +32,97 @@
  *
  * Whenever a vector is needed to be declared, this is probably what you want!
  **/
-#define declare_vector(vector_type)                                                        \
-    typedef struct {                                                                       \
-        vector_type* head;                                                                 \
-        vector_type* avail;                                                                \
-        vector_type* tail;                                                                 \
-    } vector_##vector_type;                                                                \
-                                                                                           \
-    /*                                                                                     \
-     * Initializes an empty vector within the vector* passed.                              \
-     *                                                                                     \
-     * Note that this data structure is completely empty, and has                          \
-     * nothing allocated; not necessary to call vector_free on this                        \
-     */                                                                                    \
-    void vector_init_##vector_type(vector_##vector_type* v);                               \
-                                                                                           \
-    /*                                                                                     \
-     * Initializes an empty vector with the size passed.                                   \
-     * Memory will be allocated under the size given, so vector_free                       \
-     * is required.                                                                        \
-     */                                                                                    \
-    void vector_init_size_##vector_type(vector_##vector_type* v, size_t s);                \
-                                                                                           \
-    /*                                                                                     \
-     * Intiailizes an empty vector with the size passed.                                   \
-     * Unlike vector_init_size, this function will fill the capacity.                      \
-     */                                                                                    \
-    void vector_init_capacity_##vector_type(vector_##vector_type* v, size_t s);            \
-                                                                                           \
-    /*                                                                                     \
-     * Creates a fresh copy of a vector. If the dest contains a pre-existing vector,       \
-     * it will not be freed, so please release if not empty.                               \
-     */                                                                                    \
-    void vector_copy_##vector_type(vector_##vector_type* dest, vector_##vector_type* src); \
-                                                                                           \
-    /*                                                                                     \
-     * Sets an element of the vector to the value passed.                                  \
-     */                                                                                    \
-    void vector_set_##vector_type(vector_##vector_type* v, size_t pos, vector_type val);   \
-                                                                                           \
-    /*                                                                                     \
-     * Pushes a new element onto the vector.                                               \
-     */                                                                                    \
-    void vector_push_back_##vector_type(vector_##vector_type* v, vector_type e);           \
-                                                                                           \
-    /*                                                                                     \
-     * Returns the first pointer in the vector's sequence.                                 \
-     */                                                                                    \
-    vector_type* vector_begin_##vector_type(vector_##vector_type* v);                      \
-                                                                                           \
-    /*                                                                                     \
-     * Returns the last pointer in the vector's sequence.                                  \
-     */                                                                                    \
-    vector_type* vector_end_##vector_type(vector_##vector_type* v);                        \
-                                                                                           \
-    /*                                                                                     \
-     * Returns the current size of the vector.                                             \
-     */                                                                                    \
-    size_t vector_size_##vector_type(vector_##vector_type* v);                             \
-                                                                                           \
-    /*                                                                                     \
-     * Returns the current total capacity of the vector,                                   \
-     * which encompasses the total amount allocated.                                       \
-     */                                                                                    \
-    size_t vector_capacity_##vector_type(vector_##vector_type* v);                         \
-                                                                                           \
-    /*                                                                                     \
-     * Returns the element found at the specified location passed.                         \
-     */                                                                                    \
-    vector_type vector_at_##vector_type(vector_##vector_type* v, size_t n);                \
-                                                                                           \
-    /*                                                                                     \
-     * Frees the resources allocated to the vector.                                        \
-     * The vector is also cleared.                                                         \
-     */                                                                                    \
-    void vector_free_##vector_type(vector_##vector_type* v);                               \
-                                                                                           \
-    /*                                                                                     \
-     * Grows the vector by 2x, or 1 if empty.                                              \
-     */                                                                                    \
+#define declare_vector(vector_type)                                                                               \
+    typedef struct {                                                                                              \
+        vector_type* head;                                                                                        \
+        vector_type* avail;                                                                                       \
+        vector_type* tail;                                                                                        \
+    } vector_##vector_type;                                                                                       \
+                                                                                                                  \
+    /*                                                                                                            \
+     * Initializes an empty vector within the vector* passed.                                                     \
+     *                                                                                                            \
+     * Note that this data structure is completely empty, and has                                                 \
+     * nothing allocated; not necessary to call vector_free on this                                               \
+     */                                                                                                           \
+    void vector_init_##vector_type(vector_##vector_type* v);                                                      \
+                                                                                                                  \
+    /*                                                                                                            \
+     * Initializes an empty vector with the size passed.                                                          \
+     * Memory will be allocated under the size given, so vector_free                                              \
+     * is required.                                                                                               \
+     */                                                                                                           \
+    void vector_init_size_##vector_type(vector_##vector_type* v, size_t s);                                       \
+                                                                                                                  \
+    /*                                                                                                            \
+     * Intiailizes an empty vector with the size passed.                                                          \
+     * Unlike vector_init_size, this function will fill the capacity.                                             \
+     */                                                                                                           \
+    void vector_init_capacity_##vector_type(vector_##vector_type* v, size_t s);                                   \
+                                                                                                                  \
+    /*                                                                                                            \
+     * Creates a fresh copy of a vector. If the dest contains a pre-existing vector,                              \
+     * it will not be freed, so please release if not empty.                                                      \
+     */                                                                                                           \
+    void vector_copy_##vector_type(vector_##vector_type* dest, vector_##vector_type* src);                        \
+                                                                                                                  \
+    /*                                                                                                            \
+     * Sets an element of the vector to the value passed.                                                         \
+     */                                                                                                           \
+    void vector_set_##vector_type(vector_##vector_type* v, size_t pos, vector_type val);                          \
+                                                                                                                  \
+    /*                                                                                                            \
+     * Pushes a new element onto the vector.                                                                      \
+     */                                                                                                           \
+    void vector_push_back_##vector_type(vector_##vector_type* v, vector_type e);                                  \
+                                                                                                                  \
+    /*                                                                                                            \
+     * Erases an element at the pointer passed from the vector. Returns a pointer to the                          \
+     * new end of the vector.                                                                                     \
+     */                                                                                                           \
+    vector_type* vector_erase_##vector_type(vector_##vector_type* v, vector_type* pos);                           \
+                                                                                                                  \
+    /*                                                                                                            \
+     * Erases a range of elements [begin, end) from the vector. Returns a pointer to the                          \
+     * new end of the vector.                                                                                     \
+     */                                                                                                           \
+    vector_type* vector_erase_range_##vector_type(vector_##vector_type* v, vector_type* begin, vector_type* end); \
+                                                                                                                  \
+    /*                                                                                                            \
+     * Returns the first pointer in the vector's sequence.                                                        \
+     */                                                                                                           \
+    vector_type* vector_begin_##vector_type(vector_##vector_type* v);                                             \
+                                                                                                                  \
+    /*                                                                                                            \
+     * Returns the last pointer in the vector's sequence.                                                         \
+     */                                                                                                           \
+    vector_type* vector_end_##vector_type(vector_##vector_type* v);                                               \
+                                                                                                                  \
+    /*                                                                                                            \
+     * Returns the current size of the vector.                                                                    \
+     */                                                                                                           \
+    size_t vector_size_##vector_type(vector_##vector_type* v);                                                    \
+                                                                                                                  \
+    /*                                                                                                            \
+     * Returns the current total capacity of the vector,                                                          \
+     * which encompasses the total amount allocated.                                                              \
+     */                                                                                                           \
+    size_t vector_capacity_##vector_type(vector_##vector_type* v);                                                \
+                                                                                                                  \
+    /*                                                                                                            \
+     * Returns the element found at the specified location passed.                                                \
+     */                                                                                                           \
+    vector_type vector_at_##vector_type(vector_##vector_type* v, size_t n);                                       \
+                                                                                                                  \
+    /*                                                                                                            \
+     * Frees the resources allocated to the vector.                                                               \
+     * The vector is also cleared.                                                                                \
+     */                                                                                                           \
+    void vector_free_##vector_type(vector_##vector_type* v);                                                      \
+                                                                                                                  \
+    /*                                                                                                            \
+     * Grows the vector by 2x, or 1 if empty.                                                                     \
+     */                                                                                                           \
     static void vector_grow_##vector_type(vector_##vector_type* v);
 
 /**
