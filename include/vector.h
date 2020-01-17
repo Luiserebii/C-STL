@@ -132,72 +132,80 @@
  *
  * Ex: define_vector(int)
  */
-#define define_vector(vector_type)                                                                              \
-    void vector_init_##vector_type(vector_##vector_type* v) { *v = (vector_##vector_type){NULL, NULL, NULL}; }  \
-                                                                                                                \
-    void vector_init_size_##vector_type(vector_##vector_type* v, size_t s) {                                    \
-        v->head = (vector_type*) malloc(sizeof(vector_type) * s);                                               \
-        v->tail = v->avail = v->head + s;                                                                       \
-    }                                                                                                           \
-                                                                                                                \
-    void vector_init_capacity_##vector_type(vector_##vector_type* v, size_t s) {                                \
-        v->head = v->avail = (vector_type*) malloc(sizeof(vector_type) * s);                                    \
-        v->tail = v->head + s;                                                                                  \
-    }                                                                                                           \
-                                                                                                                \
-    void vector_copy_##vector_type(vector_##vector_type* dest, vector_##vector_type* src) {                     \
-        if(src->head == NULL) {                                                                                 \
-            dest->head = dest->avail = dest->tail = NULL;                                                       \
-            return;                                                                                             \
-        }                                                                                                       \
-        /* Initialize a fresh vector using original's size */                                                   \
-        vector_init_size_##vector_type(dest, vector_size_##vector_type(src));                                   \
-        /* Copy over values */                                                                                  \
-        algorithm_copy(vector_type*, src->head, src->avail, dest->head)                                         \
-    }                                                                                                           \
-    void vector_set_##vector_type(vector_##vector_type* v, size_t pos, vector_type val) { v->head[pos] = val; } \
-                                                                                                                \
-    void vector_push_back_##vector_type(vector_##vector_type* v, vector_type e) {                               \
-        if(v->avail == v->tail) {                                                                               \
-            vector_grow_##vector_type(v);                                                                       \
-        }                                                                                                       \
-        *(v->avail++) = e;                                                                                      \
-    }                                                                                                           \
-                                                                                                                \
-    vector_type* vector_erase_##vector_type(vector_##vector_type* v, vector_type* pos) {                        \
-        for(; pos + 1 != v->avail; ++pos) {                                                                     \
-            *pos = *(pos + 1);                                                                                  \
-        }                                                                                                       \
-        return --v->avail;                                                                                      \
-    }                                                                                                           \
-                                                                                                                \
-    vector_type* vector_begin_##vector_type(vector_##vector_type* v) { return v->head; }                        \
-                                                                                                                \
-    vector_type* vector_end_##vector_type(vector_##vector_type* v) { return v->avail; }                         \
-                                                                                                                \
-    void vector_grow_##vector_type(vector_##vector_type* v) {                                                   \
-        size_t old_size = vector_size_##vector_type(v);                                                         \
-        size_t n_size = v->head ? old_size * 2 : 1;                                                             \
-                                                                                                                \
-        vector_type* n_head = (vector_type*) malloc(sizeof(vector_type) * n_size);                              \
-                                                                                                                \
-        algorithm_copy(vector_type*, v->head, v->avail, n_head);                                                \
-                                                                                                                \
-        free(v->head);                                                                                          \
-        v->head = n_head;                                                                                       \
-        v->avail = n_head + old_size;                                                                           \
-        v->tail = n_head + n_size;                                                                              \
-    }                                                                                                           \
-                                                                                                                \
-    size_t vector_size_##vector_type(vector_##vector_type* v) { return v->avail - v->head; }                    \
-                                                                                                                \
-    size_t vector_capacity_##vector_type(vector_##vector_type* v) { return v->tail - v->head; }                 \
-                                                                                                                \
-    vector_type vector_at_##vector_type(vector_##vector_type* v, size_t n) { return *(v->head + n); }           \
-                                                                                                                \
-    void vector_free_##vector_type(vector_##vector_type* v) {                                                   \
-        free(v->head);                                                                                          \
-        v->head = v->avail = v->tail = NULL;                                                                    \
+#define define_vector(vector_type)                                                                                 \
+    void vector_init_##vector_type(vector_##vector_type* v) { *v = (vector_##vector_type){NULL, NULL, NULL}; }     \
+                                                                                                                   \
+    void vector_init_size_##vector_type(vector_##vector_type* v, size_t s) {                                       \
+        v->head = (vector_type*) malloc(sizeof(vector_type) * s);                                                  \
+        v->tail = v->avail = v->head + s;                                                                          \
+    }                                                                                                              \
+                                                                                                                   \
+    void vector_init_capacity_##vector_type(vector_##vector_type* v, size_t s) {                                   \
+        v->head = v->avail = (vector_type*) malloc(sizeof(vector_type) * s);                                       \
+        v->tail = v->head + s;                                                                                     \
+    }                                                                                                              \
+                                                                                                                   \
+    void vector_copy_##vector_type(vector_##vector_type* dest, vector_##vector_type* src) {                        \
+        if(src->head == NULL) {                                                                                    \
+            dest->head = dest->avail = dest->tail = NULL;                                                          \
+            return;                                                                                                \
+        }                                                                                                          \
+        /* Initialize a fresh vector using original's size */                                                      \
+        vector_init_size_##vector_type(dest, vector_size_##vector_type(src));                                      \
+        /* Copy over values */                                                                                     \
+        algorithm_copy(vector_type*, src->head, src->avail, dest->head)                                            \
+    }                                                                                                              \
+    void vector_set_##vector_type(vector_##vector_type* v, size_t pos, vector_type val) { v->head[pos] = val; }    \
+                                                                                                                   \
+    void vector_push_back_##vector_type(vector_##vector_type* v, vector_type e) {                                  \
+        if(v->avail == v->tail) {                                                                                  \
+            vector_grow_##vector_type(v);                                                                          \
+        }                                                                                                          \
+        *(v->avail++) = e;                                                                                         \
+    }                                                                                                              \
+                                                                                                                   \
+    vector_type* vector_erase_##vector_type(vector_##vector_type* v, vector_type* pos) {                           \
+        for(; pos + 1 != v->avail; ++pos) {                                                                        \
+            *pos = *(pos + 1);                                                                                     \
+        }                                                                                                          \
+        return --v->avail;                                                                                         \
+    }                                                                                                              \
+                                                                                                                   \
+    vector_type* vector_erase_range_##vector_type(vector_##vector_type* v, vector_type* begin, vector_type* end) { \
+        size_t diff = end - begin;                                                                                 \
+        for(; begin + diff != v->avail; ++begin) {                                                                 \
+            *begin = *(begin + diff);                                                                              \
+        }                                                                                                          \
+        return v->avail -= diff;                                                                                   \
+    }                                                                                                              \
+                                                                                                                   \
+    vector_type* vector_begin_##vector_type(vector_##vector_type* v) { return v->head; }                           \
+                                                                                                                   \
+    vector_type* vector_end_##vector_type(vector_##vector_type* v) { return v->avail; }                            \
+                                                                                                                   \
+    void vector_grow_##vector_type(vector_##vector_type* v) {                                                      \
+        size_t old_size = vector_size_##vector_type(v);                                                            \
+        size_t n_size = v->head ? old_size * 2 : 1;                                                                \
+                                                                                                                   \
+        vector_type* n_head = (vector_type*) malloc(sizeof(vector_type) * n_size);                                 \
+                                                                                                                   \
+        algorithm_copy(vector_type*, v->head, v->avail, n_head);                                                   \
+                                                                                                                   \
+        free(v->head);                                                                                             \
+        v->head = n_head;                                                                                          \
+        v->avail = n_head + old_size;                                                                              \
+        v->tail = n_head + n_size;                                                                                 \
+    }                                                                                                              \
+                                                                                                                   \
+    size_t vector_size_##vector_type(vector_##vector_type* v) { return v->avail - v->head; }                       \
+                                                                                                                   \
+    size_t vector_capacity_##vector_type(vector_##vector_type* v) { return v->tail - v->head; }                    \
+                                                                                                                   \
+    vector_type vector_at_##vector_type(vector_##vector_type* v, size_t n) { return *(v->head + n); }              \
+                                                                                                                   \
+    void vector_free_##vector_type(vector_##vector_type* v) {                                                      \
+        free(v->head);                                                                                             \
+        v->head = v->avail = v->tail = NULL;                                                                       \
     }
 
 #endif
