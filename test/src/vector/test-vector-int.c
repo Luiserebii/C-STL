@@ -148,15 +148,15 @@ void test_vector_erase_int() {
     vector_push_back_int(&v, el[2]);
 
     //Attempt erasure of second element
-    int newEnd* = vector_erase_int(&v, &v + 1);
+    int* newEnd = vector_erase_int(&v, v.head + 1);
     
     //Assert newEnd is valid
-    TEST_ASSERT_EQUAL_PTR(newEnd, &v + 2);
+    TEST_ASSERT_EQUAL_PTR(newEnd, v.head + 2);
 
     //Assert elements have changed (this also tests size implicitly)
     const int newEl[] = {10, 30};
     int isEqual;
-    algorithm_equal(int*, v.begin, v.avail, newEl, isEqual);
+    algorithm_equal(int*, v.head, v.avail, newEl, isEqual);
     TEST_ASSERT(isEqual);
 
     //Free
