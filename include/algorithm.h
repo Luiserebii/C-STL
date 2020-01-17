@@ -255,4 +255,14 @@
         }                                                                           \
     }
 
+#define algorithm_partition(type, begin, end, f, res)                        \
+    res = begin;                                                             \
+    for(const type _alg_prt_it = begin; _alg_prt_it != end; ++_alg_prt_it) { \
+        if(!f(*_alg_prt_it)) {                                               \
+            type _alg_prt_val = *res;                                        \
+            *res++ = *_alg_prt_it;                                           \
+            *alg_prt_it = _alg_prt_val;                                      \
+        }                                                                    \
+    }
+
 #endif
