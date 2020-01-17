@@ -10,5 +10,6 @@ void test_vector_push_back_int();
 void test_vector_erase_int();
 void test_vector_erase_range_int();
 void test_vector_accessors_int(); /* Intention is to test expected usage of basic vector accessors */
+void test_vector_idioms_int();
 
 #endif

@@ -220,3 +220,22 @@ void test_vector_accessors_int() {
     //Free
     vector_free_int(&v);
 }
+
+void test_vector_idioms_int() {
+    //Create and initialize test vector
+    vector_int v;
+    vector_init_int(&v);
+
+    //Push some elements back
+    const int el[] = {15, 30, 45, 60, 75};
+    vector_push_back_int(&v, el[0]);
+    vector_push_back_int(&v, el[1]);
+    vector_push_back_int(&v, el[2]);
+    vector_push_back_int(&v, el[3]);
+    vector_push_back_int(&v, el[4]);
+    
+    int isEven(int x);
+    
+    
+    
+}

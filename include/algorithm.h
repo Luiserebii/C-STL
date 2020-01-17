@@ -235,6 +235,30 @@
     }
 
 /**
+ * algorithm_remove_if(type, begin, end, f, res)
+ *
+ * Iterates through [begin, end), removing any elements which return true when 
+ * passed to the predicate f.
+ *
+ * Elements are not truly removed; the function simply does not set elements
+ * which return true in the range [begin, res), where res is a pointer to the 
+ * new end of the range.
+ *
+ * This function is convenient when paired with vector's erase, forming an idiom.
+ *
+ * Ex: algorithm_remove_if(int*, nums, nums + sz, isEven, res);
+ */
+#define algorithm_remove_if(type, begin, end, f, res)                               \
+    {                                                                               \
+        res = begin;                                                                \
+        for(type _alg_remove_it = begin; _alg_remove_it != end; ++_alg_remove_it) { \
+            if(!f(*_alg_remove_it)) {                                               \
+                *res++ = *_alg_remove_it;                                           \
+            }                                                                       \
+        }                                                                           \
+    }
+
+/**
  * algorithm_remove_copy(type, begin, end, dest, val)
  *
  * Copies all values in the range [begin, end) to dest which
