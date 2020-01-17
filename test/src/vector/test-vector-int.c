@@ -149,15 +149,15 @@ void test_vector_erase_int() {
     vector_push_back_int(&v, el[2]);
 
     //Attempt erasure of second element
-    int* newEnd = vector_erase_int(&v, v.head + 1);
+    int* newEnd = vector_erase_int(&v, vector_begin_int(&v) + 1);
     
     //Assert newEnd is valid
-    TEST_ASSERT_EQUAL_PTR(newEnd, v.head + 2);
+    TEST_ASSERT_EQUAL_PTR(newEnd, vector_begin_int(&v) + 2);
 
     //Assert elements have changed (this also tests size implicitly)
     const int newEl[] = {10, 30};
     int isEqual;
-    algorithm_equal(int*, v.head, v.avail, newEl, isEqual);
+    algorithm_equal(int*, vector_begin_int(&v), vector_end_int(&v), newEl, isEqual);
     TEST_ASSERT(isEqual);
 
     //Free
@@ -178,15 +178,15 @@ void test_vector_erase_range_int() {
     vector_push_back_int(&v, el[4]);
 
     //Attempt erasure of [2, 4)
-    int* newEnd = vector_erase_range_int(&v, v.head + 2, v.head + 4);
+    int* newEnd = vector_erase_range_int(&v, vector_begin_int(&v) + 2, vector_begin_int(&v) + 4);
     
     //Assert newEnd is valid
-    TEST_ASSERT_EQUAL_PTR(newEnd, v.head + 3);
+    TEST_ASSERT_EQUAL_PTR(newEnd, vector_begin_int(&v) + 3);
 
     //Assert elements have changed (this also tests size implicitly)
     const int newEl[] = {10, 20, 50};
     int isEqual;
-    algorithm_equal(int*, v.head, v.avail, newEl, isEqual);
+    algorithm_equal(int*, vector_begin_int(&v), vector_end_int(&v), newEl, isEqual);
     TEST_ASSERT(isEqual);
 
     //Free
@@ -234,8 +234,23 @@ void test_vector_idioms_int() {
     vector_push_back_int(&v, el[3]);
     vector_push_back_int(&v, el[4]);
     
+    //Attempt to remove all even nums from vector
     int isEven(int x);
+    int* lastIt;
+    algorithm_remove_if(int*, vector_begin_int(&v), vector_end_int(&v), isEven, lastIt);
+    vector_erase_range_int(&v, lastIt, vector_end_int(&v));
     
+    //Now, assert the new vector:
+    const int expEl[] = {15, 45, 75};
+    int isEqual;
+    algorithm_equal(int*, vector_begin_int(&v), vector_end_int(&v), expEl, isEqual);
+    TEST_ASSERT(isEqual);
+
+    //Free
+    vector_free_int(&v);
     
-    
+}
+
+int isEven(int x) {
+    return !(x & 1);
 }
