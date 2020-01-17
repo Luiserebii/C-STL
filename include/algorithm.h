@@ -225,7 +225,7 @@
  * This function is convenient when paired with vector's erase, forming an idiom.
  *
  * Ex: algorithm_remove(int*, nums, nums + sz, 10, res);
- *
+ */
 #define algorithm_remove(type, begin, end, val, res) \
     { \
         res = begin; \

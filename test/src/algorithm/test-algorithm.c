@@ -3,13 +3,14 @@
 #include "../../include/algorithm/test-algorithm-copy.h"
 #include "../../include/algorithm/test-algorithm-count.h"
 #include "../../include/algorithm/test-algorithm-equal.h"
-#include "../../include/algorithm/test-algorithm-find-if.h"
 #include "../../include/algorithm/test-algorithm-find.h"
 #include "../../include/algorithm/test-algorithm-max.h"
 #include "../../include/algorithm/test-algorithm-min.h"
 #include "../../include/algorithm/test-algorithm-remove-copy-if.h"
 #include "../../include/algorithm/test-algorithm-search.h"
 #include "../../include/algorithm/test-algorithm-transform.h"
+#include "../../include/algorithm/test-algorithm-find-if.h"
+#include "../../include/algorithm/test-algorithm-remove.h"
 #include "../../lib/unity.h"
 
 void setUp() {}
@@ -60,5 +61,8 @@ int main() {
     RUN_TEST(test_algorithm_find_if_int);
     RUN_TEST(test_algorithm_find_if_char);
 
+    /* algorithm_remove */
+    RUN_TEST(test_algorithm_remove_int);
+    RUN_TEST(test_algorithm_remove_char);
     return UNITY_END();
 }
