@@ -53,7 +53,7 @@ int main() {
 
     /* algorithm_search */
     RUN_TEST(test_algorithm_search_int);
-    //RUN_TEST(test_algorithm_search_char);
+    RUN_TEST(test_algorithm_search_char);
 
     return UNITY_END();
 }
