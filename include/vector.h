@@ -164,6 +164,13 @@
         *(v->avail++) = e;                                                                                      \
     }                                                                                                           \
                                                                                                                 \
+    vector_type* vector_erase_##vector_type(vector_##vector_type* v, vector_type* pos) {                        \
+        for(; pos + 1 != v->avail; ++pos) {                                                                     \
+            *pos = *(pos + 1);                                                                                  \
+        }                                                                                                       \
+        return --v->avail;                                                                                      \
+    }                                                                                                           \
+                                                                                                                \
     vector_type* vector_begin_##vector_type(vector_##vector_type* v) { return v->head; }                        \
                                                                                                                 \
     vector_type* vector_end_##vector_type(vector_##vector_type* v) { return v->avail; }                         \
