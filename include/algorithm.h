@@ -169,33 +169,30 @@
  *
  * Ex: algorithm_search(char*, charList, charList + cLsz, word, word + wsz, res);
  */
-#define algorithm_search(type, begin, end, begin2, end2, res)                                   \
-    {                                                                                           \
-        for(const type _alg_search_b1 = begin; _alg_search_b1 != end; ++_alg_search_b1) {       \
-            /* Idea behind continue; only add names below if we snag an equal initial val*/     \
-            if(*_alg_search_b1 != *begin2) {                                                    \
-                continue;                                                                       \
-            }                                                                                   \
-            const type _alg_search_it1 = _alg_search_b1;                                        \
-            const type _alg_search_it2 = begin2;                                                \
-            for(; *_alg_search_it1 == *_alg_search_it2; ++_alg_search_it1, ++_alg_search_it2) { \
-                printf("SNAGGED: %d \n", *_alg_search_it1);                                     \
-                if(_alg_search_it2 + 1 == end2) {                                               \
-                    res = _alg_search_b1;                                                       \
-                    printf("FLAG1");                                                            \
-                    goto _algorithm_search_end;                                                 \
-                }                                                                               \
-                if(_alg_search_it1 + 1 == end) {                                                \
-                    res = end;                                                                  \
-                    printf("FLAG2");                                                            \
-                    goto _algorithm_search_end;                                                 \
-                }                                                                               \
-            }                                                                                   \
-        }                                                                                       \
-        res = end;                                                                              \
-    _algorithm_search_end:                                                                      \
-        printf("OWO: Are we ewual to end?: %d\n", res == end);                                  \
-        ;                                                                                       \
+#define algorithm_search(type, begin, end, begin2, end2, res)                               \
+    {                                                                                       \
+        for(const type _alg_search_b1 = begin; _alg_search_b1 != end; ++_alg_search_b1) {   \
+            /* Idea behind continue; only add names below if we snag an equal initial val*/ \
+            if(*_alg_search_b1 != *begin2) {                                                \
+                continue;                                                                   \
+            }                                                                               \
+            const type _alg_search_it1 = _alg_search_b1;                                    \
+            const type _alg_search_it2 = begin2;                                            \
+            for(; _alg_search_it2 != end2 && *_alg_search_it1 == *_alg_search_it2;          \
+                ++_alg_search_it1, ++_alg_search_it2) {                                     \
+                if(_alg_search_it1 == end) {                                                \
+                    res = end;                                                              \
+                    goto _algorithm_search_end;                                             \
+                }                                                                           \
+            }                                                                               \
+            if(_alg_search_it2 == end2) {                                                   \
+                res = _alg_search_b1;                                                       \
+                goto _algorithm_search_end;                                                 \
+            }                                                                               \
+        }                                                                                   \
+        res = end;                                                                          \
+    _algorithm_search_end:                                                                  \
+        ;                                                                                   \
     }
 
 /**
