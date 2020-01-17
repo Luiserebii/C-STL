@@ -148,16 +148,14 @@
  *
  * Ex: algorithm_remove_copy_if(char*, a, a + sz, b, islower)
  */
-#define algorithm_remove_copy_if(type, begin, end, dest, f) \
-    {                                                       \
-        const type _alg_cpif_it = begin;                    \
-        type _alg_cpif_dest = dest;                         \
-        while(_alg_cpif_it != end) {                        \
-            if(!f(*_alg_cpif_it)) {                         \
-                *_alg_cpif_dest++ = *_alg_cpif_it;          \
-            }                                               \
-            ++_alg_cpif_it;                                 \
-        }                                                   \
+#define algorithm_remove_copy_if(type, begin, end, dest, f)                         \
+    {                                                                               \
+        type _alg_cpif_dest = dest;                                                 \
+        for(const type _alg_cpif_it = begin; _alg_cpif_it != end; ++_alg_cpif_it) { \
+            if(!f(*_alg_cpif_it)) {                                                 \
+                *_alg_cpif_dest++ = *_alg_cpif_it;                                  \
+            }                                                                       \
+        }                                                                           \
     }
 
 /**
@@ -232,6 +230,27 @@
         for(type _alg_remove_it = begin; _alg_remove_it != end; ++_alg_remove_it) { \
             if(*_alg_remove_it != val) {                                            \
                 *res++ = *_alg_remove_it;                                           \
+            }                                                                       \
+        }                                                                           \
+    }
+
+/**
+ * algorithm_remove_copy(type, begin, end, dest, val)
+ *
+ * Copies all values in the range [begin, end) to dest which
+ * do not match the value val passed. 
+ *
+ * Alternatively, this function removes any elements which match
+ * the value and places this new range in dest.
+ *
+ * Ex: algorithm_remove_copy(int*, nums, nums + sz, newNums, 100);
+ */
+#define algorithm_remove_copy(type, begin, end, dest, val)                          \
+    {                                                                               \
+        type _alg_rmcp_dest = dest;                                                 \
+        for(const type _alg_rmcp_it = begin; _alg_rmcp_it != end; ++_alg_rmcp_it) { \
+            if(*_alg_rmcp_it != val) {                                              \
+                *_alg_rmcp_dest++ = *_alg_rmcp_it;                                  \
             }                                                                       \
         }                                                                           \
     }
