@@ -91,7 +91,7 @@ void test_vector_copy_int() {
     const int expEl[] = {10, 40, 30};
     algorithm_equal(int*, vector_begin_int(&copy), vector_end_int(&copy), expEl, res);
     TEST_ASSERT(res);
-    
+
     //Free
     vector_free_int(&v);
     vector_free_int(&copy);
@@ -119,7 +119,7 @@ void test_vector_set_int() {
     int res;
     algorithm_equal(int*, vector_begin_int(&v), vector_end_int(&v), newEl, res);
     TEST_ASSERT(res);
-    
+
     //Free
     vector_free_int(&v);
 }

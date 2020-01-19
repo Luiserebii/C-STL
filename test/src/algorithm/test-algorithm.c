@@ -10,6 +10,7 @@
 #include "../../include/algorithm/test-algorithm-partition.h"
 #include "../../include/algorithm/test-algorithm-remove-copy-if.h"
 #include "../../include/algorithm/test-algorithm-remove-copy.h"
+#include "../../include/algorithm/test-algorithm-remove-if.h"
 #include "../../include/algorithm/test-algorithm-remove.h"
 #include "../../include/algorithm/test-algorithm-search.h"
 #include "../../include/algorithm/test-algorithm-transform.h"
@@ -74,6 +75,10 @@ int main() {
     /* algorithm_partition */
     RUN_TEST(test_algorithm_partition_int);
     RUN_TEST(test_algorithm_partition_char);
+
+    /* algorithm_remove_if */
+    RUN_TEST(test_algorithm_remove_if_int);
+    RUN_TEST(test_algorithm_remove_if_char);
 
     return UNITY_END();
 }
