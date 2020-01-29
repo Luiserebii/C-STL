@@ -118,12 +118,7 @@
      * Frees the resources allocated to the vector.                                                               \
      * The vector is also cleared.                                                                                \
      */                                                                                                           \
-    void vector_free_##vector_type(vector_##vector_type* v);                                                      \
-                                                                                                                  \
-    /*                                                                                                            \
-     * Grows the vector by 2x, or 1 if empty.                                                                     \
-     */                                                                                                           \
-    static void vector_grow_##vector_type(vector_##vector_type* v);
+    void vector_free_##vector_type(vector_##vector_type* v);
 
 /**
  * MACRO: define_vector(vector_type)
@@ -133,6 +128,11 @@
  * Ex: define_vector(int)
  */
 #define define_vector(vector_type)                                                                                 \
+    /*                                                                                                             \
+     * Grows the vector by 2x, or 1 if empty.                                                                      \
+     */                                                                                                            \
+    static void vector_grow_##vector_type(vector_##vector_type* v);                                                \
+                                                                                                                   \
     void vector_init_##vector_type(vector_##vector_type* v) { *v = (vector_##vector_type){NULL, NULL, NULL}; }     \
                                                                                                                    \
     void vector_init_size_##vector_type(vector_##vector_type* v, size_t s) {                                       \
@@ -185,7 +185,7 @@
                                                                                                                    \
     void vector_grow_##vector_type(vector_##vector_type* v) {                                                      \
         size_t n_size = v->head ? vector_size_##vector_type(v) * 2 : 1;                                            \
-        v->head = (vector_type*) realloc(v->head, sizeof(vector_type) * n_size);                                 \
+        v->head = (vector_type*) realloc(v->head, sizeof(vector_type) * n_size);                                   \
     }                                                                                                              \
                                                                                                                    \
     size_t vector_size_##vector_type(vector_##vector_type* v) { return v->avail - v->head; }                       \

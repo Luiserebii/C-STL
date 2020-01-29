@@ -99,7 +99,7 @@ void test_vector_copy_int() {
 
 void test_vector_set_int() {
     //Create and intiailize test vector
-    vector_int v, copy;
+    vector_int v;
     vector_init_int(&v);
 
     //Push a few elements back
