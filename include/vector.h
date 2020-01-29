@@ -42,10 +42,11 @@
     /*                                                                                                            \
      * Initializes an empty vector within the vector* passed.                                                     \
      *                                                                                                            \
-     * Note that this data structure is completely empty, and has                                                 \
-     * nothing allocated; not necessary to call vector_free on this                                               \
+     * Note that although this data structure is completely empty, and has                                        \
+     * no elements allocated, the struct itself is, so vector_free is necessary                                   \
+     * for cleanup afterwards.                                                                                    \
      */                                                                                                           \
-    void vector_init_##vector_type(vector_##vector_type* v);                                                      \
+    vector_##vector_type* vector_init_##vector_type();                                                            \
                                                                                                                   \
     /*                                                                                                            \
      * Initializes an empty vector with the size passed.                                                          \
@@ -133,7 +134,11 @@
      */                                                                                                            \
     static void vector_grow_##vector_type(vector_##vector_type* v);                                                \
                                                                                                                    \
-    void vector_init_##vector_type(vector_##vector_type* v) { *v = (vector_##vector_type){NULL, NULL, NULL}; }     \
+    vector_##vector_type* vector_init_##vector_type() {                                                            \
+        /* Allocate memory for vector struct */                                                                    \
+        vector_##vector_type* v = (vector_##vector_type*) malloc(sizeof(vector_##vector_type));                    \
+        v->head = v->avail = v->tail = NULL;                                                                       \
+    }                                                                                                              \
                                                                                                                    \
     void vector_init_size_##vector_type(vector_##vector_type* v, size_t s) {                                       \
         v->head = (vector_type*) malloc(sizeof(vector_type) * s);                                                  \
