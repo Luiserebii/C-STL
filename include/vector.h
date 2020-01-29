@@ -165,6 +165,7 @@
         algorithm_min_copy(vector_type*, src->head, src->avail, copy->head);                                       \
         return copy;                                                                                               \
     }                                                                                                              \
+                                                                                                                   \
     void vector_set_##vector_type(vector_##vector_type* v, size_t pos, vector_type val) { v->head[pos] = val; }    \
                                                                                                                    \
     void vector_push_back_##vector_type(vector_##vector_type* v, vector_type e) {                                  \
