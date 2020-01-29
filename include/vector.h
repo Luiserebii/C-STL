@@ -116,8 +116,13 @@
     vector_type vector_at_##vector_type(vector_##vector_type* v, size_t n);                                       \
                                                                                                                   \
     /*                                                                                                            \
-     * Frees the resources allocated to the vector.                                                               \
-     * The vector is also cleared.                                                                                \
+     * Clears all elements allocated to the vector, but does not deallocate                                       \
+     * the vector itself.                                                                                         \
+     */                                                                                                           \
+    void vector_clear_##vector_type(vector_##vector_type* v);                                                     \
+                                                                                                                  \
+    /*                                                                                                            \
+     * Frees the resources allocated to the vector, including the vector itself.                                  \
      */                                                                                                           \
     void vector_free_##vector_type(vector_##vector_type* v);
 
@@ -210,9 +215,14 @@
                                                                                                                    \
     vector_type vector_at_##vector_type(vector_##vector_type* v, size_t n) { return *(v->head + n); }              \
                                                                                                                    \
-    void vector_free_##vector_type(vector_##vector_type* v) {                                                      \
+    void vector_clear_##vector_type(vector_##vector_type* v) {                                                     \
         free(v->head);                                                                                             \
         v->head = v->avail = v->tail = NULL;                                                                       \
+    }                                                                                                              \
+                                                                                                                   \
+    void vector_free_##vector_type(vector_##vector_type* v) {                                                      \
+        free(v->head);                                                                                             \
+        free(v);                                                                                                   \
     }
 
 #endif
