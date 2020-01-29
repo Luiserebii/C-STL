@@ -1,6 +1,6 @@
 #include "../../../include/algorithm.h"
 #include "../../include/algorithm/test-algorithm-accumulate.h"
-#include "../../include/algorithm/test-algorithm-copy.h"
+#include "../../include/algorithm/test-algorithm-min-copy.h"
 #include "../../include/algorithm/test-algorithm-count.h"
 #include "../../include/algorithm/test-algorithm-equal.h"
 #include "../../include/algorithm/test-algorithm-find-if.h"
@@ -23,10 +23,10 @@ int main() {
 
     UNITY_BEGIN();
 
-    /* algorithm_copy_int */
-    RUN_TEST(test_algorithm_copy_int);
-    RUN_TEST(test_algorithm_copy_char);
-    RUN_TEST(test_algorithm_copy_struct);
+    /* algorithm_min_copy */
+    RUN_TEST(test_algorithm_min_copy_int);
+    RUN_TEST(test_algorithm_min_copy_char);
+    RUN_TEST(test_algorithm_min_copy_struct);
 
     /* algorithm_find */
     RUN_TEST(test_algorithm_find_int);
