@@ -21,14 +21,30 @@
 #define ALGORITHM_H
 
 /**
- * algorithm_copy(type, begin, end, dest)
+ * algorithm_copy(type, begin, end, dest, res)
+ *
+ * Takes a pointer type as the first parameter, which is to be substituted as a generic for the values
+ * of begin and dest. Essentially, the range [begin, end) is copied into dest. The new end of the range
+ * beginning with dest is copied into res.
+ *
+ * Ex: algorithm_copy(int*, months, months + 12, words, newWordsend)
+ */
+#define algorithm_copy(type, begin, end, dest, res)                                         \
+    {                                                                                       \
+        res = dest;                                                                         \
+        for(const type _alg_copy_it = begin; _alg_copy_it != end; *res++ = *_alg_copy_it++) \
+            ;                                                                               \
+    }
+
+/**
+ * algorithm_min_copy(type, begin, end, dest)
  *
  * Takes a pointer type as the first parameter, which is to be substituted as a generic for the values
  * of begin and dest. Essentially, the range [begin, end) is copied into dest.
  *
  * Ex: algorithm_copy(int*, months, months + 12, words)
  */
-#define algorithm_copy(type, begin, end, dest)                                                    \
+#define algorithm_min_copy(type, begin, end, dest)                                                \
     {                                                                                             \
         const type _alg_copy_it = begin;                                                          \
         for(type _alg_copy_dest = dest; _alg_copy_it != end; *_alg_copy_dest++ = *_alg_copy_it++) \
