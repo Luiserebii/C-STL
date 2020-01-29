@@ -75,7 +75,7 @@ void test_vector_copy_int() {
     vector_push_back_int(v, el[2]);
 
     //Copy vector over
-    vector_copy_int(copy, v);
+    copy = vector_copy_int(v);
 
     //Assert equality
     int res;

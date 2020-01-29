@@ -65,7 +65,7 @@
      * Creates a fresh copy of a vector. If the dest contains a pre-existing vector,                              \
      * it will not be freed, so please release if not empty.                                                      \
      */                                                                                                           \
-    void vector_copy_##vector_type(vector_##vector_type* dest, vector_##vector_type* src);                        \
+    vector_##vector_type* vector_copy_##vector_type(vector_##vector_type* src);                                   \
                                                                                                                   \
     /*                                                                                                            \
      * Sets an element of the vector to the value passed.                                                         \
@@ -155,15 +155,15 @@
         return v;                                                                                                  \
     }                                                                                                              \
                                                                                                                    \
-    void vector_copy_##vector_type(vector_##vector_type* dest, vector_##vector_type* src) {                        \
+    vector_##vector_type* vector_copy_##vector_type(vector_##vector_type* src) {                                   \
         if(src->head == NULL) {                                                                                    \
-            dest->head = dest->avail = dest->tail = NULL;                                                          \
-            return;                                                                                                \
+            return vector_init_##vector_type();                                                                    \
         }                                                                                                          \
         /* Initialize a fresh vector using original's size */                                                      \
-        vector_init_size_##vector_type(dest, vector_size_##vector_type(src));                                      \
+        vector_##vector_type* copy = vector_init_size_##vector_type(vector_size_##vector_type(src));               \
         /* Copy over values */                                                                                     \
-        algorithm_min_copy(vector_type*, src->head, src->avail, dest->head)                                        \
+        algorithm_min_copy(vector_type*, src->head, src->avail, copy->head);                                       \
+        return copy;                                                                                               \
     }                                                                                                              \
     void vector_set_##vector_type(vector_##vector_type* v, size_t pos, vector_type val) { v->head[pos] = val; }    \
                                                                                                                    \
