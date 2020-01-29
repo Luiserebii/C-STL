@@ -184,8 +184,13 @@
     vector_type* vector_end_##vector_type(vector_##vector_type* v) { return v->avail; }                            \
                                                                                                                    \
     void vector_grow_##vector_type(vector_##vector_type* v) {                                                      \
-        size_t n_size = v->head ? vector_size_##vector_type(v) * 2 : 1;                                            \
+        size_t old_size = vector_size_##vector_type(v);                                                            \
+        size_t n_size = v->head ? old_size * 2 : 1;                                                                \
+                                                                                                                   \
+        /* Realloc and set pointers as appropriate*/                                                               \
         v->head = (vector_type*) realloc(v->head, sizeof(vector_type) * n_size);                                   \
+        v->avail = v->head + old_size;                                                                             \
+        v->tail = v->head + n_size;                                                                                \
     }                                                                                                              \
                                                                                                                    \
     size_t vector_size_##vector_type(vector_##vector_type* v) { return v->avail - v->head; }                       \
