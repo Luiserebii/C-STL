@@ -184,17 +184,8 @@
     vector_type* vector_end_##vector_type(vector_##vector_type* v) { return v->avail; }                            \
                                                                                                                    \
     void vector_grow_##vector_type(vector_##vector_type* v) {                                                      \
-        size_t old_size = vector_size_##vector_type(v);                                                            \
-        size_t n_size = v->head ? old_size * 2 : 1;                                                                \
-                                                                                                                   \
-        vector_type* n_head = (vector_type*) malloc(sizeof(vector_type) * n_size);                                 \
-                                                                                                                   \
-        algorithm_min_copy(vector_type*, v->head, v->avail, n_head);                                                   \
-                                                                                                                   \
-        free(v->head);                                                                                             \
-        v->head = n_head;                                                                                          \
-        v->avail = n_head + old_size;                                                                              \
-        v->tail = n_head + n_size;                                                                                 \
+        size_t n_size = v->head ? vector_size_##vector_type(v) * 2 : 1;                                            \
+        v->head = (vector_type*) realloc(v->head, sizeof(vector_type) * n_size);                                 \
     }                                                                                                              \
                                                                                                                    \
     size_t vector_size_##vector_type(vector_##vector_type* v) { return v->avail - v->head; }                       \
