@@ -153,7 +153,7 @@
         /* Initialize a fresh vector using original's size */                                                      \
         vector_init_size_##vector_type(dest, vector_size_##vector_type(src));                                      \
         /* Copy over values */                                                                                     \
-        algorithm_copy(vector_type*, src->head, src->avail, dest->head)                                            \
+        algorithm_min_copy(vector_type*, src->head, src->avail, dest->head)                                        \
     }                                                                                                              \
     void vector_set_##vector_type(vector_##vector_type* v, size_t pos, vector_type val) { v->head[pos] = val; }    \
                                                                                                                    \
@@ -189,7 +189,7 @@
                                                                                                                    \
         vector_type* n_head = (vector_type*) malloc(sizeof(vector_type) * n_size);                                 \
                                                                                                                    \
-        algorithm_copy(vector_type*, v->head, v->avail, n_head);                                                   \
+        algorithm_min_copy(vector_type*, v->head, v->avail, n_head);                                                   \
                                                                                                                    \
         free(v->head);                                                                                             \
         v->head = n_head;                                                                                          \
