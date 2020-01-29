@@ -53,13 +53,13 @@
      * Memory will be allocated under the size given, so vector_free                                              \
      * is required.                                                                                               \
      */                                                                                                           \
-    void vector_init_size_##vector_type(vector_##vector_type* v, size_t s);                                       \
+    vector_##vector_type* vector_init_size_##vector_type(size_t s);                                               \
                                                                                                                   \
     /*                                                                                                            \
      * Intiailizes an empty vector with the size passed.                                                          \
      * Unlike vector_init_size, this function will fill the capacity.                                             \
      */                                                                                                           \
-    void vector_init_capacity_##vector_type(vector_##vector_type* v, size_t s);                                   \
+    vector_##vector_type* vector_init_capacity_##vector_type(size_t s);                                           \
                                                                                                                   \
     /*                                                                                                            \
      * Creates a fresh copy of a vector. If the dest contains a pre-existing vector,                              \
@@ -138,16 +138,21 @@
         /* Allocate memory for vector struct */                                                                    \
         vector_##vector_type* v = (vector_##vector_type*) malloc(sizeof(vector_##vector_type));                    \
         v->head = v->avail = v->tail = NULL;                                                                       \
+        return v;                                                                                                  \
     }                                                                                                              \
                                                                                                                    \
-    void vector_init_size_##vector_type(vector_##vector_type* v, size_t s) {                                       \
+    vector_##vector_type* vector_init_size_##vector_type(size_t s) {                                               \
+        vector_##vector_type* v = (vector_##vector_type*) malloc(sizeof(vector_##vector_type));                    \
         v->head = (vector_type*) malloc(sizeof(vector_type) * s);                                                  \
         v->tail = v->avail = v->head + s;                                                                          \
+        return v;                                                                                                  \
     }                                                                                                              \
                                                                                                                    \
-    void vector_init_capacity_##vector_type(vector_##vector_type* v, size_t s) {                                   \
+    vector_##vector_type* vector_init_capacity_##vector_type(size_t s) {                                           \
+        vector_##vector_type* v = (vector_##vector_type*) malloc(sizeof(vector_##vector_type));                    \
         v->head = v->avail = (vector_type*) malloc(sizeof(vector_type) * s);                                       \
         v->tail = v->head + s;                                                                                     \
+        return v;                                                                                                  \
     }                                                                                                              \
                                                                                                                    \
     void vector_copy_##vector_type(vector_##vector_type* dest, vector_##vector_type* src) {                        \
