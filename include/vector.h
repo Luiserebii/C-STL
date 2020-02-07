@@ -46,7 +46,7 @@
      * no elements allocated, the struct itself is, so vector_free is necessary                                   \
      * for cleanup afterwards.                                                                                    \
      */                                                                                                           \
-    vector_##vector_type* vector_init_##vector_type();                                                            \
+    vector_##vector_type* vector_init_##vector_type(void);                                                        \
                                                                                                                   \
     /*                                                                                                            \
      * Initializes an empty vector with the size passed.                                                          \
@@ -139,7 +139,7 @@
      */                                                                                                            \
     static void vector_grow_##vector_type(vector_##vector_type* v);                                                \
                                                                                                                    \
-    vector_##vector_type* vector_init_##vector_type() {                                                            \
+    vector_##vector_type* vector_init_##vector_type(void) {                                                        \
         /* Allocate memory for vector struct */                                                                    \
         vector_##vector_type* v = (vector_##vector_type*) malloc(sizeof(vector_##vector_type));                    \
         v->head = v->avail = v->tail = NULL;                                                                       \
