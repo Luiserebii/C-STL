@@ -94,7 +94,7 @@
      * Creates a fresh copy of a vector. If the dest contains a pre-existing vector,                \
      * it will not be freed, so please release if not empty.                                        \
      */                                                                                             \
-    struct_name* prefix##copy##suffix(struct_name* src);                                            \
+    struct_name* prefix##copy##suffix(const struct_name* src);                                      \
                                                                                                     \
     /*                                                                                              \
      * Sets an element of the vector to the value passed.                                           \
@@ -131,18 +131,18 @@
     /*                                                                                              \
      * Returns the current size of the vector.                                                      \
      */                                                                                             \
-    size_t prefix##size##suffix(struct_name* v);                                                    \
+    size_t prefix##size##suffix(const struct_name* v);                                              \
                                                                                                     \
     /*                                                                                              \
      * Returns the current total capacity of the vector,                                            \
      * which encompasses the total amount allocated.                                                \
      */                                                                                             \
-    size_t prefix##capacity##suffix(struct_name* v);                                                \
+    size_t prefix##capacity##suffix(const struct_name* v);                                          \
                                                                                                     \
     /*                                                                                              \
      * Returns the element found at the specified location passed.                                  \
      */                                                                                             \
-    vector_type prefix##at##suffix(struct_name* v, size_t n);                                       \
+    vector_type prefix##at##suffix(const struct_name* v, size_t n);                                 \
                                                                                                     \
     /*                                                                                              \
      * Clears all elements allocated to the vector, but does not deallocate                         \
@@ -189,7 +189,7 @@
         return v;                                                                                    \
     }                                                                                                \
                                                                                                      \
-    struct_name* prefix##copy##suffix(struct_name* src) {                                            \
+    struct_name* prefix##copy##suffix(const struct_name* src) {                                      \
         if(src->head == NULL) {                                                                      \
             return prefix##init##suffix();                                                           \
         }                                                                                            \
@@ -238,11 +238,11 @@
         v->tail = v->head + n_size;                                                                  \
     }                                                                                                \
                                                                                                      \
-    size_t prefix##size##suffix(struct_name* v) { return v->avail - v->head; }                       \
+    size_t prefix##size##suffix(const struct_name* v) { return v->avail - v->head; }                 \
                                                                                                      \
-    size_t prefix##capacity##suffix(struct_name* v) { return v->tail - v->head; }                    \
+    size_t prefix##capacity##suffix(const struct_name* v) { return v->tail - v->head; }              \
                                                                                                      \
-    vector_type prefix##at##suffix(struct_name* v, size_t n) { return *(v->head + n); }              \
+    vector_type prefix##at##suffix(const struct_name* v, size_t n) { return *(v->head + n); }        \
                                                                                                      \
     void prefix##clear##suffix(struct_name* v) {                                                     \
         free(v->head);                                                                               \

@@ -51,10 +51,13 @@ Example usage:
 #define MAX_BUFFER 1000
 
 char buffer[MAX_BUFFER];
+
 //Initializing our string to a C-string
 string* str = string_init_cstr("Hello world");
+
 //Setting our string to a new C-string
 string_set_cstr("I need a string that can expand!");
+
 //Exporting our string as a C-string
 string_to_cstr(str, buffer);
 ```
