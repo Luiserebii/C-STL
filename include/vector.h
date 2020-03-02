@@ -191,7 +191,7 @@
                                                                                                      \
     struct_name* prefix##copy##suffix(struct_name* src) {                                            \
         if(src->head == NULL) {                                                                      \
-            return vector_init_##vector_type();                                                      \
+            return prefix##init##suffix();                                                           \
         }                                                                                            \
         /* Initialize a fresh vector using original's size */                                        \
         struct_name* copy = prefix##init_size##suffix(prefix##size##suffix(src));                    \
