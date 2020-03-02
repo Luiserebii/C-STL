@@ -27,4 +27,21 @@
  */
 declare_vector(string_, , string, char)
 
+    /**
+ * Intiailizes an empty string with the contents of the char* passed. 
+ * It is assumed that that char* is valid.
+ */
+    string* string_init_cstr(char* s);
+
+/**
+ * Sets the string to the char* passed. If there is not enough space,
+ * the string will expand to fit the string.
+ */
+void string_set_cstr(string* str, char* s);
+
+/**
+ * TODO: Should there be a string-specific strcat? Isn't this
+ * a combination of algorithm_copy along with other stuff?
+ */
+
 #endif
