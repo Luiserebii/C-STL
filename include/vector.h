@@ -32,7 +32,7 @@
  *
  * Whenever a vector is needed to be declared, this is probably what you want!
  **/
-#define declare_vector_type(vector_type) declare_vector(vector_,, struct_name, vector_type)
+#define declare_vector_type(vector_type) declare_vector(vector_##vector_type##_,, vector_##vector_type, vector_type)
 
 /**
  * MACRO: define_vector_type(vector_type)
@@ -41,7 +41,7 @@
  *
  * Ex: define_vector_type(int)
  **/
-#define define_vector_type(vector_type) declare_vector(vector_,, struct_name, vector_type)
+#define define_vector_type(vector_type) define_vector(vector_##vector_type##_,, vector_##vector_type, vector_type)
 
 /**
  * MACRO: declare_vector(prefix, suffix, struct_name, vector_type)
