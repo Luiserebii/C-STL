@@ -25,19 +25,26 @@
 /**
  * Generate a set of vector functions for our string
  */
+// clang-format off
 declare_vector(string_, , string, char)
+// clang-format on
 
-    /**
+/**
  * Intiailizes an empty string with the contents of the char* passed. 
  * It is assumed that that char* is valid.
  */
-    string* string_init_cstr(char* s);
+string* string_init_cstr(const char* s);
 
 /**
  * Sets the string to the char* passed. If there is not enough space,
  * the string will expand to fit the string.
  */
-void string_set_cstr(string* str, char* s);
+void string_set_cstr(string* str, const char* s);
+
+/**
+ * Writes the contents of the string to the char* passed.
+ */
+void string_to_cstr(const string* str, char* dest);
 
 /**
  * TODO: Should there be a string-specific strcat? Isn't this

@@ -26,17 +26,25 @@
 /**
  * Generate a set of vector functions for our string
  */
+// clang-format off
 define_vector(string_, , string, char)
+// clang-format on
 
-string* string_init_cstr(char* s) {
+string* string_init_cstr(const char* s) {
     string* str = string_init_size(strlen(s));
     algorithm_min_copy(char*, s, s + strlen(s), str->head);
     return str;
 }
 
-void string_set_cstr(string* str, char* s) {
+void string_set_cstr(string* str, const char* s) {
     if(string_size(str) < strlen(s)) {
         str->head = (char*) realloc(str->head, sizeof(string) * strlen(s));
     }
     algorithm_min_copy(char*, s, s + strlen(s), str->head)
+}
+
+void string_to_cstr(const string* str, char* dest) {
+    char* end;
+    algorithm_copy(char*, str->head, str->avail, dest, end);
+    end = '\0';
 }

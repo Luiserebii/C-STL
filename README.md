@@ -44,7 +44,20 @@ Further documentation on the currently implemented functions can be found in [ve
 
 ### \<string\>
 
-The flexible, dynamically-allocated C++ string is emulated by expanding on the vector macro, and adding additional functions useful for interaction with C-strings. All functions available to vectors are equally available to the C-STL string type (e.g. `string_push_back(char c)`). Information on the additional functions can be found in [string.h](https://github.com/Luiserebii/C-STL/blob/master/include/string.h)
+The flexible, dynamically-allocated C++ `std::string` is emulated by expanding on the vector macro, and adding additional functions useful for interaction with C-strings. All functions available to vectors are equally available to the C-STL string type (e.g. `string_push_back(char c)`). Information on the additional functions can be found in [string.h](https://github.com/Luiserebii/C-STL/blob/master/include/string.h).
+
+Example usage:
+```c
+#define MAX_BUFFER 1000
+
+char buffer[MAX_BUFFER];
+//Initializing our string to a C-string
+string* str = string_init_cstr("Hello world");
+//Setting our string to a new C-string
+string_set_cstr("I need a string that can expand!");
+//Exporting our string as a C-string
+string_to_cstr(str, buffer);
+```
 
 ## Testing
 The [`test/`](test) directory contains tests which intend to exercise typical usage. To run all tests, simply use the command `make test`, which also includes diagnostic information from valgrind to ensure resources are being freed properly. The simple test framework [Unity](https://github.com/ThrowTheSwitch/Unity) is currently being used to write them.
