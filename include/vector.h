@@ -24,7 +24,7 @@
 #include "algorithm.h"
 
 /**
- * MACRO: declare_vector(vector_type)
+ * MACRO: declare_vector_type(vector_type)
  *
  * Declares an entire set of vector declarations for a specific type.
  *
@@ -32,7 +32,27 @@
  *
  * Whenever a vector is needed to be declared, this is probably what you want!
  **/
-#define declare_vector(vector_type)                                                                               \
+#define declare_vector_type(vector_type) declare_vector(vector_,, vector_##vector_type, vector_type)
+
+/**
+ * MACRO: declare_vector(prefix, suffix, struct_name, vector_type)
+ *
+ * Declares an entire set of vector declarations based on the arguments passed.
+ * 
+ * The prefix/suffix determines the text to place before or after each set of
+ * vector functions available. For example, with a prefix of "string_", and no
+ * suffix, the init function would generate as "string_init".
+ *
+ * struct_name determines the name of the data type used internally, and vector_type
+ * specifies the type used within the vector.
+ *
+ * This is intended to allow for the most amount of control in generating
+ * definitions for a vector-like object.
+ *
+ * Ex: declare_vector(vector_, _int, vector_int, int)
+ *
+ **/
+#define declare_vector(prefix, suffix, struct_name, vector_type)                                                                               \
     typedef struct {                                                                                              \
         vector_type* head;                                                                                        \
         vector_type* avail;                                                                                       \
