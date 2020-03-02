@@ -209,14 +209,14 @@
         *(v->avail++) = e;                                                                                         \
     }                                                                                                              \
                                                                                                                    \
-    vector_type* vector_erase_##vector_type(struct_name* v, vector_type* pos) {                           \
+    vector_type* prefix##erase##suffix(struct_name* v, vector_type* pos) {                           \
         for(; pos + 1 != v->avail; ++pos) {                                                                        \
             *pos = *(pos + 1);                                                                                     \
         }                                                                                                          \
         return --v->avail;                                                                                         \
     }                                                                                                              \
                                                                                                                    \
-    vector_type* vector_erase_range_##vector_type(struct_name* v, vector_type* begin, vector_type* end) { \
+    vector_type* prefix##erase_range##suffix(struct_name* v, vector_type* begin, vector_type* end) { \
         size_t diff = end - begin;                                                                                 \
         for(; begin + diff != v->avail; ++begin) {                                                                 \
             *begin = *(begin + diff);                                                                              \
@@ -224,12 +224,12 @@
         return v->avail -= diff;                                                                                   \
     }                                                                                                              \
                                                                                                                    \
-    vector_type* vector_begin_##vector_type(struct_name* v) { return v->head; }                           \
+    vector_type* prefix##begin##suffix(struct_name* v) { return v->head; }                           \
                                                                                                                    \
-    vector_type* vector_end_##vector_type(struct_name* v) { return v->avail; }                            \
+    vector_type* prefix##end##suffix(struct_name* v) { return v->avail; }                            \
                                                                                                                    \
-    void vector_grow_##vector_type(struct_name* v) {                                                      \
-        size_t old_size = vector_size_##vector_type(v);                                                            \
+    void prefix##grow##suffix(struct_name* v) {                                                      \
+        size_t old_size = prefix##size##suffix(v);                                                            \
         size_t n_size = v->head ? old_size * 2 : 1;                                                                \
                                                                                                                    \
         /* Realloc and set pointers as appropriate*/                                                               \
@@ -238,18 +238,18 @@
         v->tail = v->head + n_size;                                                                                \
     }                                                                                                              \
                                                                                                                    \
-    size_t vector_size_##vector_type(struct_name* v) { return v->avail - v->head; }                       \
+    size_t prefix##size##suffix(struct_name* v) { return v->avail - v->head; }                       \
                                                                                                                    \
-    size_t vector_capacity_##vector_type(struct_name* v) { return v->tail - v->head; }                    \
+    size_t prefix##capacity##suffix(struct_name* v) { return v->tail - v->head; }                    \
                                                                                                                    \
-    vector_type vector_at_##vector_type(struct_name* v, size_t n) { return *(v->head + n); }              \
+    vector_type prefix##at##suffix(struct_name* v, size_t n) { return *(v->head + n); }              \
                                                                                                                    \
-    void vector_clear_##vector_type(struct_name* v) {                                                     \
+    void prefix##clear##suffix(struct_name* v) {                                                     \
         free(v->head);                                                                                             \
         v->head = v->avail = v->tail = NULL;                                                                       \
     }                                                                                                              \
                                                                                                                    \
-    void vector_free_##vector_type(struct_name* v) {                                                      \
+    void prefix##free##suffix(struct_name* v) {                                                      \
         free(v->head);                                                                                             \
         free(v);                                                                                                   \
     }
