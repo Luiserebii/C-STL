@@ -3,6 +3,6 @@
 
 #include "../../../include/vector.h"
 
-declare_vector(int)
+declare_vector(vector_, _int, vector_int, int)
 
 #endif

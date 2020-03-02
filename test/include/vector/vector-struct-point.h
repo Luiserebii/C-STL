@@ -9,6 +9,6 @@ typedef struct {
     int y;
 } point;
 
-declare_vector(point)
+declare_vector(vector_, _point, vector_point, point)
 
 #endif
