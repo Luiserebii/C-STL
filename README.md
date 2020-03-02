@@ -13,7 +13,7 @@ Functions from the `<algorithm>` header are currently being implemented as macro
 
 ### \<vector\>
 
-Emulating the C++ `<vector>` in C is difficult, but macros allow us some room to play. Two macros, `declare_vector` and `define_vector`, allow us to explicitly provide a type (much like a template) and construct the rest according to our needs.
+Emulating the C++ `<vector>` in C is difficult, but macros allow us some room to play. Two macros, `declare_vector_type` and `define_vector_type`, allow us to explicitly provide a type (much like a template) and construct the rest according to our needs. These are built on `declare_vector` and `define_vector`, which allow more flexibility and power with the naming of containers and functions.
 
 Since the declaration of the vector `struct` data type and associated functions should ideally belong in a header file, it is advised to use the `declare_vector` within one, and use `define_vector` in a matching `.c` file. For example, to create an `int` vector, one might write:
 
@@ -24,7 +24,7 @@ Since the declaration of the vector `struct` data type and associated functions 
 
 #include "vector.h"
 
-declare_vector(int)
+declare_vector_type(int)
 
 #endif
 ```
@@ -33,14 +33,18 @@ declare_vector(int)
 #include "vector_int.h"
 #include "vector.h"
 
-define_vector(int)
+define_vector_type(int)
 ```
 
-This will then expand into the appropriate vector `struct` (e.g. `vector_int`) with matching functions. All functions are appended with the type, with the general format `vector_FUNCTION_TYPE`. Therefore, to `push_back` on an `int` vector, one would call `vector_push_back_int`.
+This will then expand into the appropriate vector `struct` (e.g. `vector_int`) with matching functions. All functions are appended with the type, with the general format `vector_TYPE_FUNCTION`. Therefore, to `push_back` on an `int` vector, one would call `vector_int_push_back`.
 
-As `vector` relies on dynamically-allocated memory via `malloc`, a convenience function `vector_free_TYPE` has been provided to release a vector after it has finished being used.
+As `vector` relies on dynamically-allocated memory via `malloc`, a convenience function `vector_TYPE_free` has been provided to release a vector after it has finished being used.
 
 Further documentation on the currently implemented functions can be found in [vector.h](https://github.com/Luiserebii/C-STL/blob/master/include/vector.h).
+
+### \<string\>
+
+The flexible, dynamically-allocated C++ string is emulated by expanding on the vector macro, and adding additional functions useful for interaction with C-strings. All functions available to vectors are equally available to the C-STL string type (e.g. `string_push_back(char c)`). Information on the additional functions can be found in [string.h](https://github.com/Luiserebii/C-STL/blob/master/include/string.h)
 
 ## Testing
 The [`test/`](test) directory contains tests which intend to exercise typical usage. To run all tests, simply use the command `make test`, which also includes diagnostic information from valgrind to ensure resources are being freed properly. The simple test framework [Unity](https://github.com/ThrowTheSwitch/Unity) is currently being used to write them.
