@@ -44,6 +44,27 @@
 #define define_vector_type(vector_type) define_vector(vector_##vector_type##_, , vector_##vector_type, vector_type)
 
 /**
+ * MACRO: declare_vector_class(name, vector_type)
+ *
+ * Declares an entire set of vector declarations for a specific classname,
+ * uses the name both as a prefix and as the struct_name generated.
+ *
+ * Ex: declare_vector_type(string, char)
+ *
+ * Whenever a vector is needed to be declared, this is probably what you want!
+ **/
+#define declare_vector_class(name, vector_type) declare_vector(name##_, , name, vector_type)
+
+/**
+ * MACRO: define_vector_class(name, vector_type)
+ *
+ * Defines an entire set of vector declarations for a specific classname.
+ *
+ * Ex: define_vector_type(string, char)
+ **/
+#define define_vector_class(name, vector_type) define_vector(name##_, , name, vector_type)
+
+/**
  * MACRO: declare_vector(prefix, suffix, struct_name, vector_type)
  *
  * Declares an entire set of vector declarations based on the arguments passed.
@@ -90,6 +111,11 @@
      */                                                                                             \
     struct_name* prefix##init_capacity##suffix(size_t s);                                           \
                                                                                                     \
+    /* \
+     * Intializes a new vector, and fills it with n elements, each with value val. \
+     */ \
+    struct_name* prefix##init_fill##suffix(size_t n, vector_type val);  \
+\
     /*                                                                                              \
      * Creates a fresh copy of a vector. If the dest contains a pre-existing vector,                \
      * it will not be freed, so please release if not empty.                                        \
@@ -160,7 +186,7 @@
  *
  * Generates an entire set of definitions for a vector based on parameters passed.
  *
- * Ex: define_vector()
+ * Ex: define_vector(vector_, _int, vector_int, int)
  */
 #define define_vector(prefix, suffix, struct_name, vector_type)                                      \
     /*                                                                                               \
@@ -188,7 +214,13 @@
         v->tail = v->head + s;                                                                       \
         return v;                                                                                    \
     }                                                                                                \
-                                                                                                     \
+\
+    struct_name* prefix##init_fill##suffix(size_t n, vector_type val) {  \
+        struct_name* v = prefix##init_size##suffix(n); \
+        for(vector_type* h = v->head; h != v->tail; *h++ = val) \
+            ; \
+    } \
+\
     struct_name* prefix##copy##suffix(const struct_name* src) {                                      \
         if(src->head == NULL) {                                                                      \
             return prefix##init##suffix();                                                           \

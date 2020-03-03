@@ -26,7 +26,7 @@
  * Generate a set of vector functions for our string
  */
 // clang-format off
-declare_vector(string_, , string, char);
+declare_vector_class(string, char);
 // clang-format on
 
 /**

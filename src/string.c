@@ -27,7 +27,7 @@
  * Generate a set of vector functions for our string
  */
 // clang-format off
-define_vector(string_, , string, char)
+define_vector_class(string, char)
 // clang-format on
 
 string* string_init_cstr(const char* s) {
@@ -46,5 +46,5 @@ void string_set_cstr(string* str, const char* s) {
 void string_to_cstr(const string* str, char* dest) {
     char* end;
     algorithm_copy(char*, str->head, str->avail, dest, end);
-    end = '\0';
+    *end = '\0';
 }
