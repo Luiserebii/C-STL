@@ -52,6 +52,20 @@
     }
 
 /**
+ * algorithm_fill(type, begin, end, val)
+ *
+ * Takes a pointer type as the first parameter, which is to be substituted as a generic for the value
+ * of begin. Essentially, the value val is copied into the range [begin, end).
+ *
+ * Ex: algorithm_fill(int*, months, months + 12, words)
+ */
+#define algorithm_min_copy(type, begin, end, val)                                                \
+    {                                                                                             \
+        for(const type _alg_copy_it = begin; _alg_copy_it != end; *_alg_copy_it++ = val) \
+            ;                                                                                     \
+    }
+
+/**
  * algorithm_find(begin, end, val, res)
  *
  * Searches through [begin, end) for val. Returns a pointer to the found value through

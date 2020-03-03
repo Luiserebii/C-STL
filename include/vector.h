@@ -217,8 +217,7 @@
 \
     struct_name* prefix##init_fill##suffix(size_t n, vector_type val) {  \
         struct_name* v = prefix##init_size##suffix(n); \
-        for(vector_type* h = v->head; h != v->tail; *h++ = val) \
-            ; \
+        algorithm_fill(vector_type*, v->head, v->tail, val); \
     } \
 \
     struct_name* prefix##copy##suffix(const struct_name* src) {                                      \
