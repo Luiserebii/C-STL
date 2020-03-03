@@ -203,12 +203,22 @@
                                                                                                     \
     /*                                                                                              \
      * Resizes the vector by growing it to n elements. This function causes a reallocation          \
-     * via realloc.                                                                                 \
+     * via realloc. It should not change the size of the vector, simply expanding the capacity.     \
      *                                                                                              \
      * If the n is less than the current size of the vector, it will be left in an invalid state    \
      * and the behavior is undefined.                                                               \
      */                                                                                             \
     void prefix##grow##suffix(struct_name* v, size_t n);                                            \
+                                                                                                    \
+    /*                                                                                              \
+     * Resizes the vector by shrinking it to n elements.                                            \
+     *                                                                                              \
+     * This function does not change the capacity of the vector, only size.                         \
+     *                                                                                              \
+     * If the n is greater than the current size of the vector, it will be left                     \
+     * in an invalid state and the behavior is undefined.                                           \
+     */                                                                                             \
+    void prefix##shrink##suffix(struct_name* v, size_t n);                                          \
                                                                                                     \
     /*                                                                                              \
      * Clears all elements allocated to the vector, but does not deallocate                         \
@@ -320,12 +330,11 @@
     vector_type* prefix##end##suffix(struct_name* v) { return v->avail; }                            \
                                                                                                      \
     void prefix##autogrow##suffix(struct_name* v) {                                                  \
-        size_t old_size = prefix##size##suffix(v);                                                   \
-        size_t n_size = v->head ? old_size * 2 : 1;                                                  \
+        size_t old_sz = prefix##size##suffix(v);                                                     \
+        size_t n_size = v->head ? old_sz * 2 : 1;                                                    \
                                                                                                      \
-        /* Realloc and set pointers as appropriate */                                                \
         v->head = (vector_type*) realloc(v->head, sizeof(vector_type) * n_size);                     \
-        v->avail = v->head + old_size;                                                               \
+        v->avail = v->head + old_sz;                                                                 \
         v->tail = v->head + n_size;                                                                  \
     }                                                                                                \
                                                                                                      \
@@ -348,9 +357,16 @@
                                                                                                      \
     void prefix##grow##suffix(struct_name* v, size_t n) {                                            \
         size_t old_sz = prefix##size##suffix(v);                                                     \
+        assert(n > old_sz);                                                                          \
+        /* Realloc and set pointers as appropriate */                                                \
         v->head = (vector_type*) realloc(v->head, sizeof(vector_type) * n);                          \
         v->avail = v->head + old_sz;                                                                 \
         v->tail = v->head + n;                                                                       \
+    }                                                                                                \
+                                                                                                     \
+    void prefix##shrink##suffix(struct_name* v, size_t n) {                                          \
+        assert(n < prefix##size##suffix(v));                                                         \
+        v->avail -= (prefix##size##suffix(v) - n);                                                   \
     }                                                                                                \
                                                                                                      \
     void prefix##clear##suffix(struct_name* v) {                                                     \
