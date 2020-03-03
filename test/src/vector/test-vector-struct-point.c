@@ -6,7 +6,7 @@ void setUp() {}
 void tearDown() {}
 int is_equal_point(point a, point b);
 
-int main() {
+int main(void) {
     UNITY_BEGIN();
     RUN_TEST(test_vector_init_point);
     RUN_TEST(test_vector_init_size_point);

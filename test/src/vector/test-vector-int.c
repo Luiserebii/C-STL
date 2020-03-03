@@ -5,7 +5,7 @@
 void setUp() {}
 void tearDown() {}
 
-int main() {
+int main(void) {
     UNITY_BEGIN();
     RUN_TEST(test_vector_init_int);
     RUN_TEST(test_vector_init_size_int);

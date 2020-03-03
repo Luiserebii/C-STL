@@ -6,8 +6,8 @@ struct point {
     int y;
 };
 
-void test_algorithm_min_copy_int();
-void test_algorithm_min_copy_char();
-void test_algorithm_min_copy_struct();
+void test_algorithm_min_copy_int(void);
+void test_algorithm_min_copy_char(void);
+void test_algorithm_min_copy_struct(void);
 
 #endif
