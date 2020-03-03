@@ -138,6 +138,13 @@
     void prefix##push_back##suffix(struct_name* v, vector_type e);                                  \
                                                                                                     \
     /*                                                                                              \
+     * Pops the last element off the vector.                                                        \
+     *                                                                                              \
+     * NOTE: This function will break the vector if it is empty, use responsibly.                   \
+     */                                                                                             \
+    void prefix##pop_back##suffix(struct_name* v);                                                  \
+                                                                                                    \
+    /*                                                                                              \
      * Erases an element at the pointer passed from the vector. Returns a pointer to the            \
      * new end of the vector.                                                                       \
      */                                                                                             \
@@ -259,6 +266,11 @@
             prefix##grow##suffix(v);                                                                 \
         }                                                                                            \
         *(v->avail++) = e;                                                                           \
+    }                                                                                                \
+                                                                                                     \
+    void prefix##pop_back##suffix(struct_name* v) {                                                  \
+        --v->avail;                                                                                  \
+        return;                                                                                      \
     }                                                                                                \
                                                                                                      \
     vector_type* prefix##erase##suffix(struct_name* v, vector_type* pos) {                           \
