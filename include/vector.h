@@ -111,11 +111,16 @@
      */                                                                                             \
     struct_name* prefix##init_capacity##suffix(size_t s);                                           \
                                                                                                     \
-    /* \
-     * Intializes a new vector, and fills it with n elements, each with value val. \
-     */ \
-    struct_name* prefix##init_fill##suffix(size_t n, vector_type val);  \
-\
+    /*                                                                                              \
+     * Intializes a new vector, and fills it with n elements, each with value val.                  \
+     */                                                                                             \
+    struct_name* prefix##init_fill##suffix(size_t n, vector_type val);                              \
+                                                                                                    \
+    /*                                                                                              \
+     * Initializes a new vector, and fills it with the range [first, last) passed.                  \
+     */                                                                                             \
+    struct_name* prefix##init_range##suffix(vector_type* first, vector_type* last);                 \
+                                                                                                    \
     /*                                                                                              \
      * Creates a fresh copy of a vector. If the dest contains a pre-existing vector,                \
      * it will not be freed, so please release if not empty.                                        \
@@ -214,12 +219,19 @@
         v->tail = v->head + s;                                                                       \
         return v;                                                                                    \
     }                                                                                                \
-\
-    struct_name* prefix##init_fill##suffix(size_t n, vector_type val) {  \
-        struct_name* v = prefix##init_size##suffix(n); \
-        algorithm_fill(vector_type*, v->head, v->tail, val); \
-    } \
-\
+                                                                                                     \
+    struct_name* prefix##init_fill##suffix(size_t n, vector_type val) {                              \
+        struct_name* v = prefix##init_size##suffix(n);                                               \
+        algorithm_fill(vector_type*, v->head, v->tail, val);                                         \
+        return v;                                                                                    \
+    }                                                                                                \
+                                                                                                     \
+    struct_name* prefix##init_range##suffix(vector_type* first, vector_type* last) {                 \
+        struct_name* v = prefix##init_size##suffix(last - first);                                    \
+        algorithm_min_copy(vector_type*, first, last, v->head);                                      \
+        return v;                                                                                    \
+    }                                                                                                \
+                                                                                                     \
     struct_name* prefix##copy##suffix(const struct_name* src) {                                      \
         if(src->head == NULL) {                                                                      \
             return prefix##init##suffix();                                                           \

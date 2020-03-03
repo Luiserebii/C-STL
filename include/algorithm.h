@@ -59,10 +59,10 @@
  *
  * Ex: algorithm_fill(int*, months, months + 12, words)
  */
-#define algorithm_min_copy(type, begin, end, val)                                                \
-    {                                                                                             \
-        for(const type _alg_copy_it = begin; _alg_copy_it != end; *_alg_copy_it++ = val) \
-            ;                                                                                     \
+#define algorithm_fill(type, begin, end, val)                                      \
+    {                                                                              \
+        for(type _alg_copy_it = begin; _alg_copy_it != end; *_alg_copy_it++ = val) \
+            ;                                                                      \
     }
 
 /**
