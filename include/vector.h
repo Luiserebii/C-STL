@@ -176,6 +176,15 @@
     vector_type prefix##at##suffix(const struct_name* v, size_t n);                                 \
                                                                                                     \
     /*                                                                                              \
+     * Resizes the vector to n elements. If n is less than the current size of the vector, any      \
+     * extra elements will be destroyed. Conversely, if n is greater, the capacity of the vector    \
+     * will expand, and any pre-existing elements will be kept.                                     \
+     *                                                                                              \
+     * This function causes a reallocation via realloc.                                             \
+     */                                                                                             \
+    void prefix##resize##suffix(struct_name* v, size_t n);                                          \
+                                                                                                    \
+    /*                                                                                              \
      * Clears all elements allocated to the vector, but does not deallocate                         \
      * the vector itself.                                                                           \
      */                                                                                             \
@@ -275,7 +284,7 @@
         size_t old_size = prefix##size##suffix(v);                                                   \
         size_t n_size = v->head ? old_size * 2 : 1;                                                  \
                                                                                                      \
-        /* Realloc and set pointers as appropriate*/                                                 \
+        /* Realloc and set pointers as appropriate */                                                \
         v->head = (vector_type*) realloc(v->head, sizeof(vector_type) * n_size);                     \
         v->avail = v->head + old_size;                                                               \
         v->tail = v->head + n_size;                                                                  \
@@ -286,6 +295,13 @@
     size_t prefix##capacity##suffix(const struct_name* v) { return v->tail - v->head; }              \
                                                                                                      \
     vector_type prefix##at##suffix(const struct_name* v, size_t n) { return *(v->head + n); }        \
+                                                                                                     \
+    void prefix##resize##suffix(struct_name* v, size_t n) {                                          \
+        size_t old_sz = prefix##size##suffix(v);                                                     \
+        v->head = (vector_type*) realloc(v->head, sizeof(vector_type) * n);                          \
+        v->tail = v->head + n;                                                                       \
+        v->avail = n > old_sz ? v->head + old_sz : v->tail;                                          \
+    }                                                                                                \
                                                                                                      \
     void prefix##clear##suffix(struct_name* v) {                                                     \
         free(v->head);                                                                               \
