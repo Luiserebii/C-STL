@@ -32,7 +32,7 @@
  *
  * Whenever a vector is needed to be declared, this is probably what you want!
  **/
-#define declare_vector_type(vector_type) declare_vector(vector_##vector_type##_, , vector_##vector_type, vector_type)
+#define declare_vector_type(vector_type) declare_vector_class(vector_##vector_type, vector_type)
 
 /**
  * MACRO: define_vector_type(vector_type)
@@ -41,7 +41,7 @@
  *
  * Ex: define_vector_type(int)
  **/
-#define define_vector_type(vector_type) define_vector(vector_##vector_type##_, , vector_##vector_type, vector_type)
+#define define_vector_type(vector_type) define_vector_class(vector_##vector_type, vector_type)
 
 /**
  * MACRO: declare_vector_class(name, vector_type)
@@ -138,6 +138,14 @@
     void prefix##push_back##suffix(struct_name* v, vector_type e);                                  \
                                                                                                     \
     /*                                                                                              \
+     * Pushes a new element onto the vector, using the pointer e's value passed.                    \
+     *                                                                                              \
+     * For complex data type vectors, this is more space-efficient than the copy                    \
+     * performed by push_back.                                                                      \
+     */                                                                                             \
+    void prefix##push_back_r##suffix(struct_name* v, const vector_type* e);                         \
+                                                                                                    \
+    /*                                                                                              \
      * Pops the last element off the vector.                                                        \
      *                                                                                              \
      * NOTE: This function will break the vector if it is empty, use responsibly.                   \
@@ -187,7 +195,7 @@
      * extra elements will be destroyed. Conversely, if n is greater, the capacity of the vector    \
      * will expand, and any pre-existing elements will be kept.                                     \
      *                                                                                              \
-     * This function causes a reallocation via realloc.                                             \
+     * This function causes a reallocation via realloc if more space is necessary.                  \
      */                                                                                             \
     void prefix##resize##suffix(struct_name* v, size_t n);                                          \
                                                                                                     \
@@ -268,6 +276,13 @@
         *(v->avail++) = e;                                                                           \
     }                                                                                                \
                                                                                                      \
+    void prefix##push_back_r##suffix(struct_name* v, const vector_type* e) {                         \
+        if(v->avail == v->tail) {                                                                    \
+            prefix##grow##suffix(v);                                                                 \
+        }                                                                                            \
+        *(v->avail++) = *e;                                                                          \
+    }                                                                                                \
+                                                                                                     \
     void prefix##pop_back##suffix(struct_name* v) {                                                  \
         --v->avail;                                                                                  \
         return;                                                                                      \
@@ -310,9 +325,13 @@
                                                                                                      \
     void prefix##resize##suffix(struct_name* v, size_t n) {                                          \
         size_t old_sz = prefix##size##suffix(v);                                                     \
-        v->head = (vector_type*) realloc(v->head, sizeof(vector_type) * n);                          \
-        v->tail = v->head + n;                                                                       \
-        v->avail = n > old_sz ? v->head + old_sz : v->tail;                                          \
+        if(n > old_sz) {                                                                             \
+            v->head = (vector_type*) realloc(v->head, sizeof(vector_type) * n);                      \
+            v->avail = v->head + old_sz;                                                             \
+            v->tail = v->head + n;                                                                   \
+        } else {                                                                                     \
+            v->tail = (v->avail -= (old_sz - n));                                                    \
+        }                                                                                            \
     }                                                                                                \
                                                                                                      \
     void prefix##clear##suffix(struct_name* v) {                                                     \
