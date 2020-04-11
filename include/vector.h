@@ -83,152 +83,170 @@
  * Ex: declare_vector(vector_, _int, vector_int, int)
  *
  **/
-#define declare_vector(prefix, suffix, struct_name, vector_type)                                    \
-    typedef struct {                                                                                \
-        vector_type* head;                                                                          \
-        vector_type* avail;                                                                         \
-        vector_type* tail;                                                                          \
-    } struct_name;                                                                                  \
-                                                                                                    \
-    /*                                                                                              \
-     * Initializes an empty vector within the vector* passed.                                       \
-     *                                                                                              \
-     * Note that although this data structure is completely empty, and has                          \
-     * no elements allocated, the struct itself is, so vector_free is necessary                     \
-     * for cleanup afterwards.                                                                      \
-     */                                                                                             \
-    struct_name* prefix##init##suffix(void);                                                        \
-                                                                                                    \
-    /*                                                                                              \
-     * Initializes an empty vector with the size passed.                                            \
-     * Memory will be allocated under the size given, so vector_free                                \
-     * is required.                                                                                 \
-     */                                                                                             \
-    struct_name* prefix##init_size##suffix(size_t s);                                               \
-                                                                                                    \
-    /*                                                                                              \
-     * Intiailizes an empty vector with the size passed.                                            \
-     * Unlike vector_init_size, this function will fill the capacity.                               \
-     */                                                                                             \
-    struct_name* prefix##init_capacity##suffix(size_t s);                                           \
-                                                                                                    \
-    /*                                                                                              \
-     * Intializes a new vector, and fills it with n elements, each with value val.                  \
-     */                                                                                             \
-    struct_name* prefix##init_fill##suffix(size_t n, vector_type val);                              \
-                                                                                                    \
-    /*                                                                                              \
-     * Initializes a new vector, and fills it with the range [first, last) passed.                  \
-     */                                                                                             \
-    struct_name* prefix##init_range##suffix(vector_type* first, vector_type* last);                 \
-                                                                                                    \
-    /*                                                                                              \
-     * Creates a fresh copy of a vector. If the dest contains a pre-existing vector,                \
-     * it will not be freed, so please release if not empty.                                        \
-     */                                                                                             \
-    struct_name* prefix##copy##suffix(const struct_name* src);                                      \
-                                                                                                    \
-    /*                                                                                              \
-     * Sets an element of the vector to the value passed.                                           \
-     */                                                                                             \
-    void prefix##set##suffix(struct_name* v, size_t pos, vector_type val);                          \
-                                                                                                    \
-    /*                                                                                              \
-     * Pushes a new element onto the vector.                                                        \
-     */                                                                                             \
-    void prefix##push_back##suffix(struct_name* v, vector_type e);                                  \
-                                                                                                    \
-    /*                                                                                              \
-     * Pushes a new element onto the vector, using the pointer e's value passed.                    \
-     *                                                                                              \
-     * For complex data type vectors, this is more space-efficient than the copy                    \
-     * performed by push_back.                                                                      \
-     */                                                                                             \
-    void prefix##push_back_r##suffix(struct_name* v, const vector_type* e);                         \
-                                                                                                    \
-    /*                                                                                              \
-     * Pops the last element off the vector.                                                        \
-     *                                                                                              \
-     * NOTE: If the vector is empty, the vector will be left in an invalid state and will           \
-     * likely produce undesired results. In other words, the behavior is undefined.                 \
-     */                                                                                             \
-    void prefix##pop_back##suffix(struct_name* v);                                                  \
-                                                                                                    \
-    /*                                                                                              \
-     * Erases an element at the pointer passed from the vector. Returns a pointer to the            \
-     * new end of the vector.                                                                       \
-     */                                                                                             \
-    vector_type* prefix##erase##suffix(struct_name* v, vector_type* pos);                           \
-                                                                                                    \
-    /*                                                                                              \
-     * Erases a range of elements [begin, end) from the vector. Returns a pointer to the            \
-     * new end of the vector.                                                                       \
-     */                                                                                             \
-    vector_type* prefix##erase_range##suffix(struct_name* v, vector_type* begin, vector_type* end); \
-                                                                                                    \
-    /*                                                                                              \
-     * Returns the first pointer in the vector's sequence.                                          \
-     */                                                                                             \
-    vector_type* prefix##begin##suffix(struct_name* v);                                             \
-                                                                                                    \
-    /*                                                                                              \
-     * Returns the last pointer in the vector's sequence.                                           \
-     */                                                                                             \
-    vector_type* prefix##end##suffix(struct_name* v);                                               \
-                                                                                                    \
-    /*                                                                                              \
-     * Returns the current size of the vector.                                                      \
-     */                                                                                             \
-    size_t prefix##size##suffix(const struct_name* v);                                              \
-                                                                                                    \
-    /*                                                                                              \
-     * Returns the current total capacity of the vector,                                            \
-     * which encompasses the total amount allocated.                                                \
-     */                                                                                             \
-    size_t prefix##capacity##suffix(const struct_name* v);                                          \
-                                                                                                    \
-    /*                                                                                              \
-     * Returns the element found at the specified location passed.                                  \
-     */                                                                                             \
-    vector_type prefix##at##suffix(const struct_name* v, size_t n);                                 \
-                                                                                                    \
-    /*                                                                                              \
-     * Resizes the vector to n elements. If n is less than the current size of the vector, any      \
-     * extra elements will be destroyed. Conversely, if n is greater, the capacity of the vector    \
-     * will expand, and any pre-existing elements will be kept.                                     \
-     *                                                                                              \
-     * This function causes a reallocation via realloc if more space is necessary.                  \
-     */                                                                                             \
-    void prefix##resize##suffix(struct_name* v, size_t n);                                          \
-                                                                                                    \
-    /*                                                                                              \
-     * Resizes the vector by growing it to n elements. This function causes a reallocation          \
-     * via realloc. It should not change the size of the vector, simply expanding the capacity.     \
-     *                                                                                              \
-     * If the n is less than the current size of the vector, it will be left in an invalid state    \
-     * and the behavior is undefined.                                                               \
-     */                                                                                             \
-    void prefix##grow##suffix(struct_name* v, size_t n);                                            \
-                                                                                                    \
-    /*                                                                                              \
-     * Resizes the vector by shrinking it to n elements.                                            \
-     *                                                                                              \
-     * This function does not change the capacity of the vector, only size.                         \
-     *                                                                                              \
-     * If the n is greater than the current size of the vector, it will be left                     \
-     * in an invalid state and the behavior is undefined.                                           \
-     */                                                                                             \
-    void prefix##shrink##suffix(struct_name* v, size_t n);                                          \
-                                                                                                    \
-    /*                                                                                              \
-     * Clears all elements allocated to the vector, but does not deallocate                         \
-     * the vector itself.                                                                           \
-     */                                                                                             \
-    void prefix##clear##suffix(struct_name* v);                                                     \
-                                                                                                    \
-    /*                                                                                              \
-     * Frees the resources allocated to the vector, including the vector itself.                    \
-     */                                                                                             \
+#define declare_vector(prefix, suffix, struct_name, vector_type)                                         \
+    typedef struct {                                                                                     \
+        vector_type* head;                                                                               \
+        vector_type* avail;                                                                              \
+        vector_type* tail;                                                                               \
+    } struct_name;                                                                                       \
+                                                                                                         \
+    /*                                                                                                   \
+     * Initializes an empty vector within the vector* passed.                                            \
+     *                                                                                                   \
+     * Note that although this data structure is completely empty, and has                               \
+     * no elements allocated, the struct itself is, so vector_free is necessary                          \
+     * for cleanup afterwards.                                                                           \
+     */                                                                                                  \
+    struct_name* prefix##init##suffix(void);                                                             \
+                                                                                                         \
+    /*                                                                                                   \
+     * Initializes an empty vector with the size passed.                                                 \
+     * Memory will be allocated under the size given, so vector_free                                     \
+     * is required.                                                                                      \
+     */                                                                                                  \
+    struct_name* prefix##init_size##suffix(size_t s);                                                    \
+                                                                                                         \
+    /*                                                                                                   \
+     * Intiailizes an empty vector with the size passed.                                                 \
+     * Unlike vector_init_size, this function will fill the capacity.                                    \
+     */                                                                                                  \
+    struct_name* prefix##init_capacity##suffix(size_t s);                                                \
+                                                                                                         \
+    /*                                                                                                   \
+     * Intializes a new vector, and fills it with n elements, each with value val.                       \
+     */                                                                                                  \
+    struct_name* prefix##init_fill##suffix(size_t n, vector_type val);                                   \
+                                                                                                         \
+    /*                                                                                                   \
+     * Initializes a new vector, and fills it with the range [first, last) passed.                       \
+     */                                                                                                  \
+    struct_name* prefix##init_range##suffix(vector_type* first, vector_type* last);                      \
+                                                                                                         \
+    /*                                                                                                   \
+     * Creates a fresh copy of a vector. If the dest contains a pre-existing vector,                     \
+     * it will not be freed, so please release if not empty.                                             \
+     */                                                                                                  \
+    struct_name* prefix##copy##suffix(const struct_name* src);                                           \
+                                                                                                         \
+    /*                                                                                                   \
+     * Sets an element of the vector to the value passed.                                                \
+     */                                                                                                  \
+    void prefix##set##suffix(struct_name* v, size_t pos, vector_type val);                               \
+                                                                                                         \
+    /*                                                                                                   \
+     * Pushes a new element onto the vector.                                                             \
+     */                                                                                                  \
+    void prefix##push_back##suffix(struct_name* v, vector_type e);                                       \
+                                                                                                         \
+    /*                                                                                                   \
+     * Pushes a new element onto the vector, using the pointer e's value passed.                         \
+     *                                                                                                   \
+     * For complex data type vectors, this is more space-efficient than the copy                         \
+     * performed by push_back.                                                                           \
+     */                                                                                                  \
+    void prefix##push_back_r##suffix(struct_name* v, const vector_type* e);                              \
+                                                                                                         \
+    /*                                                                                                   \
+     * Inserts a new element before the pointer passed.                                                  \
+     */                                                                                                  \
+    void prefix##insert##suffix(struct_name* v, vector_type val);                                        \
+                                                                                                         \
+    /*                                                                                                   \
+     * Inserts a new element before the pointer passed, using the pointer v's value passed.              \
+     *                                                                                                   \
+     * For complex data type vectors, this is more space-efficient than the copy                         \
+     * performed by insert.                                                                              \
+     */                                                                                                  \
+    void prefix##insert_r##suffix(struct_name* v, const vector_type* val);                               \
+                                                                                                         \
+    /*                                                                                                   \
+     * Inserts the range of values in [first, last), before the pointer passed.                          \
+     */                                                                                                  \
+    void prefix##insert_range##suffix(struct_name* v, const vector_type* begin, const vector_type* end); \
+                                                                                                         \
+    /*                                                                                                   \
+     * Pops the last element off the vector.                                                             \
+     *                                                                                                   \
+     * NOTE: If the vector is empty, the vector will be left in an invalid state and will                \
+     * likely produce undesired results. In other words, the behavior is undefined.                      \
+     */                                                                                                  \
+    void prefix##pop_back##suffix(struct_name* v);                                                       \
+                                                                                                         \
+    /*                                                                                                   \
+     * Erases an element at the pointer passed from the vector. Returns a pointer to the                 \
+     * new end of the vector.                                                                            \
+     */                                                                                                  \
+    vector_type* prefix##erase##suffix(struct_name* v, vector_type* pos);                                \
+                                                                                                         \
+    /*                                                                                                   \
+     * Erases a range of elements [begin, end) from the vector. Returns a pointer to the                 \
+     * new end of the vector.                                                                            \
+     */                                                                                                  \
+    vector_type* prefix##erase_range##suffix(struct_name* v, vector_type* begin, vector_type* end);      \
+                                                                                                         \
+    /*                                                                                                   \
+     * Returns the first pointer in the vector's sequence.                                               \
+     */                                                                                                  \
+    vector_type* prefix##begin##suffix(struct_name* v);                                                  \
+                                                                                                         \
+    /*                                                                                                   \
+     * Returns the last pointer in the vector's sequence.                                                \
+     */                                                                                                  \
+    vector_type* prefix##end##suffix(struct_name* v);                                                    \
+                                                                                                         \
+    /*                                                                                                   \
+     * Returns the current size of the vector.                                                           \
+     */                                                                                                  \
+    size_t prefix##size##suffix(const struct_name* v);                                                   \
+                                                                                                         \
+    /*                                                                                                   \
+     * Returns the current total capacity of the vector,                                                 \
+     * which encompasses the total amount allocated.                                                     \
+     */                                                                                                  \
+    size_t prefix##capacity##suffix(const struct_name* v);                                               \
+                                                                                                         \
+    /*                                                                                                   \
+     * Returns the element found at the specified location passed.                                       \
+     */                                                                                                  \
+    vector_type prefix##at##suffix(const struct_name* v, size_t n);                                      \
+                                                                                                         \
+    /*                                                                                                   \
+     * Resizes the vector to n elements. If n is less than the current size of the vector, any           \
+     * extra elements will be destroyed. Conversely, if n is greater, the capacity of the vector         \
+     * will expand, and any pre-existing elements will be kept.                                          \
+     *                                                                                                   \
+     * This function causes a reallocation via realloc if more space is necessary.                       \
+     */                                                                                                  \
+    void prefix##resize##suffix(struct_name* v, size_t n);                                               \
+                                                                                                         \
+    /*                                                                                                   \
+     * Resizes the vector by growing it to n elements. This function causes a reallocation               \
+     * via realloc. It should not change the size of the vector, simply expanding the capacity.          \
+     *                                                                                                   \
+     * If the n is less than the current size of the vector, it will be left in an invalid state         \
+     * and the behavior is undefined.                                                                    \
+     */                                                                                                  \
+    void prefix##grow##suffix(struct_name* v, size_t n);                                                 \
+                                                                                                         \
+    /*                                                                                                   \
+     * Resizes the vector by shrinking it to n elements.                                                 \
+     *                                                                                                   \
+     * This function does not change the capacity of the vector, only size.                              \
+     *                                                                                                   \
+     * If the n is greater than the current size of the vector, it will be left                          \
+     * in an invalid state and the behavior is undefined.                                                \
+     */                                                                                                  \
+    void prefix##shrink##suffix(struct_name* v, size_t n);                                               \
+                                                                                                         \
+    /*                                                                                                   \
+     * Clears all elements allocated to the vector, but does not deallocate                              \
+     * the vector itself.                                                                                \
+     */                                                                                                  \
+    void prefix##clear##suffix(struct_name* v);                                                          \
+                                                                                                         \
+    /*                                                                                                   \
+     * Frees the resources allocated to the vector, including the vector itself.                         \
+     */                                                                                                  \
     void prefix##free##suffix(struct_name* v);
 
 /**
