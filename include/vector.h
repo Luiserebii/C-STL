@@ -157,7 +157,7 @@
      * For complex data type vectors, this is more space-efficient than the copy                         \
      * performed by insert.                                                                              \
      */                                                                                                  \
-    void prefix##insert_r##suffix(struct_name* v, vector_type* p, const vector_type* v);                               \
+    void prefix##insert_r##suffix(struct_name* v, vector_type* p, const vector_type* val);                               \
                                                                                                          \
     /*                                                                                                   \
      * Inserts the range of values in [first, last), before the pointer passed.                          \
@@ -323,10 +323,10 @@
     }                                                                                                \
     \
     void prefix##insert##suffix(struct_name* v, vector_type* p, vector_type val){                                        \
-        if(avail == tail) { \
+        if(v->avail == v->tail) { \
             prefix##grow##suffix(v, prefix##capacity##suffix(v) + 1); \
         } \
-        vector_type* it = a + (prefix##size##suffix(v) - 1); \
+        vector_type* it = v->avail - 1; \
         for(; it > p; --it) { \
             *(it + 1) = *it; \
         } \
@@ -335,10 +335,10 @@
     } \
                                                                                                          \
     void prefix##insert_r##suffix(struct_name* v, vector_type* p, const vector_type* val) {              \
-        if(avail == tail) { \
+        if(v->avail == v->tail) { \
             prefix##grow##suffix(v, prefix##capacity##suffix(v) + 1); \
         } \
-        vector_type* it = a + (prefix##size##suffix(v) - 1); \
+        vector_type* it = v->avail - 1; \
         for(; it > p; --it) { \
             *(it + 1) = *it; \
         } \
@@ -347,10 +347,10 @@
     } \
                                                                                                          \
     void prefix##insert_range##suffix(struct_name* v, vector_type* p, const vector_type* begin, const vector_type* end) { \
-        if(avail == tail) { \
+        if(v->avail == v->tail) { \
             prefix##grow##suffix(v, prefix##capacity##suffix(v) + 1); \
         } \
-        vector_type* it = a + (prefix##size##suffix(v) - 1); \
+        vector_type* it = v->avail - 1; \
         size_t sz = end - begin; \
         for(; it > p; --it) { \
             *(it + sz) = *it; \
