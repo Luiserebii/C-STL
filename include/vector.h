@@ -149,7 +149,7 @@
     /*                                                                                                   \
      * Inserts a new element before the pointer passed.                                                  \
      */                                                                                                  \
-    void prefix##insert##suffix(struct_name* v, vector_type val);                                        \
+    void prefix##insert##suffix(struct_name* v, vector_type* p, vector_type val);                                        \
                                                                                                          \
     /*                                                                                                   \
      * Inserts a new element before the pointer passed, using the pointer v's value passed.              \
@@ -157,12 +157,12 @@
      * For complex data type vectors, this is more space-efficient than the copy                         \
      * performed by insert.                                                                              \
      */                                                                                                  \
-    void prefix##insert_r##suffix(struct_name* v, const vector_type* val);                               \
+    void prefix##insert_r##suffix(struct_name* v, vector_type* p, const vector_type* val);                               \
                                                                                                          \
     /*                                                                                                   \
      * Inserts the range of values in [first, last), before the pointer passed.                          \
      */                                                                                                  \
-    void prefix##insert_range##suffix(struct_name* v, const vector_type* begin, const vector_type* end); \
+    void prefix##insert_range##suffix(struct_name* v, vector_type* p, const vector_type* begin, const vector_type* end); \
                                                                                                          \
     /*                                                                                                   \
      * Pops the last element off the vector.                                                             \
@@ -321,7 +321,38 @@
         }                                                                                            \
         *(v->avail++) = *e;                                                                          \
     }                                                                                                \
+    \
+    void prefix##insert##suffix(struct_name* v, vector_type* p, vector_type val){                                        \
+        if(avail == tail) { \
+            prefix##grow##suffix(v, prefix##capacity##suffix(v) + 1); \
+        } \
+        vector_type* it = a + (prefix##size##suffix(v) - 1); \
+        for(; it > p; --it) { \
+            *(it + 1) = *it; \
+        } \
+        *(it + 1) = *it; \
+        *p = val; \
+    } \
+                                                                                                         \
+    void prefix##insert_r##suffix(struct_name* v, vector_type* p, const vector_type* val) {              \
+        if(avail == tail) { \
+            prefix##grow##suffix(v, prefix##capacity##suffix(v) + 1); \
+        } \
+        vector_type* it = a + (prefix##size##suffix(v) - 1); \
+        for(; it > p; --it) { \
+            *(it + 1) = *it; \
+        } \
+        *(it + 1) = *it; \
+        *p = *val; \
+    }
+                                                                                                         \
+    /*                                                                                                   \
+     * Inserts the range of values in [first, last), before the pointer passed.                          \
+     */                                                                                                  \
+    void prefix##insert_range##suffix(struct_name* v, vector_type* p, const vector_type* begin, const vector_type* end); \
                                                                                                      \
+
+
     void prefix##pop_back##suffix(struct_name* v) {                                                  \
         assert(prefix##size##suffix(v) != 0);                                                        \
         --v->avail;                                                                                  \
