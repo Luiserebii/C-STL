@@ -349,11 +349,11 @@
                                                                                                      \
     void prefix##insert_range##suffix(struct_name* v, vector_type* p, const vector_type* begin,      \
                                       const vector_type* end) {                                      \
+        size_t sz = end - begin;                                                                     \
         if(v->avail == v->tail) {                                                                    \
-            prefix##grow##suffix(v, prefix##capacity##suffix(v) + 1);                                \
+            prefix##grow##suffix(v, prefix##capacity##suffix(v) + sz);                               \
         }                                                                                            \
         vector_type* it = v->avail - 1;                                                              \
-        size_t sz = end - begin;                                                                     \
         for(; it > p; --it) {                                                                        \
             *(it + sz) = *it;                                                                        \
         }                                                                                            \
