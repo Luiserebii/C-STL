@@ -13,6 +13,7 @@ int main(void) {
     RUN_TEST(test_vector_copy_int);
     RUN_TEST(test_vector_set_int);
     RUN_TEST(test_vector_push_back_int);
+    RUN_TEST(test_vector_insert_int);
     RUN_TEST(test_vector_erase_int);
     RUN_TEST(test_vector_erase_range_int);
     RUN_TEST(test_vector_accessors_int);
@@ -138,6 +139,19 @@ void test_vector_push_back_int() {
 
     //Free
     vector_free_int(v);
+}
+
+void test_vector_insert_int() {
+    //Create and intiailize test vector
+    vector_int* v = vector_init_int();
+    
+    //Insert multiple elements in
+    const int n = 4;
+    const int el[] = {10, 20, 30, 40};
+    vector_insert_range_int(v, v->head, el, el + n);
+
+    //Assert elements and size
+    //TEST_ASSERT_EQUAL_INT_ARRAY(el, v->avail, n);
 }
 
 void test_vector_erase_int() {
