@@ -157,7 +157,7 @@
      * For complex data type vectors, this is more space-efficient than the copy                         \
      * performed by insert.                                                                              \
      */                                                                                                  \
-    void prefix##insert_r##suffix(struct_name* v, vector_type* p, const vector_type* val);                               \
+    void prefix##insert_r##suffix(struct_name* v, vector_type* p, const vector_type* v);                               \
                                                                                                          \
     /*                                                                                                   \
      * Inserts the range of values in [first, last), before the pointer passed.                          \
@@ -344,15 +344,22 @@
         } \
         *(it + 1) = *it; \
         *p = *val; \
-    }
+    } \
                                                                                                          \
-    /*                                                                                                   \
-     * Inserts the range of values in [first, last), before the pointer passed.                          \
-     */                                                                                                  \
-    void prefix##insert_range##suffix(struct_name* v, vector_type* p, const vector_type* begin, const vector_type* end); \
+    void prefix##insert_range##suffix(struct_name* v, vector_type* p, const vector_type* begin, const vector_type* end) { \
+        if(avail == tail) { \
+            prefix##grow##suffix(v, prefix##capacity##suffix(v) + 1); \
+        } \
+        vector_type* it = a + (prefix##size##suffix(v) - 1); \
+        size_t sz = end - begin; \
+        for(; it > p; --it) { \
+            *(it + sz) = *it; \
+        } \
+        *(it + sz) = *it; \
+        /* Copy [begin, end) into [p, p + sz) */ \
+        algorithm_min_copy(vector_type*, begin, end, p); \
+    }    \
                                                                                                      \
-
-
     void prefix##pop_back##suffix(struct_name* v) {                                                  \
         assert(prefix##size##suffix(v) != 0);                                                        \
         --v->avail;                                                                                  \
