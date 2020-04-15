@@ -329,11 +329,10 @@
             prefix##grow##suffix(v, prefix##capacity##suffix(v) + 1);                                \
         }                                                                                            \
         p = v->avail + pos; \
-        vector_type* it = v->avail - 1;                                                              \
-        for(; it > p; --it) {                                                                        \
-            *(it + 1) = *it;                                                                         \
+        vector_type* it = v->avail;                                                              \
+        for(; it != p; --it) {                                                                        \
+            *it = *(it - 1);                                                                         \
         }                                                                                            \
-        *(it + 1) = *it;                                                                             \
         *p = val;                                                                                    \
     }                                                                                                \
                                                                                                      \
@@ -342,12 +341,11 @@
         if(v->avail == v->tail) {                                                                    \
             prefix##grow##suffix(v, prefix##capacity##suffix(v) + 1);                                \
         }                                                                                            \
-        p = v->avail + pos; \
-        vector_type* it = v->avail - 1;                                                              \
-        for(; it > p; --it) {                                                                        \
-            *(it + 1) = *it;                                                                         \
+        vector_type* it = v->avail;                                                              \
+        for(; it != p; --it) {                                                                        \
+            *it = *(it - 1);                                                                         \
         }                                                                                            \
-        *(it + 1) = *it;                                                                             \
+        p = v->avail + pos; \
         *p = *val;                                                                                   \
     }                                                                                                \
                                                                                                      \
@@ -359,11 +357,10 @@
             prefix##grow##suffix(v, prefix##capacity##suffix(v) + sz);                               \
         }                                                                                            \
         p = v->avail + pos; \
-        vector_type* it = v->avail - 1;                                                              \
-        for(; it > p; --it) {                                                                        \
-            *(it + sz) = *it;                                                                        \
+        vector_type* it = v->avail;                                                              \
+        for(; it != p; --it) {                                                                        \
+            *(it + sz - 1) = *(it - 1);                                                                        \
         }                                                                                            \
-        *(it + sz) = *it;                                                                            \
         /* Copy [begin, end) into [p, p + sz) */                                                     \
         algorithm_min_copy(vector_type*, begin, end, p);                                             \
     }                                                                                                \

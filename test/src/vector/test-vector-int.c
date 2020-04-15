@@ -151,7 +151,10 @@ void test_vector_insert_int() {
     vector_insert_range_int(v, v->head, el, el + n);
 
     //Assert elements and size
-    //TEST_ASSERT_EQUAL_INT_ARRAY(el, v->avail, n);
+    TEST_ASSERT_EQUAL_INT_ARRAY(el, v->avail, n);
+
+    //Free
+    vector_free_int(v);
 }
 
 void test_vector_erase_int() {
