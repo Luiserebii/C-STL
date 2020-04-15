@@ -144,7 +144,7 @@ void test_vector_push_back_int() {
 void test_vector_insert_int() {
     //Create and intiailize test vector
     vector_int* v = vector_init_int();
-    
+
     //Insert multiple elements in
     const int n = 4;
     const int el[] = {10, 20, 30, 40};
