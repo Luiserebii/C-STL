@@ -151,7 +151,16 @@ void test_vector_insert_int() {
     vector_insert_range_int(v, v->head, el, el + n);
 
     //Assert elements and size
-    TEST_ASSERT_EQUAL_INT_ARRAY(el, v->avail, n);
+    TEST_ASSERT_EQUAL_INT_ARRAY(el, v->head, n);
+    TEST_ASSERT_EQUAL_INT(n, vector_size_int(v));
+
+    //Insert a selection of elements in
+    const int exp1[] = {10, 20, 10, 20, 30, 30, 40};
+    vector_insert_range_int(v, v->head + 2, el, el + 3);
+
+    //Assert elements and size
+    TEST_ASSERT_EQUAL_INT_ARRAY(exp1, v->head, 7);
+    TEST_ASSERT_EQUAL_INT(7, vector_size_int(v));
 
     //Free
     vector_free_int(v);

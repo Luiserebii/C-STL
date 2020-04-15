@@ -324,45 +324,48 @@
     }                                                                                                \
                                                                                                      \
     void prefix##insert##suffix(struct_name* v, vector_type* p, vector_type val) {                   \
-        size_t pos = p - v->head; \
+        size_t pos = p - v->head;                                                                    \
         if(v->avail == v->tail) {                                                                    \
             prefix##grow##suffix(v, prefix##capacity##suffix(v) + 1);                                \
         }                                                                                            \
-        p = v->avail + pos; \
-        vector_type* it = v->avail;                                                              \
-        for(; it != p; --it) {                                                                        \
+        p = v->avail + pos;                                                                          \
+        vector_type* it = v->avail;                                                                  \
+        for(; it != p; --it) {                                                                       \
             *it = *(it - 1);                                                                         \
         }                                                                                            \
         *p = val;                                                                                    \
+        ++v->avail; \
     }                                                                                                \
                                                                                                      \
     void prefix##insert_r##suffix(struct_name* v, vector_type* p, const vector_type* val) {          \
-        size_t pos = p - v->head; \
+        size_t pos = p - v->head;                                                                    \
         if(v->avail == v->tail) {                                                                    \
             prefix##grow##suffix(v, prefix##capacity##suffix(v) + 1);                                \
         }                                                                                            \
-        vector_type* it = v->avail;                                                              \
-        for(; it != p; --it) {                                                                        \
+        p = v->avail + pos;                                                                          \
+        vector_type* it = v->avail;                                                                  \
+        for(; it != p; --it) {                                                                       \
             *it = *(it - 1);                                                                         \
         }                                                                                            \
-        p = v->avail + pos; \
         *p = *val;                                                                                   \
+        ++v->avail; \
     }                                                                                                \
                                                                                                      \
     void prefix##insert_range##suffix(struct_name* v, vector_type* p, const vector_type* begin,      \
                                       const vector_type* end) {                                      \
-        size_t pos = p - v->head; \
+        size_t pos = p - v->head;                                                                    \
         size_t sz = end - begin;                                                                     \
         if(v->avail == v->tail) {                                                                    \
             prefix##grow##suffix(v, prefix##capacity##suffix(v) + sz);                               \
         }                                                                                            \
-        p = v->avail + pos; \
-        vector_type* it = v->avail;                                                              \
-        for(; it != p; --it) {                                                                        \
-            *(it + sz - 1) = *(it - 1);                                                                        \
+        p = v->avail + pos;                                                                          \
+        vector_type* it = v->avail;                                                                  \
+        for(; it != p; --it) {                                                                       \
+            *(it + sz - 1) = *(it - 1);                                                              \
         }                                                                                            \
         /* Copy [begin, end) into [p, p + sz) */                                                     \
         algorithm_min_copy(vector_type*, begin, end, p);                                             \
+        v->avail += sz; \
     }                                                                                                \
                                                                                                      \
     void prefix##pop_back##suffix(struct_name* v) {                                                  \
