@@ -36,15 +36,18 @@ declare_vector_class(string, char);
 string* string_init_cstr(const char* s);
 
 /**
- * Sets the string to the char* passed. If there is not enough space,
+ * Sets the contents of the string to the char* passed. If there is not enough space,
  * the string will expand to fit the string.
  */
 void string_set_cstr(string* str, const char* s);
 
 /**
- * Writes the contents of the string to the char* passed.
+ * Returns a pointer to the contents of the string as a null-terminated char.
+ * 
+ * Note that if any of the elements of the string is a null-terminator, this will
+ * result in a "chopped" c-string.
  */
-void string_to_cstr(const string* str, char* dest);
+const char* string_cstr(string* str);
 
 /**
  * TODO: Should there be a string-specific strcat? Isn't this

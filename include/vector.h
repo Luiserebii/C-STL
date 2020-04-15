@@ -363,7 +363,6 @@
         for(; it != p; --it) {                                                                       \
             *(it + sz - 1) = *(it - 1);                                                              \
         }                                                                                            \
-        /* Copy [begin, end) into [p, p + sz) */                                                     \
         algorithm_min_copy(vector_type*, begin, end, p);                                             \
         v->avail += sz;                                                                              \
     }                                                                                                \

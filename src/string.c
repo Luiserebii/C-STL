@@ -31,20 +31,27 @@ define_vector_class(string, char)
 // clang-format on
 
 string* string_init_cstr(const char* s) {
-    string* str = string_init_size(strlen(s));
-    algorithm_min_copy(char*, s, s + strlen(s), str->head);
+    size_t len = strlen(s);
+    string* str = string_init_size(len);
+    algorithm_min_copy(char*, s, s + len, str->head);
     return str;
 }
 
 void string_set_cstr(string* str, const char* s) {
-    if(string_size(str) < strlen(s)) {
-        str->head = (char*) realloc(str->head, sizeof(string) * strlen(s));
+    size_t len = strlen(s);
+    if(string_capacity(str) < len) {
+        string_grow(str, len);
     }
-    algorithm_min_copy(char*, s, s + strlen(s), str->head)
+    algorithm_min_copy(char*, s, s + len, str->head);
+    str->avail = str->head + len;
 }
 
-void string_to_cstr(const string* str, char* dest) {
-    char* end;
-    algorithm_copy(char*, str->head, str->avail, dest, end);
-    *end = '\0';
+const char* string_cstr(string* str) {
+    //Grow capacity if necessary
+    if(str->avail == str->tail) {
+        string_grow(str, string_capacity(str) + 1);
+    }
+    //Set a null-terminator at avail
+    str->avail = '\0';
+    return str->head;
 }
