@@ -25,6 +25,17 @@
 #include "algorithm.h"
 
 /**
+ * Options for supplanting a user-defined malloc/realloc equivalent for vectors.
+ */
+#ifndef CSTL_MALLOC
+#define CSTL_MALLOC malloc
+#endif
+
+#ifndef CSTL_REALLOC
+#define CSTL_REALLOC realloc
+#endif
+
+/**
  * MACRO: declare_vector_type(vector_type)
  *
  * Declares an entire set of vector declarations for a specific type.
@@ -272,21 +283,21 @@
                                                                                                      \
     struct_name* prefix##init##suffix(void) {                                                        \
         /* Allocate memory for vector struct */                                                      \
-        struct_name* v = (struct_name*) malloc(sizeof(struct_name));                                 \
+        struct_name* v = (struct_name*) CSTL_MALLOC(sizeof(struct_name));                            \
         v->head = v->avail = v->tail = NULL;                                                         \
         return v;                                                                                    \
     }                                                                                                \
                                                                                                      \
     struct_name* prefix##init_size##suffix(size_t s) {                                               \
-        struct_name* v = (struct_name*) malloc(sizeof(struct_name));                                 \
-        v->head = (vector_type*) malloc(sizeof(vector_type) * s);                                    \
+        struct_name* v = (struct_name*) CSTL_MALLOC(sizeof(struct_name));                            \
+        v->head = (vector_type*) CSTL_MALLOC(sizeof(vector_type) * s);                               \
         v->tail = v->avail = v->head + s;                                                            \
         return v;                                                                                    \
     }                                                                                                \
                                                                                                      \
     struct_name* prefix##init_capacity##suffix(size_t s) {                                           \
-        struct_name* v = (struct_name*) malloc(sizeof(struct_name));                                 \
-        v->head = v->avail = (vector_type*) malloc(sizeof(vector_type) * s);                         \
+        struct_name* v = (struct_name*) CSTL_MALLOC(sizeof(struct_name));                            \
+        v->head = v->avail = (vector_type*) CSTL_MALLOC(sizeof(vector_type) * s);                    \
         v->tail = v->head + s;                                                                       \
         return v;                                                                                    \
     }                                                                                                \
@@ -317,7 +328,7 @@
     void prefix##assign##suffix(struct_name* v, const vector_type* first, const vector_type* last) { \
         size_t sz = last - first;                                                                    \
         if(prefix##capacity##suffix(v) < sz) {                                                       \
-            v->head = (vector_type*) realloc(v->head, sizeof(vector_type) * sz);                     \
+            v->head = (vector_type*) CSTL_REALLOC(v->head, sizeof(vector_type) * sz);                \
             v->tail = v->head + sz;                                                                  \
         }                                                                                            \
         algorithm_min_copy(vector_type*, first, last, v->head);                                      \
@@ -413,7 +424,7 @@
         size_t old_sz = prefix##size##suffix(v);                                                     \
         size_t n_size = v->head ? old_sz * 2 : 1;                                                    \
                                                                                                      \
-        v->head = (vector_type*) realloc(v->head, sizeof(vector_type) * n_size);                     \
+        v->head = (vector_type*) CSTL_REALLOC(v->head, sizeof(vector_type) * n_size);                \
         v->avail = v->head + old_sz;                                                                 \
         v->tail = v->head + n_size;                                                                  \
     }                                                                                                \
@@ -427,7 +438,7 @@
     void prefix##resize##suffix(struct_name* v, size_t n) {                                          \
         size_t old_sz = prefix##size##suffix(v);                                                     \
         if(n > old_sz) {                                                                             \
-            v->head = (vector_type*) realloc(v->head, sizeof(vector_type) * n);                      \
+            v->head = (vector_type*) CSTL_REALLOC(v->head, sizeof(vector_type) * n);                 \
             v->avail = v->head + old_sz;                                                             \
             v->tail = v->head + n;                                                                   \
         } else {                                                                                     \
@@ -439,7 +450,7 @@
         size_t old_sz = prefix##size##suffix(v);                                                     \
         assert(n > old_sz);                                                                          \
         /* Realloc and set pointers as appropriate */                                                \
-        v->head = (vector_type*) realloc(v->head, sizeof(vector_type) * n);                          \
+        v->head = (vector_type*) CSTL_REALLOC(v->head, sizeof(vector_type) * n);                     \
         v->avail = v->head + old_sz;                                                                 \
         v->tail = v->head + n;                                                                       \
     }                                                                                                \
