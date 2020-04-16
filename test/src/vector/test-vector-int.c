@@ -96,8 +96,26 @@ void test_vector_copy_int() {
     vector_free_int(copy);
 }
 void test_vector_assign_int() {
-    vector_int* v;
+    vector_int* v = vector_init_int();
 
+    //Test assigning to an empty vector
+    const int el[] = {10, 20, 30, 40, 50};
+    const int sz = 5;
+    vector_assign_int(v, el, el + sz);
+
+    TEST_ASSERT_EQUAL_INT_ARRAY(el, vector_begin_int(v), sz);
+    TEST_ASSERT_EQUAL_INT(sz, vector_size_int(v));
+
+    //Test assigning to a vector with some size (capacity should be unchanged)
+    size_t old_cap = vector_capacity_int(v);
+    vector_assign_int(v, el, el + 3);
+    size_t new_cap = vector_capacity_int(v);
+
+    TEST_ASSERT_EQUAL_INT_ARRAY(el, vector_begin_int(v), 3);
+    TEST_ASSERT_EQUAL_INT(3, vector_size_int(v));
+    TEST_ASSERT_EQUAL_INT(old_cap, new_cap);
+
+    vector_free_int(v);
 }
 
 void test_vector_set_int() {
@@ -149,7 +167,7 @@ void test_vector_push_back_int() {
 void test_vector_insert_int() {
     //Create and intiailize test vector
     vector_int* v = vector_init_int();
-    
+
     //Insert multiple elements in
     const int n = 4;
     const int el[] = {10, 20, 30, 40};

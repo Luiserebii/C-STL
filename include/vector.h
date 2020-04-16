@@ -133,7 +133,7 @@
      * The size is adjusted to the number of elements assigned, and allocation may occur            \
      * if needed.                                                                                   \
      */                                                                                             \
-    void prefix##assign##suffix(struct_name* v, vector_type* first, vector_type* last);             \
+    void prefix##assign##suffix(struct_name* v, const vector_type* first, const vector_type* last); \
                                                                                                     \
     /*                                                                                              \
      * Sets an element of the vector to the value passed.                                           \
@@ -314,7 +314,7 @@
         return copy;                                                                                 \
     }                                                                                                \
                                                                                                      \
-    void prefix##assign##suffix(struct_name* v, vector_type* first, vector_type* last) {             \
+    void prefix##assign##suffix(struct_name* v, const vector_type* first, const vector_type* last) { \
         size_t sz = last - first;                                                                    \
         if(prefix##capacity##suffix(v) < sz) {                                                       \
             v->head = (vector_type*) realloc(v->head, sizeof(vector_type) * sz);                     \
