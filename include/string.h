@@ -44,7 +44,7 @@ void string_set_cstr(string* str, const char* s);
 /**
  * Concatenates the string src to the end of the string dest.
  */
-#define string_cat(dest, src) string_insert_range(dest, dest->avail, src, src->avail)
+#define string_cat(dest, src) string_insert_range(dest, dest->avail, src->head, src->avail)
 
 /**
  * Returns a pointer to the contents of the string as a null-terminated char.
