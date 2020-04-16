@@ -60,9 +60,4 @@ void string_set_cstr(string* str, const char* s);
  */
 const char* string_cstr(string* str);
 
-/**
- * TODO: Should there be a string-specific strcat? Isn't this
- * a combination of algorithm_copy along with other stuff?
- */
-
 #endif

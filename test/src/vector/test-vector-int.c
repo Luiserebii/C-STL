@@ -11,6 +11,7 @@ int main(void) {
     RUN_TEST(test_vector_init_size_int);
     RUN_TEST(test_vector_init_capacity_int);
     RUN_TEST(test_vector_copy_int);
+    RUN_TEST(test_vector_assign_int);
     RUN_TEST(test_vector_set_int);
     RUN_TEST(test_vector_push_back_int);
     RUN_TEST(test_vector_insert_int);
@@ -94,6 +95,10 @@ void test_vector_copy_int() {
     vector_free_int(v);
     vector_free_int(copy);
 }
+void test_vector_assign_int() {
+    vector_int* v;
+
+}
 
 void test_vector_set_int() {
     //Create and intiailize test vector
@@ -144,7 +149,7 @@ void test_vector_push_back_int() {
 void test_vector_insert_int() {
     //Create and intiailize test vector
     vector_int* v = vector_init_int();
-
+    
     //Insert multiple elements in
     const int n = 4;
     const int el[] = {10, 20, 30, 40};
@@ -161,6 +166,12 @@ void test_vector_insert_int() {
     //Assert elements and size
     TEST_ASSERT_EQUAL_INT_ARRAY(exp1, v->head, 7);
     TEST_ASSERT_EQUAL_INT(7, vector_size_int(v));
+
+    //Insert a simple element in
+    const int exp2[] = {10, 20, 10, 20, 500, 30, 30, 40};
+    vector_insert_int(v, v->head + 4, 500);
+    TEST_ASSERT_EQUAL_INT_ARRAY(exp2, v->head, 8);
+    TEST_ASSERT_EQUAL_INT(8, vector_size_int(v));
 
     //Free
     vector_free_int(v);
