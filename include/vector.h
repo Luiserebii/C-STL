@@ -129,6 +129,13 @@
     struct_name* prefix##copy##suffix(const struct_name* src);                                      \
                                                                                                     \
     /*                                                                                              \
+     * Assigns the values [first, last) to the vector, overwriting any current contents.            \
+     * The size is adjusted to the number of elements assigned, and allocation may occur            \
+     * if needed.                                                                                   \
+     */                                                                                             \
+    void prefix##assign##suffix(struct_name* v, vector_type* first, vector_type* last);             \
+                                                                                                    \
+    /*                                                                                              \
      * Sets an element of the vector to the value passed.                                           \
      */                                                                                             \
     void prefix##set##suffix(struct_name* v, size_t pos, vector_type val);                          \
@@ -305,6 +312,16 @@
         /* Copy over values */                                                                       \
         algorithm_min_copy(vector_type*, src->head, src->avail, copy->head);                         \
         return copy;                                                                                 \
+    }                                                                                                \
+                                                                                                     \
+    void prefix##assign##suffix(struct_name* v, vector_type* first, vector_type* last) {             \
+        size_t sz = last - first;                                                                    \
+        if(prefix##capacity##suffix(v) < sz) {                                                       \
+            v->head = (vector_type*) realloc(v->head, sizeof(vector_type) * sz);                     \
+            v->tail = v->head + sz;                                                                  \
+        }                                                                                            \
+        algorithm_min_copy(vector_type*, first, last, v->head);                                      \
+        v->avail = v->head + sz;                                                                     \
     }                                                                                                \
                                                                                                      \
     void prefix##set##suffix(struct_name* v, size_t pos, vector_type val) { v->head[pos] = val; }    \

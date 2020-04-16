@@ -38,6 +38,8 @@ string* string_init_cstr(const char* s);
 /**
  * Sets the contents of the string to the char* passed. If there is not enough space,
  * the string will expand to fit the string.
+ *
+ * TODO: This should be generalized into vector_assign
  */
 void string_set_cstr(string* str, const char* s);
 
@@ -46,6 +48,12 @@ void string_set_cstr(string* str, const char* s);
  * 
  * Note that if any of the elements of the string is a null-terminator, this will
  * result in a "chopped" c-string.
+ *
+ * Note that this function may increase the capacity of the string if needed.
+ * 
+ * The pointer returned by this function may also become invalidated if any mutations
+ * to the string occur - best to call once and use quickly before performing
+ * any modifications.
  */
 const char* string_cstr(string* str);
 
