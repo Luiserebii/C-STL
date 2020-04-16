@@ -39,7 +39,7 @@ string* string_init_cstr(const char* s) {
 
 void string_set_cstr(string* str, const char* s) {
     const char* end = s;
-    for(; end != '\0'; ++end)
+    for(; *end != '\0'; ++end)
         ;
     string_assign(str, s, end);
 }
@@ -50,6 +50,6 @@ const char* string_cstr(string* str) {
         string_grow(str, string_capacity(str) + 1);
     }
     //Set a null-terminator at avail
-    str->avail = '\0';
+    *(str->avail) = '\0';
     return str->head;
 }

@@ -11,7 +11,7 @@ void tearDown() {}
 int main(void) {
     UNITY_BEGIN();
     RUN_TEST(test_string_init);
-//    RUN_TEST(test_string_set_cstr);
+    RUN_TEST(test_string_set_cstr);
     RUN_TEST(test_string_cat);
     RUN_TEST(test_string_cstr);
     return UNITY_END();
