@@ -17,7 +17,6 @@ int main(void) {
     return UNITY_END();
 }
 
-
 void test_string_init() {
     const char* cstr = "Hello";
     const size_t sz = 5;
@@ -32,7 +31,7 @@ void test_string_init() {
 
 void test_string_set_cstr() {
     string* s = string_init();
-    
+
     //Test setting a c-string to an empty string
     const char* cstr = "Hello";
     const size_t sz = 5;
@@ -77,8 +76,8 @@ void test_string_cat() {
     size_t sz2 = 6;
 
     string_cat(s, str2);
-   
-    const char exp[] = "Hello world";  
+
+    const char exp[] = "Hello world";
     TEST_ASSERT_EQUAL_CHAR_ARRAY(exp, s->head, sz1 + sz2);
     TEST_ASSERT_EQUAL_INT(sz1 + sz2, string_size(s));
 

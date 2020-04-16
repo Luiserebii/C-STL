@@ -38,7 +38,7 @@ define_vector_type(int)
 
 This will then expand into the appropriate vector `struct` (e.g. `vector_int`) with matching functions. All functions are appended with the type, with the general format `vector_TYPE_FUNCTION`. Therefore, to `push_back` on an `int` vector, one would call `vector_int_push_back`.
 
-As `vector` relies on dynamically-allocated memory via `malloc`, a convenience function `vector_TYPE_free` has been provided to release a vector after it has finished being used.
+As `vector` relies on dynamically-allocated memory via `malloc`, a convenience function `vector_TYPE_free` has been provided to release a vector after it has finished being used. To supplant a user-defined `malloc`, one can define the `CSTL_MALLOC` macro with the user-supplied function necessary before including the `vector` header file. The same is true for `realloc`.
 
 Further documentation on the currently implemented functions can be found in [vector.h](https://github.com/Luiserebii/C-STL/blob/master/include/vector.h).
 
@@ -59,8 +59,10 @@ string* str = string_init_cstr("Hello world");
 string_set_cstr("I need a string that can expand!");
 
 //Exporting our string as a C-string
-string_to_cstr(str, buffer);
+strcpy(buffer, string_cstr(str));
 ```
+
+**NOTE:** This module is constantly changing and improving, this document attempts to work as a good starting point with as much as correct as possible, but the source of truth should rest in the library's comments themselves. This README is not guaranteed to contain up-to-date information with the latest `master` build.
 
 ## Testing
 The [`test/`](test) directory contains tests which intend to exercise typical usage. To run all tests, simply use the command `make test`, which also includes diagnostic information from valgrind to ensure resources are being freed properly. The simple test framework [Unity](https://github.com/ThrowTheSwitch/Unity) is currently being used to write them.
