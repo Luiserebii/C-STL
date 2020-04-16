@@ -38,10 +38,13 @@ string* string_init_cstr(const char* s);
 /**
  * Sets the contents of the string to the char* passed. If there is not enough space,
  * the string will expand to fit the string.
- *
- * TODO: This should be generalized into vector_assign
  */
 void string_set_cstr(string* str, const char* s);
+
+/**
+ * Concatenates the string src to the end of the string dest.
+ */
+#define string_cat(dest, src) string_insert_range(dest, dest->avail, src, src->avail)
 
 /**
  * Returns a pointer to the contents of the string as a null-terminated char.

@@ -38,12 +38,10 @@ string* string_init_cstr(const char* s) {
 }
 
 void string_set_cstr(string* str, const char* s) {
-    size_t len = strlen(s);
-    if(string_capacity(str) < len) {
-        string_grow(str, len);
-    }
-    algorithm_min_copy(char*, s, s + len, str->head);
-    str->avail = str->head + len;
+    const char* end = s;
+    for(; end != '\0'; ++end)
+        ;
+    string_assign(str, s, end);
 }
 
 const char* string_cstr(string* str) {
