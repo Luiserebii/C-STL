@@ -1,4 +1,4 @@
-#include "../../../include/algorithm.h"
+#include <cstl/algorithm.h>
 #include "../../include/algorithm/test-algorithm-accumulate.h"
 #include "../../include/algorithm/test-algorithm-count.h"
 #include "../../include/algorithm/test-algorithm-equal.h"

@@ -1,6 +1,6 @@
 #include <ctype.h>
 
-#include "../../../include/algorithm.h"
+#include <cstl/algorithm.h>
 #include "../../include/algorithm/test-algorithm-remove-if.h"
 #include "../../lib/unity.h"
 

@@ -1,7 +1,7 @@
 #ifndef VECTOR_STRUCT_POINT_H
 #define VECTOR_STRUCT_POINT_H
 
-#include "../../../include/vector.h"
+#include <cstl/vector.h>
 
 typedef struct {
     char* name;

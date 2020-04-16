@@ -17,9 +17,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "../include/string.h"
-#include "../include/vector.h"
-#include "../include/algorithm.h"
+#include "../include/cstl/string.h"
+#include "../include/cstl/vector.h"
+#include "../include/cstl/algorithm.h"
 
 #include <string.h>
 

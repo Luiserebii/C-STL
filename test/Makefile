@@ -1,4 +1,6 @@
-CFLAGS = -g3 -Wall -Wextra -Wstrict-prototypes
+INCLUDE_FLAGS=-I../include
+CFLAGS = -g3 -Wall -Wextra -Wstrict-prototypes $(INCLUDE_FLAGS)
+
 
 test: algorithm string vector valgrind
 algorithm:
@@ -11,8 +13,10 @@ vector-int:
 vector-struct-point:
 	$(CC) $(CFLAGS) ./src/vector/test-vector-struct-point.c ./src/vector/vector-struct-point.c lib/*.c && ./a.out
 valgrind:
-	$(CC) ./src/vector/test-vector-int.c ./src/vector/vector-int.c lib/*.c && valgrind ./a.out
-	$(CC) ./src/vector/test-vector-struct-point.c ./src/vector/vector-struct-point.c lib/*.c && valgrind ./a.out
-	$(CC) ./src/string/*.c ../src/*.c lib/*.c && valgrind ./a.out
+	$(CC) $(INCLUDE_FLAGS) ./src/vector/test-vector-int.c ./src/vector/vector-int.c lib/*.c && valgrind ./a.out
+	$(CC) $(INCLUDE_FLAGS) ./src/vector/test-vector-struct-point.c ./src/vector/vector-struct-point.c lib/*.c && valgrind ./a.out
+	$(CC) $(INCLUDE_FLAGS) ./src/string/*.c ../src/*.c lib/*.c && valgrind ./a.out
+
+.PHONY: clean
 clean:
 	rm a.out

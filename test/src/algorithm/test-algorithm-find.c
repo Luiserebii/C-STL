@@ -1,5 +1,5 @@
 #include "../../include/algorithm/test-algorithm-find.h"
-#include "../../../include/algorithm.h"
+#include <cstl/algorithm.h>
 #include "../../lib/unity.h"
 
 void test_algorithm_find_int() {

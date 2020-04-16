@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "../../../include/algorithm.h"
+#include <cstl/algorithm.h>
 #include "../../include/algorithm/test-algorithm-min-copy.h"
 #include "../../lib/unity.h"
 
