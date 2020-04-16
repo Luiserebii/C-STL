@@ -85,4 +85,25 @@ void test_string_cat() {
 
 void test_string_cstr() {
 
+    //Test obtaining a c-string from an empty string and consuming it
+    string s = string_init_cstr();
+    char buf[1000] = "Meme";
+    size_t sz = 4;
+
+    strcat(buf, string_cstr(s));
+
+    TEST_ASSERT_EQUAL_CHAR_ARRAY("Meme", buf, sz);
+    TEST_ASSERT_EQUAL_INT(sz, strlen(buf));
+
+    //Test obtaining a c-string from a string with contents and consuming it
+    string name = string_init_cstr(": OwO");
+    size_t sz_n = 5;
+
+    strcat(buf, string_cstr(name));
+
+    TEST_ASSERT_EQUAL_CHAR_ARRAY("Meme: OwO", buf, sz + sz_n);
+    TEST_ASSERT_EQUAL_INT(sz + sz_n, strlen(buf));
+
+    string_free(s);
+    string_free(name);
 }
