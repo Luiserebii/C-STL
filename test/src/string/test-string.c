@@ -99,6 +99,7 @@ void test_string_cmp() {
     //Test comparing an empty string to one with content
     string_asn_cstr(s2, "banana");
     TEST_ASSERT_EQUAL_INT(-1, string_cmp(s1, s2));
+    TEST_ASSERT_EQUAL_INT(1, string_cmp(s2, s1));
 
     //Test comparing two filled strings, where s1 < s2
     string_asn_cstr(s1, "apple");
