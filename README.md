@@ -50,23 +50,27 @@ Example usage:
 ```c
 #include <cstl/string.h>
 
-//Initializing our string to a C-string
-string* str = string_init_cstr("Hello world");
+int main() {
 
-//Setting our string to a new C-string
-string_asn_cstr(str, "I need a string that can expand!");
+    //Initializing our string to a C-string
+    string* str = string_init_cstr("Hello world");
 
-//And concatenating it with a C-string
-string_cat_cstr(str, "And concatenate, too!");
+    //Setting our string to a new C-string
+    string_asn_cstr(str, "I need a string that can expand!");
 
-//Exporting our string as a C-string
-printf(string_cstr(str));
+    //And concatenating it with a C-string
+    string_cat_cstr(str, " And concatenate, too!");
+
+    //Exporting our string as a C-string
+    printf(string_cstr(str));
+
+}
 ```
 
 **NOTE:** This module is constantly changing and improving, this document attempts to work as a good starting point with as much as correct as possible, but the source of truth should rest in the library's comments themselves. This README is not guaranteed to contain up-to-date information with the latest `master` build.
 
 ## Testing
-The [`test/`](test) directory contains tests which intend to exercise typical usage. To run all tests, simply use the command `make test`, which also includes diagnostic information from valgrind to ensure resources are being freed properly. The simple test framework [Unity](https://github.com/ThrowTheSwitch/Unity) is currently being used to write them.
+The [`test/`](test) directory contains tests which intend to exercise typical usage. To run all tests, simply use the command `make test`, which also includes diagnostic information from valgrind to ensure resources are being freed properly. The simple test framework [Unity](https://github.com/ThrowTheSwitch/Unity) is used to write them.
 
 ## License
 This code has been licensed under the GNU General Public License v3.0.

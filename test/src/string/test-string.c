@@ -12,6 +12,10 @@ int main(void) {
     RUN_TEST(test_string_init);
     RUN_TEST(test_string_asn_cstr);
     RUN_TEST(test_string_cat);
+    RUN_TEST(test_string_cmp);
+    RUN_TEST(test_string_cat_cstr);
+    RUN_TEST(test_string_cmp_cstr);
+    RUN_TEST(test_string_cat_cstr);
     RUN_TEST(test_string_cstr);
     return UNITY_END();
 }
@@ -83,6 +87,40 @@ void test_string_cat() {
     string_free(s);
     string_free(str1);
     string_free(str2);
+}
+
+void test_string_cmp() {
+    string* s1 = string_init();
+    string* s2 = string_init();
+
+    //Test comparing two empty strings to each other
+    TEST_ASSERT_EQUAL_INT(0, string_cmp(s1, s2));
+
+    //Test comparing an empty string to one with content
+    string_asn_cstr(s2, "banana");
+    TEST_ASSERT_EQUAL_INT(-1, string_cmp(s1, s2));
+
+    //Test comparing two filled strings, where s1 < s2
+    string_asn_cstr(s1, "apple");
+    TEST_ASSERT_EQUAL_INT(-1, string_cmp(s1, s2));
+
+    //Test comparing two filled strings, where s1 > s2
+    TEST_ASSERT_EQUAL_INT(1, string_cmp(s2, s1));
+    
+    //Test comparing two equal strings
+    string_asn_cstr(s2, "apple");
+    TEST_ASSERT_EQUAL_INT(0, string_cmp(s1, s2));
+
+    string_free(s1);
+    string_free(s2);
+}
+
+void test_string_cat_cstr() {
+
+}
+
+void test_string_cmp_cstr() {
+
 }
 
 void test_string_cstr() {
