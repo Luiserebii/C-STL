@@ -47,6 +47,11 @@ void string_set_cstr(string* str, const char* s);
 #define string_cat(dest, src) string_insert_range(dest, dest->avail, src->head, src->avail)
 
 /**
+ * Concatenates the char* string s to the end of the string str.
+ */
+void string_cat_cstr(string* str, const char* s);
+
+/**
  * Returns a pointer to the contents of the string as a null-terminated char.
  * 
  * Note that if any of the elements of the string is a null-terminator, this will

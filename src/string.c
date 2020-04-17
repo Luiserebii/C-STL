@@ -44,6 +44,13 @@ void string_set_cstr(string* str, const char* s) {
     string_assign(str, s, end);
 }
 
+void string_cat_cstr(string* str, const char* s) {
+    const char* end = s;
+    for(; *end != '\0'; ++end)
+        ;
+    string_insert_range(str, string_end(str), s, end);
+}
+
 const char* string_cstr(string* str) {
     //Grow capacity if necessary
     if(str->avail == str->tail) {
