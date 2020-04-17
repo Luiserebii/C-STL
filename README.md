@@ -22,7 +22,7 @@ Since the declaration of the vector `struct` data type and associated functions 
 #ifndef VECTOR_INT_H
 #define VECTOR_INT_H
 
-#include "vector.h"
+#include <cstl/vector.h>
 
 declare_vector_type(int)
 
@@ -31,7 +31,7 @@ declare_vector_type(int)
 ```c
 /** vector_int.c **/
 #include "vector_int.h"
-#include "vector.h"
+#include <cstl/vector.h>
 
 define_vector_type(int)
 ```
@@ -48,18 +48,19 @@ The flexible, dynamically-allocated C++ `std::string` is emulated by expanding o
 
 Example usage:
 ```c
-#define MAX_BUFFER 1000
-
-char buffer[MAX_BUFFER];
+#include <cstl/string.h>
 
 //Initializing our string to a C-string
 string* str = string_init_cstr("Hello world");
 
 //Setting our string to a new C-string
-string_set_cstr("I need a string that can expand!");
+string_asn_cstr(str, "I need a string that can expand!");
+
+//And concatenating it with a C-string
+string_cat_cstr(str, "And concatenate, too!");
 
 //Exporting our string as a C-string
-strcpy(buffer, string_cstr(str));
+printf(string_cstr(str));
 ```
 
 **NOTE:** This module is constantly changing and improving, this document attempts to work as a good starting point with as much as correct as possible, but the source of truth should rest in the library's comments themselves. This README is not guaranteed to contain up-to-date information with the latest `master` build.
