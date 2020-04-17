@@ -80,20 +80,10 @@ int string_cmp(const string* s1, const string* s2) {
     if(it1 == end1) {
         return -1;
     }
-    return 1;
-    
-    for(; it1 != end1 && it2 != end2; ++it1, ++it2) {
-        if(*it1 != *it2) {
-            return *it1 - *it2;
-        }
+    if(it2 == end2) {
+        return 1;
     }
-    if(it1 == end1 && it2 == end2) {
-        return 0;
-    }
-    if(it == end1) {
-        return -1;
-    }
-    return 1;
+    return *it1 - *it2;
 }
 
 const char* string_cstr(string* str) {
