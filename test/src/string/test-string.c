@@ -107,7 +107,7 @@ void test_string_cmp() {
 
     //Test comparing two filled strings, where s1 > s2
     TEST_ASSERT_EQUAL_INT(1, string_cmp(s2, s1));
-
+    
     //Test comparing two equal strings
     string_asn_cstr(s2, "apple");
     TEST_ASSERT_EQUAL_INT(0, string_cmp(s1, s2));
@@ -116,9 +116,34 @@ void test_string_cmp() {
     string_free(s2);
 }
 
-void test_string_cat_cstr() {}
+void test_string_cat_cstr() {
 
-void test_string_cmp_cstr() {}
+}
+
+void test_string_cmp_cstr() {
+    string* s1 = string_init();
+
+    //Test comparing an empty string and empty c-string to each other
+    TEST_ASSERT_EQUAL_INT(0, string_cmp(s1, ""));
+
+    //Test comparing an empty string to a c-string with content
+    TEST_ASSERT_EQUAL_INT(-1, string_cmp(s1, "banana"));
+
+    //Test comparing an filled string, to an empty c-string
+    string_asn_str(s1, "banana");
+    TEST_ASSERT_EQUAL_INT(1, string_cmp(s1, ""));
+
+    //Test comparing a filled string and c-string, where s1 < s2
+    TEST_ASSERT_EQUAL_INT(-1, string_cmp(s1, "orange"));
+
+    //Test comparing two filled strings, where s1 > s2
+    TEST_ASSERT_EQUAL_INT(1, string_cmp(s1, "apple"));
+    
+    //Test comparing two equal strings
+    TEST_ASSERT_EQUAL_INT(0, string_cmp(s1, "banana"));
+
+    string_free(s1);
+}
 
 void test_string_cstr() {
 
