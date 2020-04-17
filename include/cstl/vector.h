@@ -35,6 +35,10 @@
 #define CSTL_REALLOC realloc
 #endif
 
+#ifndef CSTL_FREE
+#define CSTL_FREE free
+#endif
+
 /**
  * MACRO: declare_vector_type(vector_type)
  *
@@ -461,13 +465,13 @@
     }                                                                                                \
                                                                                                      \
     void prefix##clear##suffix(struct_name* v) {                                                     \
-        free(v->head);                                                                               \
+        CSTL_FREE(v->head);                                                                          \
         v->head = v->avail = v->tail = NULL;                                                         \
     }                                                                                                \
                                                                                                      \
     void prefix##free##suffix(struct_name* v) {                                                      \
-        free(v->head);                                                                               \
-        free(v);                                                                                     \
+        CSTL_FREE(v->head);                                                                          \
+        CSTL_FREE(v);                                                                                \
     }
 
 #endif
