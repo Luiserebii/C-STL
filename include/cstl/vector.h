@@ -17,8 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef VECTOR_H
-#define VECTOR_H
+#ifndef CSTL_VECTOR_H
+#define CSTL_VECTOR_H
 
 #include <assert.h>
 #include <stdlib.h>

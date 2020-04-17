@@ -17,8 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef STRING_H
-#define STRING_H
+#ifndef CSTL_STRING_H
+#define CSTL_STRING_H
 
 #include "vector.h"
 
