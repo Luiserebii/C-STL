@@ -210,12 +210,12 @@
     /*                                                                                              \
      * Returns the first pointer in the vector's sequence.                                          \
      */                                                                                             \
-    vector_type* prefix##begin##suffix(struct_name* v);                                             \
+    vector_type* prefix##begin##suffix(const struct_name* v);                                       \
                                                                                                     \
     /*                                                                                              \
      * Returns the last pointer in the vector's sequence.                                           \
      */                                                                                             \
-    vector_type* prefix##end##suffix(struct_name* v);                                               \
+    vector_type* prefix##end##suffix(const struct_name* v);                                         \
                                                                                                     \
     /*                                                                                              \
      * Returns the current size of the vector.                                                      \
@@ -420,9 +420,9 @@
         return v->avail -= diff;                                                                     \
     }                                                                                                \
                                                                                                      \
-    vector_type* prefix##begin##suffix(struct_name* v) { return v->head; }                           \
+    vector_type* prefix##begin##suffix(const struct_name* v) { return v->head; }                     \
                                                                                                      \
-    vector_type* prefix##end##suffix(struct_name* v) { return v->avail; }                            \
+    vector_type* prefix##end##suffix(const struct_name* v) { return v->avail; }                      \
                                                                                                      \
     void prefix##autogrow##suffix(struct_name* v) {                                                  \
         size_t old_sz = prefix##size##suffix(v);                                                     \

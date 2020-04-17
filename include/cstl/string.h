@@ -52,6 +52,26 @@ void string_set_cstr(string* str, const char* s);
 void string_cat_cstr(string* str, const char* s);
 
 /**
+ * Compares string s1 to char* s2, and returns an integer representing
+ * the result.
+ *
+ * If s1 < s2, then the result is a negative integer (i.e. n < 0).
+ * If s1 > s2, then the result is a positive integer (i.e. n > 0).
+ * If s1 == s2, then the result is 0.
+ */
+int string_cmp_cstr(const string* s1, const char* s2);
+
+/**
+ * Compares string s1 to string s2, and returns an integer representing
+ * the result.
+ *
+ * If s1 < s2, then the result is a negative integer (i.e. n < 0).
+ * If s1 > s2, then the result is a positive integer (i.e. n > 0).
+ * If s1 == s2, then the result is 0.
+ */
+int string_cmp(const string* s1, const string* s2);
+
+/**
  * Returns a pointer to the contents of the string as a null-terminated char.
  * 
  * Note that if any of the elements of the string is a null-terminator, this will
