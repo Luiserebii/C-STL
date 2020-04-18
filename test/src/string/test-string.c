@@ -107,7 +107,7 @@ void test_string_cmp() {
 
     //Test comparing two filled strings, where s1 > s2
     TEST_ASSERT_EQUAL_INT(1, string_cmp(s2, s1));
-    
+
     //Test comparing two equal strings
     string_asn_cstr(s2, "apple");
     TEST_ASSERT_EQUAL_INT(0, string_cmp(s1, s2));
@@ -130,6 +130,11 @@ void test_string_cat_cstr() {
     TEST_ASSERT_EQUAL_CHAR_ARRAY(cs, string_begin(s), sz1);
     TEST_ASSERT_EQUAL_INT(sz1, string_size(s));
 
+    //Test concatenating a filled string with an empty c-string
+    string_cat_cstr(s, "");
+    TEST_ASSERT_EQUAL_CHAR_ARRAY(cs, string_begin(s), sz1);
+    TEST_ASSERT_EQUAL_INT(sz1, string_size(s));
+
     //Test concatentating a filled c-string to a filled string
     const char cs2[] = "banana";
     const size_t sz2 = 6;
@@ -137,6 +142,8 @@ void test_string_cat_cstr() {
     const char exp[] = "applebanana";
     TEST_ASSERT_EQUAL_CHAR_ARRAY(exp, string_begin(s), sz1 + sz2);
     TEST_ASSERT_EQUAL_INT(sz1 + sz2, string_size(s));
+
+    string_free(s);
 }
 
 void test_string_cmp_cstr() {
@@ -157,7 +164,7 @@ void test_string_cmp_cstr() {
 
     //Test comparing two filled strings, where s1 > s2
     TEST_ASSERT_EQUAL_INT(1, string_cmp_cstr(s1, "apple"));
-    
+
     //Test comparing two equal strings
     TEST_ASSERT_EQUAL_INT(0, string_cmp_cstr(s1, "banana"));
 
