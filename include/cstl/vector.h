@@ -135,7 +135,7 @@
     /*                                                                                              \
      * Initializes a new vector, and fills it with the range [first, last) passed.                  \
      */                                                                                             \
-    struct_name* prefix##init_range##suffix(vector_type* first, vector_type* last);                 \
+    struct_name* prefix##init_range##suffix(const vector_type* first, const vector_type* last);     \
                                                                                                     \
     /*                                                                                              \
      * Creates a fresh copy of a vector. If the dest contains a pre-existing vector,                \
@@ -320,7 +320,7 @@
         return v;                                                                                    \
     }                                                                                                \
                                                                                                      \
-    struct_name* prefix##init_range##suffix(vector_type* first, vector_type* last) {                 \
+    struct_name* prefix##init_range##suffix(const vector_type* first, const vector_type* last) {     \
         struct_name* v = prefix##init_size##suffix(last - first);                                    \
         algorithm_min_copy(vector_type*, first, last, v->head);                                      \
         return v;                                                                                    \

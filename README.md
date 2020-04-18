@@ -62,9 +62,9 @@ declare_vector_type(int)
 define_vector_type(int)
 ```
 
-This will then expand into the appropriate vector `struct` (e.g. `vector_int`) with matching functions. All functions are appended with the type, with the general format `vector_**[TYPE]**_FUNCTION`. Therefore, to `push_back` on an `int` vector, one would call `vector_int_push_back`.
+This will then expand into the appropriate vector `struct` (e.g. `vector_int`) with matching functions. All functions are appended with the type, with the general format `vector_`**[TYPE]**`_`**[FUNCTION]**. Therefore, to `push_back` on an `int` vector, one would call `vector_int_push_back`.
 
-As `vector` relies on dynamically-allocated memory via `malloc`, a convenience function `vector_**[TYPE]**_free` has been provided to release a vector after it has finished being used. To supplant a user-defined `malloc`, one can define the `CSTL_MALLOC` macro with the user-supplied function necessary before including the `vector` header file. The same is true for `realloc` and `free`, as `CSTL_REALLOC` and `CSTL_FREE`.
+As `vector` relies on dynamically-allocated memory via `malloc`, a convenience function `vector_`**[TYPE]**`_free` has been provided to release a vector after it has finished being used. To supplant a user-defined `malloc`, one can define the `CSTL_MALLOC` macro with the user-supplied function necessary before including the `vector` header file. The same is true for `realloc` and `free`, as `CSTL_REALLOC` and `CSTL_FREE`.
 
 To sum up, here is some example usage with the declared `vector_int` above:
 ```c
@@ -76,7 +76,7 @@ int main() {
 
     //Inserting 5 of the first elements from an array
     int a[] = {10, 20, 30, 40, 50};
-    vector_int_insert_range(v, vector_int_begin(v), a, a + 5);
+    vector_int_insert_range(v, vector_int_begin(v), a, a + sizeof(a));
 
     //Printing vector contents to the console
     for(int* it = vector_int_begin(v); it != vector_int_end(v); ++it) {
