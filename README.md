@@ -9,7 +9,7 @@ Implementation of the C++ Standard Library in C. Can creatures armed without win
 
 ### \<algorithm\>
 
-Functions from the `<algorithm>` header are currently being implemented as macros, often requiring an explicit passing of the type being used. For more, check out [algorithm.h](https://github.com/Luiserebii/C-STL/blob/master/include/algorithm.h).
+Functions from the `<algorithm>` header are currently being implemented as macros, often requiring an explicit passing of the type being used. For more, check out [algorithm.h](./include/cstl/algorithm.h).
 
 ### \<vector\>
 
@@ -36,15 +36,37 @@ declare_vector_type(int)
 define_vector_type(int)
 ```
 
-This will then expand into the appropriate vector `struct` (e.g. `vector_int`) with matching functions. All functions are appended with the type, with the general format `vector_TYPE_FUNCTION`. Therefore, to `push_back` on an `int` vector, one would call `vector_int_push_back`.
+This will then expand into the appropriate vector `struct` (e.g. `vector_int`) with matching functions. All functions are appended with the type, with the general format `vector_**[TYPE]**_FUNCTION`. Therefore, to `push_back` on an `int` vector, one would call `vector_int_push_back`.
 
-As `vector` relies on dynamically-allocated memory via `malloc`, a convenience function `vector_TYPE_free` has been provided to release a vector after it has finished being used. To supplant a user-defined `malloc`, one can define the `CSTL_MALLOC` macro with the user-supplied function necessary before including the `vector` header file. The same is true for `realloc`.
+As `vector` relies on dynamically-allocated memory via `malloc`, a convenience function `vector_**[TYPE]**_free` has been provided to release a vector after it has finished being used. To supplant a user-defined `malloc`, one can define the `CSTL_MALLOC` macro with the user-supplied function necessary before including the `vector` header file. The same is true for `realloc` and `free`, as `CSTL_REALLOC` and `CSTL_FREE`.
 
-Further documentation on the currently implemented functions can be found in [vector.h](https://github.com/Luiserebii/C-STL/blob/master/include/vector.h).
+To sum up, here is some example usage with the declared `vector_int` above:
+```c
+#include "vector_int.h"
+
+int main() {
+
+    //Initializing a new vector
+    vector_int* v = vector_int_init();
+
+    //Inserting 5 of the first elements from an array
+    int a[] = {10, 20, 30, 40, 50};
+    vector_int_insert_range(v, vector_int_begin(v), a, a + 5);
+
+    //Printing vector contents to the console
+    for(int* it = vector_int_begin(v); it != vector_int_end(v); ++it) {
+        printf("%d\n", *it);
+    }
+
+    vector_int_free(v);
+
+}
+```
+Further documentation on the currently implemented functions can be found in [vector.h](./cstl/include/vector.h).
 
 ### \<string\>
 
-The flexible, dynamically-allocated C++ `std::string` is emulated by expanding on the vector macro, and adding additional functions useful for interaction with C-strings. All functions available to vectors are equally available to the C-STL string type (e.g. `string_push_back(char c)`). Information on the additional functions can be found in [string.h](https://github.com/Luiserebii/C-STL/blob/master/include/string.h).
+The flexible, dynamically-allocated C++ `std::string` is emulated by expanding on the vector macro, and adding additional functions useful for interaction with C-strings. All functions available to vectors are equally available to the C-STL string type (e.g. `string_push_back(char c)`). Information on the additional functions can be found in [string.h](./include/cstl/string.h).
 
 Example usage:
 ```c
@@ -63,6 +85,8 @@ int main() {
 
     //Exporting our string as a C-string
     printf(string_cstr(str));
+
+    string_free(str);
 
 }
 ```
