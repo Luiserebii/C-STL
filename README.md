@@ -24,6 +24,7 @@ int main() {
     algorithm_remove_if(char*, string_begin(s), string_end(s), isvowel, last);
     string_erase_range(s, last, string_end(s));
     printf("%s\n", string_cstr(s));
+    string_free(s);
 }
 
 int isvowel(char c) {
@@ -70,7 +71,6 @@ To sum up, here is some example usage with the declared `vector_int` above:
 #include "vector_int.h"
 
 int main() {
-
     //Initializing a new vector
     vector_int* v = vector_int_init();
 
@@ -84,7 +84,6 @@ int main() {
     }
 
     vector_int_free(v);
-
 }
 ```
 Further documentation on the currently implemented functions can be found in [vector.h](./cstl/include/vector.h).
@@ -98,7 +97,6 @@ Example usage:
 #include <cstl/string.h>
 
 int main() {
-
     //Initializing our string to a C-string
     string* str = string_init_cstr("Hello world");
 
@@ -112,7 +110,6 @@ int main() {
     printf(string_cstr(str));
 
     string_free(str);
-
 }
 ```
 
