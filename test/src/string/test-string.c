@@ -117,7 +117,26 @@ void test_string_cmp() {
 }
 
 void test_string_cat_cstr() {
+    string* s = string_init();
 
+    //Test concatenating an empty c-string to an empty string
+    string_cat_cstr(s, "");
+    TEST_ASSERT_EQUAL_INT(0, string_size(s));
+
+    //Test concatenating a filled c-string to an empty string
+    const char cs[] = "apple";
+    const size_t sz1 = 5;
+    string_cat_cstr(s, cs);
+    TEST_ASSERT_EQUAL_CHAR_ARRAY(cs, string_begin(s), sz1);
+    TEST_ASSERT_EQUAL_INT(sz1, string_size(s));
+
+    //Test concatentating a filled c-string to a filled string
+    const char cs2[] = "banana";
+    const size_t sz2 = 6;
+    string_cat_cstr(s, cs2);
+    const char exp[] = "applebanana";
+    TEST_ASSERT_EQUAL_CHAR_ARRAY(exp, string_begin(s), sz1 + sz2);
+    TEST_ASSERT_EQUAL_INT(sz1 + sz2, string_size(s));
 }
 
 void test_string_cmp_cstr() {
