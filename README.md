@@ -9,7 +9,32 @@ Implementation of the C++ Standard Library in C. Can creatures armed without win
 
 ### \<algorithm\>
 
-Functions from the `<algorithm>` header are currently being implemented as macros, often requiring an explicit passing of the type being used. For more, check out [algorithm.h](./include/cstl/algorithm.h).
+Functions from the `<algorithm>` header are currently being implemented as macros, often requiring an explicit passing of the type being used. 
+
+Example usage, which removes all vowels from a string:
+```c
+#include <cstl/algorithm.h>
+#include <cstl/string.h>
+#include <stdio.h>
+int isvowel(char c);
+
+int main() {
+    string* s = string_init_cstr("Hello world");
+    char* last;
+    algorithm_remove_if(char*, string_begin(s), string_end(s), isvowel, last);
+    string_erase_range(s, last, string_end(s));
+    printf("%s\n", string_cstr(s));
+}
+
+int isvowel(char c) {
+    char vowels[] = {'a','e','i','o','u','A','E','I','O','U'};
+    char* found;
+    algorithm_find(vowels, vowels + sizeof(vowels), c, found);
+    return found != (vowels + sizeof(vowels));
+}
+```
+
+For more, check out [algorithm.h](./include/cstl/algorithm.h).
 
 ### \<vector\>
 
