@@ -30,10 +30,10 @@ declare_vector_class(string, char);
 // clang-format on
 
 /**
- * Intiailizes an empty string with the contents of the char* passed. 
+ * Creates (allocates and initializes) an empty string with the contents of the char* passed. 
  * It is assumed that that char* is valid.
  */
-string* string_init_cstr(const char* s);
+string* string_create_cstr(const char* s);
 
 /**
  * Sets the contents of the string to the char* passed. If there is not enough space,

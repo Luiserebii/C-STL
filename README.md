@@ -44,7 +44,9 @@ Emulating the C++ `<vector>` in C is difficult, but macros allow us some room to
 Since the declaration of the vector `struct` data type and associated functions should ideally belong in a header file, it is advised to use the `declare_vector` within one, and use `define_vector` in a matching `.c` file. For example, to create an `int` vector, one might write:
 
 ```c
-/** vector_int.h **/
+/**
+ * vector_int.h 
+ */
 #ifndef VECTOR_INT_H
 #define VECTOR_INT_H
 
@@ -55,7 +57,9 @@ declare_vector_type(int)
 #endif
 ```
 ```c
-/** vector_int.c **/
+/**
+ * vector_int.c
+ */
 #include "vector_int.h"
 #include <cstl/vector.h>
 
@@ -76,7 +80,7 @@ int main() {
 
     //Inserting 5 of the first elements from an array
     int a[] = {10, 20, 30, 40, 50};
-    vector_int_insert_range(v, vector_int_begin(v), a, a + sizeof(a));
+    vector_int_insert_range(v, vector_int_begin(v), a, a + (sizeof(a) / sizeof(a[0])));
 
     //Printing vector contents to the console
     for(int* it = vector_int_begin(v); it != vector_int_end(v); ++it) {

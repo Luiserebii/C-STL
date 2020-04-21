@@ -293,36 +293,58 @@
      */                                                                                              \
     static void prefix##autogrow##suffix(struct_name* v);                                            \
                                                                                                      \
-    struct_name* prefix##init##suffix(void) {                                                        \
-        /* Allocate memory for vector struct */                                                      \
-        struct_name* v = (struct_name*) CSTL_MALLOC(sizeof(struct_name));                            \
+    void prefix##init##suffix(struct_name* v) {                                                        \
         v->head = v->avail = v->tail = NULL;                                                         \
-        return v;                                                                                    \
     }                                                                                                \
                                                                                                      \
-    struct_name* prefix##init_size##suffix(size_t s) {                                               \
-        struct_name* v = (struct_name*) CSTL_MALLOC(sizeof(struct_name));                            \
+    void prefix##init_size##suffix(struct_name* v, size_t s) {                                               \
         v->head = (vector_type*) CSTL_MALLOC(sizeof(vector_type) * s);                               \
         v->tail = v->avail = v->head + s;                                                            \
-        return v;                                                                                    \
     }                                                                                                \
                                                                                                      \
-    struct_name* prefix##init_capacity##suffix(size_t s) {                                           \
-        struct_name* v = (struct_name*) CSTL_MALLOC(sizeof(struct_name));                            \
+    void prefix##init_capacity##suffix(struct_name* v, size_t s) {                                           \
         v->head = v->avail = (vector_type*) CSTL_MALLOC(sizeof(vector_type) * s);                    \
         v->tail = v->head + s;                                                                       \
-        return v;                                                                                    \
     }                                                                                                \
                                                                                                      \
-    struct_name* prefix##init_fill##suffix(size_t n, vector_type val) {                              \
-        struct_name* v = prefix##init_size##suffix(n);                                               \
+    void prefix##init_fill##suffix(struct_name* v, size_t n, vector_type val) {                              \
+        prefix##init_size##suffix(v, n);                                               \
         algorithm_fill(vector_type*, v->head, v->tail, val);                                         \
+    }                                                                                                \
+                                                                                                     \
+    void prefix##init_range##suffix(struct_name* v, const vector_type* first, const vector_type* last) {     \
+        prefix##init_size##suffix(v, last - first);                                    \
+        algorithm_min_copy(vector_type*, first, last, v->head);                                      \
+    }                                                                                                \
+                                                                                                     \
+    struct_name* prefix##create##suffix(void) {                                                        \
+        /* Allocate memory for vector struct */                                                      \
+        struct_name* v = (struct_name*) CSTL_MALLOC(sizeof(struct_name));                            \
+        prefix##init##suffix(v);                                                         \
         return v;                                                                                    \
     }                                                                                                \
                                                                                                      \
-    struct_name* prefix##init_range##suffix(const vector_type* first, const vector_type* last) {     \
-        struct_name* v = prefix##init_size##suffix(last - first);                                    \
-        algorithm_min_copy(vector_type*, first, last, v->head);                                      \
+    struct_name* prefix##create_size##suffix(size_t s) {                                               \
+        struct_name* v = (struct_name*) CSTL_MALLOC(sizeof(struct_name));                            \
+        prefix##init_size##suffix(v); \
+        return v;                                                                                    \
+    }                                                                                                \
+                                                                                                     \
+    struct_name* prefix##create_capacity##suffix(size_t s) {                                           \
+        struct_name* v = (struct_name*) CSTL_MALLOC(sizeof(struct_name));                            \
+        prefix##init_capacity##suffix(v);                    \
+        return v;                                                                                    \
+    }                                                                                                \
+                                                                                                     \
+    struct_name* prefix##create_fill##suffix(size_t n, vector_type val) {                              \
+        struct_name* v = prefix##create_size##suffix(n);                                               \
+        prefix##init_fill##suffix(v); \
+        return v;                                                                                    \
+    }                                                                                                \
+                                                                                                     \
+    struct_name* prefix##create_range##suffix(const vector_type* first, const vector_type* last) {     \
+        struct_name* v = prefix##create_size##suffix(last - first);                                    \
+        prefix##init_range##suffix(v); \
         return v;                                                                                    \
     }                                                                                                \
                                                                                                      \

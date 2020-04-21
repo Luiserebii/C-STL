@@ -30,9 +30,9 @@
 define_vector_class(string, char)
 // clang-format on
 
-string* string_init_cstr(const char* s) {
+string* string_create_cstr(const char* s) {
     size_t len = strlen(s);
-    string* str = string_init_size(len);
+    string* str = string_create_size(len);
     algorithm_min_copy(char*, s, s + len, str->head);
     return str;
 }
