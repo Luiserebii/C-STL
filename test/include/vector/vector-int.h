@@ -3,6 +3,6 @@
 
 #include <cstl/vector.h>
 
-declare_vector(vector_, _int, vector_int, int)
+declare_vector_type(int)
 
 #endif
