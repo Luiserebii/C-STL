@@ -16,4 +16,18 @@ void safestrcpy(char* dest, const char* src, size_t lim);
  */
 #define safestrcat(dest, src, dest_lim) strncat(dest, src, dest_lim - strlen(dest) - 1)
 
+/**
+ * fstrcat, as in, "fast" strcat.
+ * Returns a pointer to the last element, to try to alleviate future O(n) calls.
+ */
+char* fstrcat(char* dest, const char* src);
+
+/**
+ * sfstrcat, as in, "safe-fast" strcat.
+ * Guarantees concatenating as many characters as possible from src to dest.
+ * Returns a pointer to the last element, to try to alleviate future O(n) calls.
+ */
+char* sfstrcat(char* dest, const char* src, size_t lim);
+
+
 #endif
