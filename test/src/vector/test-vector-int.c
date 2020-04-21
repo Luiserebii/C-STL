@@ -95,14 +95,14 @@ void test_vector_int_copy() {
     vector_int_destroy(v);
     vector_int_destroy(copy);
 }
-void test_vector_assign_int() {
+void test_vector_int_assign() {
     vector_int v;
     vector_int_init(&v);
 
     //Test assigning to an empty vector
     const int el[] = {10, 20, 30, 40, 50};
     const int sz = 5;
-    vector_assign_int(&v, el, el + sz);
+    vector_int_assign(&v, el, el + sz);
 
     TEST_ASSERT_EQUAL_INT_ARRAY(el, vector_int_begin(&v), sz);
     TEST_ASSERT_EQUAL_INT(sz, vector_int_size(&v));
@@ -167,7 +167,7 @@ void test_vector_int_push_back() {
     vector_int_deinit(&v);
 }
 
-void test_vector_insert_int() {
+void test_vector_int_insert() {
     //Declare (onto the stack) and intiailize test vector
     vector_int v;
     vector_int_init(&v);
@@ -191,7 +191,7 @@ void test_vector_insert_int() {
 
     //Insert a simple element in
     const int exp2[] = {10, 20, 10, 20, 500, 30, 30, 40};
-    vector_insert_int(&v, v.head + 4, 500);
+    vector_int_insert(&v, v.head + 4, 500);
     TEST_ASSERT_EQUAL_INT_ARRAY(exp2, v.head, 8);
     TEST_ASSERT_EQUAL_INT(8, vector_int_size(&v));
 
@@ -283,7 +283,7 @@ void test_vector_int_accessors() {
     vector_int_deinit(&v);
 }
 
-void test_vector_idioms_int() {
+void test_vector_int_idioms() {
     //Declare (onto the stack) and intiailize test vector
     vector_int v;
     vector_int_init(&v);
