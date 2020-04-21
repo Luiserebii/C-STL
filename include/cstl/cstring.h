@@ -30,9 +30,17 @@ char* fstrcat(char* dest, const char* src);
 char* sfstrcat(char* dest, const char* src, size_t lim);
 
 /**
- * String OO-like functions
+ * String OO-like functions: cstring
+ *
+ * The general idea is that a heap-allocated c-string can be either NULL, or
+ * filled with contents. 
+ *
+ * The strange part of the semantics here, is that it is valid to destroy an
+ * initialized c-string, and nothing is required to de-initialize a c-string.
+ *
+ * A class looking to use cstring, might set all cstring (char*) members to
+ * NULL, and reserve deinit/destroy for the actual calling of cstring_destroy.
  */
-
 
 /**
  * Options for supplanting a user-defined malloc/realloc equivalent for vectors.
@@ -50,18 +58,20 @@ char* sfstrcat(char* dest, const char* src, size_t lim);
 #endif
 
 /**
- * Create a new c-string.
+ * Initialize a c-string to a valid state, or, NULL.
  */
-char* cstring_create(void);
+#define cstring_init(s) s = NULL
 
 /**
- * Create a new c-string, and set it to the contents of c-string s.
+ * Create a new c-string, and fill it with the contents of c-string s.
  */
-char* cstring_create_cstr(const char* s);
+char* cstring_create(const char* s);
 
 /**
  * Assign an initialized c-string s1 to a new c-string s2.
  * This will cause a deallocation, if s1 already has been filled.
+ * As NULL is a valid state for a char*, this is checked for; if s2 is NULL,
+ * then s1 will simply be freed and will stay as NULL.
  */
 char* cstring_asn(char* s1, const char* s2);
 
