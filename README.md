@@ -19,12 +19,12 @@ Example usage, which removes all vowels from a string:
 int isvowel(char c);
 
 int main() {
-    string* s = string_init_cstr("Hello world");
+    string* s = string_create_cstr("Hello world");
     char* last;
     algorithm_remove_if(char*, string_begin(s), string_end(s), isvowel, last);
     string_erase_range(s, last, string_end(s));
     printf("%s\n", string_cstr(s));
-    string_free(s);
+    string_destroy(s);
 }
 
 int isvowel(char c) {
@@ -76,18 +76,19 @@ To sum up, here is some example usage with the declared `vector_int` above:
 
 int main() {
     //Initializing a new vector
-    vector_int* v = vector_int_init();
+    vector_int v;
+    vector_int_init(&v);
 
     //Inserting 5 of the first elements from an array
     int a[] = {10, 20, 30, 40, 50};
-    vector_int_insert_range(v, vector_int_begin(v), a, a + (sizeof(a) / sizeof(a[0])));
+    vector_int_insert_range(&v, vector_int_begin(&v), a, a + (sizeof(a) / sizeof(a[0])));
 
     //Printing vector contents to the console
-    for(int* it = vector_int_begin(v); it != vector_int_end(v); ++it) {
+    for(int* it = vector_int_begin(&v); it != vector_int_end(&v); ++it) {
         printf("%d\n", *it);
     }
 
-    vector_int_free(v);
+    vector_int_deinit(&v);
 }
 ```
 Further documentation on the currently implemented functions can be found in [vector.h](./cstl/include/vector.h).
@@ -102,18 +103,19 @@ Example usage:
 
 int main() {
     //Initializing our string to a C-string
-    string* str = string_init_cstr("Hello world");
+    string s;
+    string_init_cstr(&s, "Hello world");
 
     //Setting our string to a new C-string
-    string_asn_cstr(str, "I need a string that can expand!");
+    string_asn_cstr(&s, "I need a string that can expand!");
 
     //And concatenating it with a C-string
-    string_cat_cstr(str, " And concatenate, too!");
+    string_cat_cstr(&s, " And concatenate, too!");
 
     //Exporting our string as a C-string
-    printf(string_cstr(str));
+    printf(string_cstr(&s));
 
-    string_free(str);
+    string_deinit(&s);
 }
 ```
 
