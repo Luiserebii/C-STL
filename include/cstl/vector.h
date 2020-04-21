@@ -370,34 +370,34 @@
                                                                                                          \
     struct_name* prefix##create_size##suffix(size_t s) {                                                 \
         struct_name* v = (struct_name*) CSTL_MALLOC(sizeof(struct_name));                                \
-        prefix##init_size##suffix(v, s);                                                                    \
+        prefix##init_size##suffix(v, s);                                                                 \
         return v;                                                                                        \
     }                                                                                                    \
                                                                                                          \
     struct_name* prefix##create_capacity##suffix(size_t s) {                                             \
         struct_name* v = (struct_name*) CSTL_MALLOC(sizeof(struct_name));                                \
-        prefix##init_capacity##suffix(v, s);                                                                \
+        prefix##init_capacity##suffix(v, s);                                                             \
         return v;                                                                                        \
     }                                                                                                    \
                                                                                                          \
     struct_name* prefix##create_fill##suffix(size_t n, vector_type val) {                                \
         struct_name* v = prefix##create_size##suffix(n);                                                 \
-        prefix##init_fill##suffix(v, n, val);                                                                    \
+        prefix##init_fill##suffix(v, n, val);                                                            \
         return v;                                                                                        \
     }                                                                                                    \
                                                                                                          \
     struct_name* prefix##create_range##suffix(const vector_type* first, const vector_type* last) {       \
         struct_name* v = prefix##create_size##suffix(last - first);                                      \
-        prefix##init_range##suffix(v, first, last);                                                                   \
+        prefix##init_range##suffix(v, first, last);                                                      \
         return v;                                                                                        \
     }                                                                                                    \
                                                                                                          \
     struct_name* prefix##copy##suffix(const struct_name* src) {                                          \
         if(src->head == NULL) {                                                                          \
-            return prefix##create##suffix();                                                               \
+            return prefix##create##suffix();                                                             \
         }                                                                                                \
         /* Initialize a fresh vector using original's size */                                            \
-        struct_name* copy = prefix##create_size##suffix(prefix##size##suffix(src));                        \
+        struct_name* copy = prefix##create_size##suffix(prefix##size##suffix(src));                      \
         /* Copy over values */                                                                           \
         algorithm_min_copy(vector_type*, src->head, src->avail, copy->head);                             \
         return copy;                                                                                     \
