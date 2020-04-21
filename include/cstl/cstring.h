@@ -47,20 +47,23 @@ char* sfstrcat(char* dest, const char* src, size_t lim);
  */
 #ifndef CSTL_MALLOC
 #define CSTL_MALLOC malloc
+#include <stdlib.h>
 #endif
 
 #ifndef CSTL_REALLOC
 #define CSTL_REALLOC realloc
+#include <stdlib.h>
 #endif
 
 #ifndef CSTL_FREE
 #define CSTL_FREE free
+#include <stdlib.h>
 #endif
 
 /**
  * Initialize a c-string to a valid state, or, NULL.
  */
-#define cstring_init(s) s = NULL
+void cstring_init(char** s);
 
 /**
  * Create a new c-string, and fill it with the contents of c-string s.
@@ -68,12 +71,14 @@ char* sfstrcat(char* dest, const char* src, size_t lim);
 char* cstring_create(const char* s);
 
 /**
- * Assign an initialized c-string s1 to a new c-string s2.
+ * Assign an initialized c-string s1 to a new c-string s2, where s1 is a pointer
+ * to a c-string. (Yes, this interface is a little screwed.)
+ *
  * This will cause a deallocation, if s1 already has been filled.
  * As NULL is a valid state for a char*, this is checked for; if s2 is NULL,
  * then s1 will simply be freed and will stay as NULL.
  */
-char* cstring_asn(char* s1, const char* s2);
+void cstring_asn(char** s1, const char* s2);
 
 /**
  * Destroys and releases the memory for a c-string.
