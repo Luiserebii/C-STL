@@ -29,5 +29,45 @@ char* fstrcat(char* dest, const char* src);
  */
 char* sfstrcat(char* dest, const char* src, size_t lim);
 
+/**
+ * String OO-like functions
+ */
+
+
+/**
+ * Options for supplanting a user-defined malloc/realloc equivalent for vectors.
+ */
+#ifndef CSTL_MALLOC
+#define CSTL_MALLOC malloc
+#endif
+
+#ifndef CSTL_REALLOC
+#define CSTL_REALLOC realloc
+#endif
+
+#ifndef CSTL_FREE
+#define CSTL_FREE free
+#endif
+
+/**
+ * Create a new c-string.
+ */
+char* cstring_create(void);
+
+/**
+ * Create a new c-string, and set it to the contents of c-string s.
+ */
+char* cstring_create_cstr(const char* s);
+
+/**
+ * Assign an initialized c-string s1 to a new c-string s2.
+ * This will cause a deallocation, if s1 already has been filled.
+ */
+char* cstring_asn(char* s1, const char* s2);
+
+/**
+ * Destroys and releases the memory for a c-string.
+ */
+void cstring_destroy(char* s);
 
 #endif
