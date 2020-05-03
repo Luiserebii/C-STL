@@ -44,7 +44,7 @@
 #endif
 
 #ifndef CSTL_VECTOR_INIT
-#define CSTL_VECTOR_INIT v->head = v->avail = v->tail = NULL
+#define CSTL_VECTOR_INIT(v) v->head = v->avail = v->tail = NULL
 #endif
 
 /**
@@ -347,7 +347,7 @@
      */                                                                                                  \
     static void prefix##autogrow##suffix(struct_name* v);                                                \
                                                                                                          \
-    void prefix##init##suffix(struct_name* v) { CSTL_VECTOR_INIT; }                   \
+    void prefix##init##suffix(struct_name* v) { CSTL_VECTOR_INIT(v); }                   \
                                                                                                          \
     void prefix##init_size##suffix(struct_name* v, size_t s) {                                           \
         v->head = CSTL_MALLOC(CSTL_VECTOR_ALLOC_SZ(sizeof(vector_type) * s));                                   \

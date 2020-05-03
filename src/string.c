@@ -18,6 +18,7 @@
  */
 
 #define CSTL_VECTOR_ALLOC_SZ(sz) ((sz) + 1)
+#define CSTL_VECTOR_INIT(v) string_init_capacity(v, 4)
 #include "../include/cstl/string.h"
 #include "../include/cstl/algorithm.h"
 #include "../include/cstl/vector.h"
