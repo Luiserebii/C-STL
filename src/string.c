@@ -17,9 +17,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#define CSTL_VECTOR_ALLOC_SZ(sz) ((sz) + 1)
 #include "../include/cstl/string.h"
 #include "../include/cstl/algorithm.h"
-#define CSTL_VECTOR_ALLOC_SZ(sz) ((sz) + 1)
 #include "../include/cstl/vector.h"
 
 #include <string.h>

@@ -43,6 +43,10 @@
 #define CSTL_VECTOR_ALLOC_SZ(sz) sz 
 #endif
 
+#ifndef CSTL_VECTOR_INIT
+#define CSTL_VECTOR_INIT v->head = v->avail = v->tail = NULL
+#endif
+
 /**
  * MACRO: declare_vector_type(vector_type)
  *
@@ -343,7 +347,7 @@
      */                                                                                                  \
     static void prefix##autogrow##suffix(struct_name* v);                                                \
                                                                                                          \
-    void prefix##init##suffix(struct_name* v) { v->head = v->avail = v->tail = NULL; }                   \
+    void prefix##init##suffix(struct_name* v) { CSTL_VECTOR_INIT; }                   \
                                                                                                          \
     void prefix##init_size##suffix(struct_name* v, size_t s) {                                           \
         v->head = CSTL_MALLOC(CSTL_VECTOR_ALLOC_SZ(sizeof(vector_type) * s));                                   \
