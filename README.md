@@ -127,7 +127,7 @@ Alongside constructs which exist in the C++ STL and standard library, some funct
 
 This module offers an interface to easily reason through heap-allocated C-strings, which may be struct members. The functions ensure that an initialized C-string is either `NULL` or a `char*` to a valid null-terminated string. In this paradigm, testing if a string is empty/non-existent is as easy as testing the pointer itself, and no unnecessary memory has to be allocated to simply represent an empty C-string. This works particularly well, as `NULL` is a valid argument for `free()`. 
 
-The only minor cost is a branch in C-string assignment (`cstring_asn`), in order to accept a valid, intialized string (which may be `NULL`).
+The only minor cost is a branch in C-string assignment (`cstring_asn`), in order to accept a valid, intialized string (which may be `NULL`). The reasoning behind this is to allow implementing the assignment of a struct to another struct easily; since it is possible for the string to be `NULL`, we don't want `cstring_asn` to break assuming the value is allocated.
 
 Example usage:
 ```c
@@ -148,7 +148,24 @@ int main() {
 }
 ```
 
-There
+A small set of functions are also avaliable within this header, which are much more useful globally. `safestrcpy` and `safestrcat` allow specifying a limit to protect from overwriting buffers, where `lim - 1` characters are copied max.
+
+Example usage:
+```c
+#include <cstl/cstring.h>
+#define BUF_MAX 8
+char buf[BUF_MAX];
+
+int main() {
+    char s[] = "I can't not easily overrun the buffer above";
+    
+    //Perform a safestrcpy to prevent it!
+    safestrcpy(buf, s, BUF_MAX);
+
+    //Let's check to see if our buffer is safe: (prints "I can't")
+    puts(buf);
+}
+```
 
 More can be found in [cstring.h](./include/cstl/cstring.h).
 
