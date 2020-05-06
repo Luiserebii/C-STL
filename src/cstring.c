@@ -1,6 +1,6 @@
 #include "../include/cstl/cstring.h"
-#include "../include/cstl/memory.h"
 #include <string.h>
+#include "../include/cstl/memory.h"
 
 void cstring_init_(char** s) {
     *s = NULL;

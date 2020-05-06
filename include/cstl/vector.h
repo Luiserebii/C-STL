@@ -26,7 +26,7 @@
 #include "memory.h"
 
 /**
- * Options for supplanting a user-defined malloc/realloc equivalent for vectors.
+ * Options for supplanting functions (in this form, it is really only useful for internal overriding.)
  */
 #ifndef CSTL_VECTOR_ALLOC_SZ
 #define CSTL_VECTOR_ALLOC_SZ(sz) sz

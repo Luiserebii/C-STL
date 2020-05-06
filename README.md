@@ -68,7 +68,7 @@ define_vector_type(int)
 
 This will then expand into the appropriate vector `struct` (e.g. `vector_int`) with matching functions. All functions are appended with the type, with the general format `vector_`**[TYPE]**`_`**[FUNCTION]**. Therefore, to `push_back` on an `int` vector, one would call `vector_int_push_back`.
 
-As `vector` relies on dynamically-allocated memory via `malloc`, a convenience function `vector_`**[TYPE]**`_free` has been provided to release a vector after it has finished being used. To supplant a user-defined `malloc`, one can define the `CSTL_MALLOC` macro with the user-supplied function necessary before including the `vector` header file. The same is true for `realloc` and `free`, as `CSTL_REALLOC` and `CSTL_FREE`.
+As `vector` relies on dynamically-allocated memory via `malloc`, a set of functions are used to allocate and release a vector after it has finished being used. To supplant a user-defined `malloc`, one can define the `CSTL_CUSTOM_MEMORY` macro and pass it in to the compiler, and implement the following functions: `cstl_malloc`, `cstl_realloc`, and `cstl_free`. To understand why this works, there is essentially a kind of conditional compilation going on. These functions are defined internally within a source file **only if** `CSTL_CUSTOM_MACRO` is not defined. Therefore, defining the macro frees up the implementation, allowing the user to supplant one easily. Through gcc, this might be done as `cc -DCSTL_CUSTOM_MACRO ...`. 
 
 To sum up, here is some example usage with the declared `vector_int` above:
 ```c
@@ -113,11 +113,44 @@ int main() {
     string_cat_cstr(&s, " And concatenate, too!");
 
     //Exporting our string as a C-string
-    printf(string_cstr(&s));
+    printf("%s", string_cstr(&s));
 
     string_deinit(&s);
 }
 ```
+
+## Useful C Additions
+
+Alongside constructs which exist in the C++ STL and standard library, some functions have been written to better interact with "native" C constructs (such as C-strings).
+
+### \<cstring\>
+
+This module offers an interface to easily reason through heap-allocated C-strings, which may be struct members. The functions ensure that an initialized C-string is either `NULL` or a `char*` to a valid null-terminated string. In this paradigm, testing if a string is empty/non-existent is as easy as testing the pointer itself, and no unnecessary memory has to be allocated to simply represent an empty C-string. This works particularly well, as `NULL` is a valid argument for `free()`. 
+
+The only minor cost is a branch in C-string assignment (`cstring_asn`), in order to accept a valid, intialized string (which may be `NULL`).
+
+Example usage:
+```c
+#include <cstl/cstring.h>
+
+int main() {
+    //Initializing a C-string
+    char* s;
+    cstring_init(s);
+
+    //Assigning it a value
+    cstring_asn(s, "A new value!");
+
+    //Printing it as we usually would
+    printf("%s", s);
+    
+    cstring_destroy(s);
+}
+```
+
+There
+
+More can be found in [cstring.h](./include/cstl/cstring.h).
 
 **NOTE:** This module is constantly changing and improving, this document attempts to work as a good starting point with as much as correct as possible, but the source of truth should rest in the library's comments themselves. This README is not guaranteed to contain up-to-date information with the latest `master` build.
 

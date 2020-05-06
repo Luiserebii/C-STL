@@ -53,7 +53,6 @@ void cstring_asn_(char** s1, const char* s2);
  */
 void cstring_destroy(char* s);
 
-
 /**
  * Utility functions for handling c-strings
  */
@@ -83,6 +82,5 @@ char* fstrcat(char* dest, const char* src);
  * Returns a pointer to the last element, to try to alleviate future O(n) calls.
  */
 char* sfstrcat(char* dest, const char* src, size_t lim);
-
 
 #endif
