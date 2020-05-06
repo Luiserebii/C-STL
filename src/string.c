@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#define CSTL_VECTOR_ALLOC_SZ(sz) ((sz) + 1)
+#define CSTL_VECTOR_ALLOC_SZ(sz) ((sz) + STRING_CAPACITY_EXTRA)
 #define CSTL_VECTOR_INIT(v) string_init_capacity(v, 4)
 #include "../include/cstl/string.h"
 #include "../include/cstl/algorithm.h"
